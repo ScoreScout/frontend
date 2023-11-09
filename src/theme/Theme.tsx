@@ -4,6 +4,6 @@ export const theme = {
     bgColor: "#FFFFFF",
     fontColor: "#331515",
     notActiveColor: "#E8968C",
-    secondryBgColor: "#E8968C",
+    secondryBgColor: "#F6DADA",
   },
 };
