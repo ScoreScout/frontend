@@ -4,7 +4,7 @@ import { theme } from "./theme/Theme";
 import GlobalStyle from "./theme/GlobalStyle";
 import HomePage from "./pages/HomePage/HomePage";
 
-const App = () => {
+const App = (): React.ReactElement => {
   return (
     <Fragment>
       <GlobalStyle />

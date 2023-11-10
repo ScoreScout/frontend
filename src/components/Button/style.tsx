@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button<{
-  $primary?: boolean;
+  $primary: boolean;
   $padding: string;
   $fontSize: string;
   $margin?: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledButton } from "./style";
-import { ButtonProps } from "../../types/buttonTypes";
+import { type ButtonProps } from "../../types/buttonTypes";
 
 const buttonSizes = {
   XL: {
@@ -21,7 +21,7 @@ const buttonSizes = {
   },
 };
 
-const Button = ({ primary, size, children, margin }: ButtonProps) => {
+const Button = ({ primary, size, children, margin }: ButtonProps): React.ReactElement => {
   return (
     <StyledButton
       $primary={primary ?? false}
