@@ -5,7 +5,7 @@ import { ButtonProps } from "../../types/buttonTypes";
 const buttonSizes = {
   XL: {
     fontSize: "2.3rem",
-    padding: "1rem 3.8rem",
+    padding: "0.8rem 4rem",
   },
   L: {
     fontSize: "2rem",
