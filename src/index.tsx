@@ -7,7 +7,11 @@ export default () => <App />;
 
 let rootElement: ReactDOM.Root;
 
-export const mount = (Component, element = document.getElementById("app")) => {
+export const mount = (Component: React.ComponentType, element : Element | null = document.getElementById("app")) => {
+  if (!element) {
+    throw new Error("Root element not found");
+  }
+
   const rootElement = ReactDOM.createRoot(element);
   rootElement.render(<Component />);
 
@@ -19,5 +23,5 @@ export const mount = (Component, element = document.getElementById("app")) => {
 };
 
 export const unmount = () => {
-  rootElement.unmount();
+    rootElement.unmount();
 };
