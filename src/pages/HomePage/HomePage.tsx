@@ -17,7 +17,7 @@ const HomePage = (): React.ReactElement => {
         On this website you can conduct tournaments for different sports.
       </StyledDescription>
       <StyledButtonsContainer>
-        <Button primary={false} size={ButtonSize.S} margin="0 1.5rem 0 0">
+        <Button primary={false} size={ButtonSize.S} margin='0 1.5rem 0 0'>
           Sign in
         </Button>
         <Button primary={true} size={ButtonSize.S}>
