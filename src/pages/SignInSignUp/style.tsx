@@ -1,12 +1,11 @@
-import React from "react";
 import styled from "styled-components";
 import media from "styled-media-query";
+import { globalRegularFontStyles, globalBoldFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
 
 const EntryWrapper = styled.div`
     background-color: ${(props) => props.theme.color.bgColor};
     display: flex;
     justify-content: center;
-    width: 100%;
 `;
 
 const EntryContainer = styled.div`
@@ -27,28 +26,29 @@ const EntryContainer = styled.div`
     `}
 
     ${media.lessThan("medium")`
-    padding: 50px 1px 0 1px;
+    padding: 3.125rem 0 0 0; 
     display: flex;
     position: absolute;
     flex-direction: column;
     align-items: center;
     margin-right: 0;
     margin-left: 0;
-    gap: 25px;
+    gap: 1.5rem; 
     `}
 `;
 
 const GoToAnotherEntryBlock = styled.div`
     align-items: center;
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     position: absolute;
     right: 10%;
 
     ${media.lessThan("medium")`
-    margin: 0;
+    margin: 0 0 0 0;
     position: relative;
     right: 0;
+    left: 0;
     `}
 `;
 
@@ -56,66 +56,60 @@ const EntryBlock = styled.div`
     background-color: ${(props) => props.theme.color.bgColor};
     border-radius: 30px;
     box-shadow: 4px 4px 100px 8px #ff6d4c40;
-    padding-top: 29px;
-    padding-bottom: 20px;
+    padding-top: 1.875rem;
+    padding-bottom: 1.25rem;
     position: absolute;
-    width: 387px;
+    width: 25rem;
     margin-left: 10%;
     display: flex;
     flex-direction: column;
 
     ${media.lessThan("large")`
         margin: 0;
-        margin-right: 40px;
+        margin-right: 2.5rem; 
         position: relative;
-        margin-bottom: 20px;
-    `}
+        margin-bottom: 1.25rem; 
+        `}
     ${media.lessThan("medium")`
-    margin-right:0;
+        margin-right:0;
     `}
 `;
 
 const TextWrapper = styled.div`
     color: ${(props) => props.theme.color.mainColor};
-    font-family: "Inter-SemiBold", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 20px;
-    margin-left: 30px;
+    ${globalSemiBoldFontStyles}
+    line-height: 1.25em;
+    margin-left: 1.875rem;
 `;
 
 const InputsContainer = styled.div`
-    margin-top: 29px;
-    margin-left: 30px;
+    margin-top: 1.8125rem;
+    margin-left: 1.875rem;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25rem;
 `;
 
 const ButtonContainer = styled.div`
-    margin-top: 20px;
+    margin-top: 1.25rem;
     display: flex;
     justify-content: right;
-    margin-right: 30px;
+    margin-right: 1.875rem;
 `;
 
 const Input = styled.input`
     background-color: ${(props) => props.theme.color.bgColor};
     border: 2px solid;
     border-color: ${(props) => props.theme.color.secondryBgColor};
-    border-radius: 16px;
+    border-radius: 1rem;
     color: ${(props) => props.theme.color.notActiveColor};
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    height: 48px;
-    letter-spacing: 0;
-    line-height: 20px;
+    ${globalRegularFontStyles}
+    height: 3rem;
     padding: 0;
-    padding-left: 18px;
+    padding-left: 1.125rem;
     position: relative;
     white-space: nowrap;
-    margin-right: 30px;
+    margin-right: 1.875rem;
 
     &:focus {
         outline: none;
@@ -137,22 +131,19 @@ const Input = styled.input`
 
 const ButtonText = styled.div`
     color: #ffffff;
-    font-family: "Inter-Bold", Helvetica;
-    /* font-size: 20px; */
-    font-weight: 700;
+    ${globalBoldFontStyles};
+    font-size: 1em;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.3125rem;
 `;
 
 const LinkToAnotherEntry = styled.p`
     color: ${(props) => props.theme.color.fontColor};
-    font-family: "Inter-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
+    ${globalRegularFontStyles}
     letter-spacing: 0;
-    line-height: 20px;
+    line-height: 1.25em;
     position: relative;
     text-decoration: underline;
     white-space: nowrap;
