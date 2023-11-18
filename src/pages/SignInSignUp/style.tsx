@@ -152,6 +152,7 @@ const LinkToAnotherEntry = styled.p`
   text-decoration: underline;
   white-space: nowrap;
   width: fit-content;
+  cursor: pointer;
 `;
 
 export {
