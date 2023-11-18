@@ -1,5 +1,5 @@
 import React from "react";
-import { IconsProps } from "../../types/iconsTypes";
+import type { IconsProps } from "../../types/iconsTypes";
 
 const AddCircleIcon = ({ color, size }: IconsProps) => {
     return (
