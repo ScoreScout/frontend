@@ -1,7 +1,7 @@
 import React from "react";
 import {
   StyledTitle,
-  StyledContianer,
+  StyledContainer,
   StyledDescription,
   StyledButtonsContainer,
   StyledStartButton,
@@ -11,7 +11,7 @@ import { ButtonSize } from "../../types/buttonTypes";
 
 const HomePage = (): React.JSX.Element => {
   return (
-    <StyledContianer>
+    <StyledContainer>
       <StyledTitle>Score Scout</StyledTitle>
       <StyledDescription>
         On this website you can conduct tournaments for different sports.
@@ -29,7 +29,7 @@ const HomePage = (): React.JSX.Element => {
           Start right now!
         </Button>
       </StyledStartButton>
-    </StyledContianer>
+    </StyledContainer>
   );
 };
 
