@@ -11,8 +11,8 @@ const App = () => {
         <Fragment>
             <GlobalStyle />
             <ThemeProvider theme={theme}>
-                {/* <HomePage /> */}
-                <SignUpPage />
+                <HomePage />
+                {/* <SignUpPage /> */}
                 {/* <SignInPage /> */}
             </ThemeProvider>
         </Fragment>
