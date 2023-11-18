@@ -18,7 +18,8 @@
         "build:prod": "npm run clean && ijl-cli build",
         "clean": "rimraf dist",
         "lint": "eslint --ext js,jsx,ts,tsx src/",
-        "format": "prettier --check src/"
+        "check-format": "prettier --check src/",
+        "format": "npx prettier -w src/"
     },
     "devDependencies": {
         "@types/node": "^20.8.10",
