@@ -8,8 +8,7 @@ const StyledButton = styled.button<{
 }>`
   background-color: ${(props) =>
     props.$primary ? props.theme.color.mainColor : props.theme.color.bgColor};
-  color: ${(props) =>
-    props.$primary ? props.theme.color.bgColor : props.theme.color.mainColor};
+  color: ${(props) => (props.$primary ? props.theme.color.bgColor : props.theme.color.mainColor)};
   border: solid 2px ${(props) => props.theme.color.mainColor};
   width: "fit-content";
   height: "fit-content";
