@@ -5,7 +5,7 @@ export enum ButtonSize {
   S = "S",
 }
 
-export type ButtonProps = {
+export interface ButtonProps {
   size: ButtonSize;
   primary?: boolean;
   children: React.ReactNode;

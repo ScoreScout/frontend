@@ -9,7 +9,7 @@ import {
 import Button from "../../components/Button/Button";
 import { ButtonSize } from "../../types/buttonTypes";
 
-const HomePage = () => {
+const HomePage = (): React.ReactElement => {
   return (
     <StyledContianer>
       <StyledTitle>Score Scout</StyledTitle>
