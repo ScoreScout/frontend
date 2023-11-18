@@ -45,7 +45,7 @@ const StyledButtonsContainer = styled.div`
 const StyledStartButton = styled.div`
   position: absolute;
   bottom: 10%;
-  left: 25%;
+  left: 30%;
   ${media.lessThan("medium")`
     left: 20%;
   `}
