@@ -20,7 +20,7 @@ const StyledTitle = styled.div`
   `}
 `;
 
-const StyledContianer = styled.div`
+const StyledContainer = styled.div`
   display: flex;
 `;
 
@@ -53,7 +53,7 @@ const StyledStartButton = styled.div`
 
 export {
   StyledTitle,
-  StyledContianer,
+  StyledContainer,
   StyledDescription,
   StyledButtonsContainer,
   StyledStartButton,
