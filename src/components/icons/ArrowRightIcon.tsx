@@ -1,7 +1,7 @@
 import React from "react";
 import type { IconsProps } from "../../types/iconsTypes";
 
-const ArrowRightIcon = ({ color, size }: IconsProps) => {
+const ArrowRightIcon = ({ color, size }: IconsProps) : React.JSX.Element => {
     return (
         <svg
             width={size}
