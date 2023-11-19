@@ -23,4 +23,3 @@ jobs:
         run: npm run lint
       - name: Checking formatting
         run: npm run check-format
-      

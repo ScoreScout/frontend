@@ -1,13 +1,10 @@
-import styled from 'styled-components';
-import {
-  globalRegularFontStyles,
-  globalBoldFontStyles,
-} from "../../theme/FontStyles";
+import styled from "styled-components";
+import { globalRegularFontStyles, globalBoldFontStyles } from "../../theme/FontStyles";
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${props => props.theme.color.bgColor};
+  background-color: ${(props) => props.theme.color.bgColor};
   border: 1.5px solid #ccc;
   border-radius: 20px;
   padding: 1rem 2rem;
@@ -15,8 +12,8 @@ const Card = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   margin-bottom: 2%;
   &:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-  };
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 const CardHeader = styled.div`
@@ -60,14 +57,4 @@ const BoldText = styled.span`
   font-size: 1.5rem;
 `;
 
-
-export {
-  Card,
-  CardHeader,
-  Title,
-  ParticipantInfo,
-  Icon,
-  Text,
-  Date,
-  BoldText,
-};
+export { Card, CardHeader, Title, ParticipantInfo, Icon, Text, Date, BoldText };

@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import {
-  globalRegularFontStyles,
-  globalSemiBoldFontStyles,
-} from "../../theme/FontStyles";
+import { globalRegularFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
 
 interface TournamentTabProps {
   active: boolean;
@@ -22,7 +19,7 @@ const ProfileLogo = styled.div`
   right: 0;
   margin: 2rem 3rem;
   font-size: 3.5rem;
-  color: ${props => props.theme.color.mainColor};
+  color: ${(props) => props.theme.color.mainColor};
   z-index: 10;
   cursor: pointer;
 `;
@@ -35,7 +32,7 @@ const MainContent = styled.div`
   flex-grow: 1;
   justify-content: center;
   flex-direction: column;
-  background-color: ${props => props.theme.color.bgColor};
+  background-color: ${(props) => props.theme.color.bgColor};
 `;
 
 const LogoutButton = styled.button`
@@ -73,17 +70,19 @@ const TournamentTab = styled.button<TournamentTabProps>`
   background: none;
   border: none;
   cursor: pointer;
-  
+
   align-self: self-end;
   width: 23rem;
   text-align: right;
   padding: 1rem 2.5rem 0rem 0;
 
-  border-right: 0.5rem solid ${props => props.active ? props.theme.color.mainColor : props.theme.color.secondryBgColor};
+  border-right: 0.5rem solid
+    ${(props) => (props.active ? props.theme.color.mainColor : props.theme.color.secondryBgColor)};
 
-  ${props => props.active ? globalSemiBoldFontStyles : globalRegularFontStyles}
+  ${(props) => (props.active ? globalSemiBoldFontStyles : globalRegularFontStyles)}
   font-size: 2rem;
-  color: ${props => props.active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
+  color: ${(props) =>
+    props.active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
 
   &:first-child {
     margin-bottom: 1rem;
@@ -104,13 +103,13 @@ const CreateTournamentButton = styled.button`
   margin-right: 3rem;
   cursor: pointer;
   ${globalRegularFontStyles}
-  color: ${props => props.theme.color.fontColor};
+  color: ${(props) => props.theme.color.fontColor};
   font-size: 2rem;
   width: 21rem;
   &:hover {
     border-radius: 6.25rem;
-    color: ${props => props.theme.color.bgColor};
-    background-color: ${props => props.theme.color.mainColor};
+    color: ${(props) => props.theme.color.bgColor};
+    background-color: ${(props) => props.theme.color.mainColor};
   }
 `;
 
@@ -119,8 +118,8 @@ const CreateIcon = styled.span`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: ${props => props.theme.color.mainColor};
-  color: ${props => props.theme.color.bgColor};
+  background-color: ${(props) => props.theme.color.mainColor};
+  color: ${(props) => props.theme.color.bgColor};
   width: 2.5rem;
   height: 2.3rem;
   font-size: 2rem;
@@ -128,14 +127,14 @@ const CreateIcon = styled.span`
 `;
 
 export {
-    ProfileContainer,
-    ProfileLogo,
-    MainContent,
-    LogoutButton,
-    LogoutIcon,
-    TournamentSlider,
-    EmailText,
-    TournamentTab,
-    CreateTournamentButton,
-    CreateIcon,
+  ProfileContainer,
+  ProfileLogo,
+  MainContent,
+  LogoutButton,
+  LogoutIcon,
+  TournamentSlider,
+  EmailText,
+  TournamentTab,
+  CreateTournamentButton,
+  CreateIcon,
 };

@@ -1,3 +1,3 @@
 export interface SidebarProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
