@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import {
+  globalRegularFontStyles,
+  globalSemiBoldFontStyles,
+} from "../../theme/FontStyles";
 
 interface TournamentTabProps {
   active: boolean;
@@ -16,15 +20,15 @@ const ProfileLogo = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  margin: 1.25rem;
-  font-size: 2.5rem;
+  margin: 2rem 3rem;
+  font-size: 3.5rem;
   color: ${props => props.theme.color.mainColor};
   z-index: 10;
   cursor: pointer;
 `;
 
 const MainContent = styled.div`
-  margin-top: 10rem;
+  margin-top: 8rem;
   padding: 0rem 10rem 0rem 5rem;
   height: 100vh;
   overflow-y: scroll;
@@ -36,67 +40,73 @@ const MainContent = styled.div`
 
 const LogoutButton = styled.button`
   display: flex;
-  width: fit-content;
+  width: 10rem;
   align-items: center;
   background: none;
   border: none;
   color: ${(props) => props.theme.color.mainColor};
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
-  padding: 1rem;
+  margin: 2rem;
   cursor: pointer;
 `;
 
 const LogoutIcon = styled.span`
-  margin-right: 8px;
+  margin-right: 0.5rem;
 `;
 
 const EmailText = styled.div`
-  margin: 20px 0;
   align-self: self-end;
-  font-size: 1.5rem;
+  margin-right: 1rem;
   padding-right: 2rem;
+  ${globalRegularFontStyles}
+  font-size: 2rem;
 `;
 
 const TournamentSlider = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 20px;
-  padding-left: 1rem;
 `;
 
 const TournamentTab = styled.button<TournamentTabProps>`
   background: none;
   border: none;
-  border-right: 0.5rem solid ${props => props.active ? props.theme.color.mainColor : props.theme.color.secondryBgColor};
-  width: 100%;
-  padding: 10px 0;
   cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: ${props => props.active ? 'bold' : 'normal'};
+  
+  align-self: self-end;
+  width: 23rem;
+  text-align: right;
+  padding: 1rem 2.5rem 0rem 0;
+
+  border-right: 0.5rem solid ${props => props.active ? props.theme.color.mainColor : props.theme.color.secondryBgColor};
+
+  ${props => props.active ? globalSemiBoldFontStyles : globalRegularFontStyles}
+  font-size: 2rem;
   color: ${props => props.active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
+
   &:first-child {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
 `;
 
 const CreateTournamentButton = styled.button`
   display: flex;
   margin-bottom: 1rem;
-  align-self: center;
-  align-items: center;
+  align-self: self-end;
+  align-items: end;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   border: none;
-  color: ${props => props.theme.color.fontColor};
   background: none;
   border-radius: 50%;
-  padding: 1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin-right: 3rem;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 1.3rem;
-
+  ${globalRegularFontStyles}
+  color: ${props => props.theme.color.fontColor};
+  font-size: 2rem;
+  width: 21rem;
   &:hover {
     border-radius: 6.25rem;
     color: ${props => props.theme.color.bgColor};
@@ -111,10 +121,9 @@ const CreateIcon = styled.span`
   border-radius: 50%;
   background-color: ${props => props.theme.color.mainColor};
   color: ${props => props.theme.color.bgColor};
-  width: 34px;
-  height: 30px;
-  margin-left: 10px;
-  font-size: 1.6rem;
+  width: 2.5rem;
+  height: 2.3rem;
+  font-size: 2rem;
   padding-bottom: 0.2rem;
 `;
 

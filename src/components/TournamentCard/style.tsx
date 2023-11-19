@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-
+import {
+  globalRegularFontStyles,
+  globalBoldFontStyles,
+} from "../../theme/FontStyles";
 
 const Card = styled.div`
   display: flex;
@@ -8,7 +11,7 @@ const Card = styled.div`
   border: 1.5px solid #ccc;
   border-radius: 20px;
   padding: 1rem 2rem;
-  width: 50rem;
+  width: 60rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   margin-bottom: 2%;
   &:hover {
@@ -20,40 +23,41 @@ const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 `;
 
 const Title = styled.h1`
-  font-size: 1.5rem;
+  ${globalBoldFontStyles};
   color: ${(props) => props.theme.color.mainColor};
-  margin: 0;
-  flex: 1;
+  font-size: 2rem;
 `;
 
 const Text = styled.span`
-  font-size: 1rem;
-  color: #333;
+  ${globalRegularFontStyles};
+  font-size: 1.5rem;
 `;
 const Date = styled(Text)`
-  font-size: 1rem;
+  ${globalRegularFontStyles};
   text-align: right;
-  color: #999;
-  white-space: nowrap;
+  font-size: 1.5rem;
 `;
 
 const ParticipantInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 `;
 
 const Icon = styled.span`
   color: ${(props) => props.theme.color.notActiveColor};
+  font-size: 1.75rem;
 `;
 
 const BoldText = styled.span`
-  font-weight: bold;
+  ${globalBoldFontStyles};
+  font-size: 1.5rem;
 `;
 
 
