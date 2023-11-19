@@ -10,4 +10,4 @@ export interface ButtonProps {
   primary?: boolean;
   children: React.ReactNode;
   margin?: string;
-};
+}

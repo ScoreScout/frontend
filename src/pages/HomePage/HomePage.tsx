@@ -1,7 +1,7 @@
 import React from "react";
 import {
   StyledTitle,
-  StyledContianer,
+  StyledContainer,
   StyledDescription,
   StyledButtonsContainer,
   StyledStartButton,
@@ -9,15 +9,15 @@ import {
 import Button from "../../components/Button/Button";
 import { ButtonSize } from "../../types/buttonTypes";
 
-const HomePage = (): React.ReactElement => {
+const HomePage = (): React.JSX.Element => {
   return (
-    <StyledContianer>
+    <StyledContainer>
       <StyledTitle>Score Scout</StyledTitle>
       <StyledDescription>
         On this website you can conduct tournaments for different sports.
       </StyledDescription>
       <StyledButtonsContainer>
-        <Button primary={false} size={ButtonSize.S} margin="0 1.5rem 0 0">
+        <Button primary={false} size={ButtonSize.S} margin='0 1.5rem 0 0'>
           Sign in
         </Button>
         <Button primary={true} size={ButtonSize.S}>
@@ -29,7 +29,7 @@ const HomePage = (): React.ReactElement => {
           Start right now!
         </Button>
       </StyledStartButton>
-    </StyledContianer>
+    </StyledContainer>
   );
 };
 
