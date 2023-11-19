@@ -3,7 +3,7 @@ export enum TournamentStatus {
     Finished = "Finished"
 }
 
-export type Tournament = {
+export interface Tournament {
   title: string;
   date: string;
   n_participants: number;
@@ -11,8 +11,6 @@ export type Tournament = {
   status: TournamentStatus;
 };
 
-export type TournamentCardProps = {
+export interface TournamentCardProps {
   tournament: Tournament;
-  children?: React.ReactNode;
-  margin?: string;
 };

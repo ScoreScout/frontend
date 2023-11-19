@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import TournamentCard from "../../components/TournamentCard/TournamentCard";
-import { TournamentStatus, Tournament } from "../../types/tournamentCardTypes";
+import { TournamentStatus, type Tournament } from "../../types/tournamentCardTypes";
 import { ProfileContainer, ProfileLogo, MainContent, TournamentSlider, LogoutButton, LogoutIcon, TournamentTab, EmailText, CreateTournamentButton, CreateIcon} from "./style";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
 import {FaUserCircle} from "react-icons/fa";
 
-const ProfilePage = () => {
+const ProfilePage = () : React.JSX.Element => {
   const [activeTab, setActiveTab] = useState('active');
   const userEmail = "emailemail@gmail.com";
   const activeTournaments : Tournament[] = [
@@ -97,12 +97,12 @@ const ProfilePage = () => {
       <TournamentSlider>
         <TournamentTab 
           active={activeTab === 'active'} 
-          onClick={() => setActiveTab('active')}>
+          onClick={() => { setActiveTab('active') }}>
           Active tournaments
         </TournamentTab>
         <TournamentTab 
           active={activeTab === 'archived'} 
-          onClick={() => setActiveTab('archived')}>
+          onClick={() => { setActiveTab('archived') }}>
           Archived tournaments
         </TournamentTab>
       </TournamentSlider>

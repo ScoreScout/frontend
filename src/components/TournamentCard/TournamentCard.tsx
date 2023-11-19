@@ -1,9 +1,9 @@
 import React from 'react';
 import {FaUserGroup, FaBolt, FaRankingStar} from 'react-icons/fa6';
 import { Card, CardHeader, Title, ParticipantInfo, Icon, Text, Date, BoldText } from './style';
-import { Tournament, TournamentCardProps } from '../../types/tournamentCardTypes';
+import type { TournamentCardProps } from '../../types/tournamentCardTypes';
 
-const TournamentCard = ({tournament, margin}: TournamentCardProps) => {
+const TournamentCard = ({tournament} : TournamentCardProps) : React.JSX.Element  => {
   return (
     <Card>
       <CardHeader>
