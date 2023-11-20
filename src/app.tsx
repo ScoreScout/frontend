@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   {
     path: "/score-scout/profile",
     element: <ProfilePage />,
-  }
+  },
 ]);
 
 const App = (): React.JSX.Element => {

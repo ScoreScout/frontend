@@ -100,13 +100,13 @@ const ProfilePage = (): React.JSX.Element => {
   return (
     <ProfileContainer>
       <Sidebar>
-      <Link to={`/score-scout`}>
-        <LogoutButton>
-          <LogoutIcon>
-            <TbLogout2 />
-          </LogoutIcon>
-          Log out
-        </LogoutButton>
+        <Link to={`/score-scout`}>
+          <LogoutButton>
+            <LogoutIcon>
+              <TbLogout2 />
+            </LogoutIcon>
+            Log out
+          </LogoutButton>
         </Link>
         <EmailText>{userEmail}</EmailText>
         <TournamentSlider>

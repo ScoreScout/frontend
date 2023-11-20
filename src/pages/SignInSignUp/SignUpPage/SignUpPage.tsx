@@ -29,12 +29,12 @@ const SignUpPage = (): JSX.Element => {
             <Input placeholder='Confirm password' type='password' />
           </InputsContainer>
           <ButtonContainer>
-          <Link to={`/score-scout/sign-in`}>
-            <Button primary={true} size={ButtonSize.S}>
-              <ButtonText>
-                Create account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
-              </ButtonText>
-            </Button>
+            <Link to={`/score-scout/sign-in`}>
+              <Button primary={true} size={ButtonSize.S}>
+                <ButtonText>
+                  Create account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
+                </ButtonText>
+              </Button>
             </Link>
           </ButtonContainer>
         </EntryBlock>
