@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { globalRegularFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
 
 interface TournamentTabProps {
-  active: boolean;
+  $active: boolean;
 }
 
 const ProfileContainer = styled.div`
@@ -77,12 +77,12 @@ const TournamentTab = styled.button<TournamentTabProps>`
   padding: 1rem 2.5rem 0rem 0;
 
   border-right: 0.5rem solid
-    ${(props) => (props.active ? props.theme.color.mainColor : props.theme.color.secondryBgColor)};
+    ${(props) => (props.$active ? props.theme.color.mainColor : props.theme.color.secondryBgColor)};
 
-  ${(props) => (props.active ? globalSemiBoldFontStyles : globalRegularFontStyles)}
+  ${(props) => (props.$active ? globalSemiBoldFontStyles : globalRegularFontStyles)}
   font-size: 2rem;
   color: ${(props) =>
-    props.active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
+    props.$active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
 
   &:first-child {
     margin-bottom: 1rem;

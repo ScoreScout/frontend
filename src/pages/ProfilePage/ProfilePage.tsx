@@ -16,6 +16,7 @@ import {
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ProfilePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState("active");
@@ -99,16 +100,18 @@ const ProfilePage = (): React.JSX.Element => {
   return (
     <ProfileContainer>
       <Sidebar>
-        <LogoutButton>
-          <LogoutIcon>
-            <TbLogout2 />
-          </LogoutIcon>
-          Log out
-        </LogoutButton>
+        <Link to={`/score-scout`}>
+          <LogoutButton>
+            <LogoutIcon>
+              <TbLogout2 />
+            </LogoutIcon>
+            Log out
+          </LogoutButton>
+        </Link>
         <EmailText>{userEmail}</EmailText>
         <TournamentSlider>
           <TournamentTab
-            active={activeTab === "active"}
+            $active={activeTab === "active"}
             onClick={() => {
               setActiveTab("active");
             }}
@@ -116,7 +119,7 @@ const ProfilePage = (): React.JSX.Element => {
             Active tournaments
           </TournamentTab>
           <TournamentTab
-            active={activeTab === "archived"}
+            $active={activeTab === "archived"}
             onClick={() => {
               setActiveTab("archived");
             }}

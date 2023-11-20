@@ -15,6 +15,7 @@ import {
   GoToAnotherEntryBlock,
   LinkToAnotherEntry,
 } from "../style";
+import { Link } from "react-router-dom";
 
 const SignInPage = (): JSX.Element => {
   return (
@@ -27,15 +28,19 @@ const SignInPage = (): JSX.Element => {
             <Input placeholder='Password' type='password' />
           </InputsContainer>
           <ButtonContainer>
-            <Button primary={true} size={ButtonSize.S}>
-              <ButtonText>
-                Log in account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
-              </ButtonText>
-            </Button>
+            <Link to={`/score-scout/profile`}>
+              <Button primary={true} size={ButtonSize.S}>
+                <ButtonText>
+                  Log in account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
+                </ButtonText>
+              </Button>
+            </Link>
           </ButtonContainer>
         </EntryBlock>
         <GoToAnotherEntryBlock>
-          <LinkToAnotherEntry>I don’t have an account</LinkToAnotherEntry>
+          <Link to={`/score-scout/sign-up`}>
+            <LinkToAnotherEntry>{"I don't have an account"}</LinkToAnotherEntry>
+          </Link>
           <ArrowRightIcon size={30} color='#331515' />
         </GoToAnotherEntryBlock>
       </EntryContainer>
