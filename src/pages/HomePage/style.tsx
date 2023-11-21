@@ -10,16 +10,17 @@ const StyledTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-  padding: 0 2rem;
+  padding: 0 3.5rem;
   ${media.lessThan("large")`
-    font-size: 4rem;
-  `}
+    padding: 0 1.9rem;
+    `}
   ${media.lessThan("medium")`
     font-size: 3rem;
+    padding: 0 1rem;
   `}
 `;
 
-const StyledContianer = styled.div`
+const StyledContainer = styled.div`
   display: flex;
 `;
 
@@ -27,14 +28,11 @@ const StyledDescription = styled.div`
   display: flex;
   align-items: center;
   font-size: 1.9rem;
-  width: 24rem;
+  width: 30%;
   margin-left: 1.5rem;
   font-weight: 500;
-  ${media.lessThan("large")`
-    font-size: 1.6rem;
-  `}
   ${media.lessThan("medium")`
-    font-size: 1.4rem;
+    width: 45%;
   `}
 `;
 
@@ -47,7 +45,7 @@ const StyledButtonsContainer = styled.div`
 const StyledStartButton = styled.div`
   position: absolute;
   bottom: 10%;
-  left: 30%;
+  left: 25%;
   ${media.lessThan("medium")`
     left: 20%;
   `}
@@ -55,7 +53,7 @@ const StyledStartButton = styled.div`
 
 export {
   StyledTitle,
-  StyledContianer,
+  StyledContainer,
   StyledDescription,
   StyledButtonsContainer,
   StyledStartButton,

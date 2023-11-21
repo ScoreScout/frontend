@@ -1,35 +1,42 @@
 import React from "react";
 import {
   StyledTitle,
-  StyledContianer,
+  StyledContainer,
   StyledDescription,
   StyledButtonsContainer,
   StyledStartButton,
 } from "./style";
 import Button from "../../components/Button/Button";
 import { ButtonSize } from "../../types/buttonTypes";
+import { Link } from "react-router-dom";
 
-const HomePage = () => {
+const HomePage = (): React.JSX.Element => {
   return (
-    <StyledContianer>
+    <StyledContainer>
       <StyledTitle>Score Scout</StyledTitle>
       <StyledDescription>
         On this website you can conduct tournaments for different sports.
       </StyledDescription>
       <StyledButtonsContainer>
-        <Button primary={false} size={ButtonSize.S} margin="0 1.5rem 0 0">
-          Sign in
-        </Button>
-        <Button primary={true} size={ButtonSize.S}>
-          Sign up
-        </Button>
+        <Link to={`sign-in`}>
+          <Button primary={false} size={ButtonSize.S} margin='0 1.5rem 0 0'>
+            Sign in
+          </Button>
+        </Link>
+        <Link to={`sign-up`}>
+          <Button primary={true} size={ButtonSize.S}>
+            Sign up
+          </Button>
+        </Link>
       </StyledButtonsContainer>
       <StyledStartButton>
-        <Button primary={true} size={ButtonSize.XL}>
-          Start right now!
-        </Button>
+        <Link to={`sign-up`}>
+          <Button primary={true} size={ButtonSize.XL}>
+            Start right now!
+          </Button>
+        </Link>
       </StyledStartButton>
-    </StyledContianer>
+    </StyledContainer>
   );
 };
 

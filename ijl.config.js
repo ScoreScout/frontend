@@ -1,21 +1,21 @@
-const pkg = require('./package')
+const pkg = require("./package");
 
 module.exports = {
-  apiPath: 'stubs/api',
+  apiPath: "stubs/api",
   webpackConfig: {
     output: {
-      publicPath: `/static/${pkg.name}/${process.env.VERSION || pkg.version}/`
-    }
+      publicPath: `/static/${pkg.name}/${process.env.VERSION || pkg.version}/`,
+    },
   },
   navigations: {
-    'undefined.main': '/undefined'
+    "undefined.main": "/undefined",
   },
   features: {
-    'undefined': {
+    undefined: {
       // add your features here in the format [featureName]: { value: string }
     },
   },
   config: {
-    key: 'value'
-  }
-}
+    key: "value",
+  },
+};
