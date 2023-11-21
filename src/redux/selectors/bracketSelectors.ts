@@ -1,9 +1,10 @@
-import { RootState } from "../index";
+import type { Match, Stage } from "../../types/bracketTypes";
+import type { RootState } from "../index";
 
-export const getMatchById = (state: RootState, id: number) => {
-	return state.bracket.matches[id];
+export const getMatchById = (state: RootState, id: number): Match => {
+  return state.bracket.matches[id];
 };
 
-export const getStages = (state: RootState) => {
-    return state.bracket.stages;
+export const getStages = (state: RootState): Stage[] => {
+  return state.bracket.stages;
 };
