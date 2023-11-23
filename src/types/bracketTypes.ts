@@ -2,6 +2,10 @@ export interface BracketProps {
   bracket: Bracket;
 }
 
+export interface WinnerProps {
+  stageNumber: number;
+}
+
 export interface Bracket {
   players: Player[];
   stages: Stage[];
@@ -11,6 +15,11 @@ export interface Bracket {
 export interface Player {
   name: string;
   rating?: number;
+}
+
+export interface PlaceWithPlayer {
+  player: Player;
+  place: number;
 }
 
 export interface FinishedMatchWithScore {
@@ -37,7 +46,6 @@ export interface PendingMatch {
   secondPlayer?: Player;
   isStarted: boolean;
   isFinished: false;
-  isWithScore: false;
 }
 
 export type FinishedMatch = FinishedMatchWithScore | FinishedMatchOnePlayer;
