@@ -13,12 +13,8 @@ export interface Player {
   rating?: number;
 }
 
-enum Promoted {
-  first = "first",
-  second = "second",
-}
-
 export interface FinishedMatchWithScore {
+  type: 'withScore'
   firstPlayer: Player;
   secondPlayer: Player;
   isFinished: true;
@@ -28,18 +24,20 @@ export interface FinishedMatchWithScore {
 }
 
 export interface FinishedMatchOnePlayer {
+  type: 'onePlayer';
   firstPlayer?: Player;
   secondPlayer?: Player;
   isFinished: true;
-  whoPromoted: Promoted;
   isStarted: true;
 }
 
 export interface PendingMatch {
+  type: 'pending';
   firstPlayer?: Player;
   secondPlayer?: Player;
   isStarted: boolean;
   isFinished: false;
+  isWithScore: false;
 }
 
 export type FinishedMatch = FinishedMatchWithScore | FinishedMatchOnePlayer;

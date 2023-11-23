@@ -1,3 +1,5 @@
+import { store } from "../redux";
+import { getMatchById } from "../redux/selectors/bracketSelectors";
 import type { Bracket, Match, MatchWithPositions, Player, Stage } from "../types/bracketTypes";
 
 const isPowerOfTwo = (x: number): boolean => {
@@ -69,19 +71,23 @@ export function initializeBracket(players: Player[]): Bracket {
     if (i === 0) {
       for (let j = 0; j < positions.length; j += 2) {
         matches.push({
+          type: "pending",
           firstPlayer: players[positions[j] - 1],
           secondPlayer: players[positions[j + 1] - 1],
           isFinished: false,
           isStarted: false,
+          isWithScore: false,
         });
       }
     } else {
       for (let j = 0; j < matchesInStage[i]; j++) {
         matches.push({
+          type: "pending",
           firstPlayer: undefined,
           secondPlayer: undefined,
           isFinished: false,
           isStarted: false,
+          isWithScore: false,
         });
       }
     }
@@ -98,15 +104,40 @@ export function constructPositionedMatchesBasic(
   const cellHeight = 2 ** stageNumber;
   const startingPosition = 1 + cellHeight / 2;
 
-  const positionedMatches: MatchWithPositions[] = matchIds.map((matchId, i) => {
-    const startPosition = startingPosition + 2 * cellHeight * i - 1;
-    const middlePosition = startPosition + 1;
-    const endPosition = middlePosition + cellHeight;
+  const positionedMatches: MatchWithPositions[] = matchIds
+    .map((matchId, i) => {
+      const startPosition = startingPosition + 2 * cellHeight * i - 1;
+      const middlePosition = startPosition + 1;
+      const endPosition = middlePosition + cellHeight;
 
-    return { matchId, startPosition, endPosition };
-  });
+      return { matchId, startPosition, endPosition };
+    })
+    .filter((positionedMatch) => {
+      const match: Match = getMatchById(store.getState(), positionedMatch.matchId);
+      return (
+        (match.firstPlayer !== undefined && match.secondPlayer !== undefined) || stageNumber !== 1
+      );
+    });
   // Remove matches from the first stage that do not have the first match
-  // .filter((positionedMatch) => (positionedMatch.match.firstPlayer && positionedMatch.match.secondPlayer) || stageNumber !== 1)
 
   return positionedMatches;
+}
+
+export function promoteToNextStage(stages: Stage[], matchId: number, matches: Match[]): void {
+  for (let i = 0; i < stages.length; i++) {
+    if (stages[i].matchIds.includes(matchId)) {
+      const startIdxOfPlayedStage = stages[i].matchIds[0];
+      const startIdxOfNextStage = Number(stages[i].matchIds.at(-1)) + 1;
+      const relativePositionOfPlayedMatch = matchId - startIdxOfPlayedStage;
+      const relativePositionOfNextMatch = Math.floor(relativePositionOfPlayedMatch / 2);
+      const idxOfNextMatch = startIdxOfNextStage + relativePositionOfNextMatch;
+      const isFirstInNextMatch = relativePositionOfPlayedMatch % 2 === 0;
+
+      if (isFirstInNextMatch) {
+        matches[idxOfNextMatch].firstPlayer = matches[matchId].firstPlayer;
+      } else {
+        matches[idxOfNextMatch].secondPlayer = matches[matchId].secondPlayer;
+      }
+    }
+  }
 }

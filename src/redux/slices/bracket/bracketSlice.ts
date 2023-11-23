@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { Bracket, Player } from "../../../types/bracketTypes";
-import { initializeBracket } from "../../../utils/bracketDistribution";
+import type { Bracket, FinishedMatchWithScore, Player } from "../../../types/bracketTypes";
+import { initializeBracket, promoteToNextStage } from "../../../utils/bracketDistribution";
 
 export type bracketState = Bracket;
 
@@ -20,10 +20,17 @@ export const bracketSlice = createSlice({
       state.matches[action.payload].isStarted = true;
       return state;
     },
-    finishMatch: (state, action: PayloadAction<number>) => {
+    finishMatch: (state, action: PayloadAction<{ matchId: number }>) => {
       //	TODO: Check if match was initialized
-      const matchId = action.payload;
-      state.matches[matchId].isFinished = true;
+      const { matchId } = action.payload;
+      const match = state.matches[matchId] as FinishedMatchWithScore;
+      match.type = "withScore";
+      match.isFinished = true;
+      match.firstPlayerScore = 2;
+      match.secondPlayerScore = 0;
+
+      promoteToNextStage(state.stages, matchId, state.matches);
+
       return state;
     },
   },
@@ -31,7 +38,5 @@ export const bracketSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { setPlayers, startMatch, finishMatch } = bracketSlice.actions;
-
-// export const bracket = useSelector((state: RootState) => state.bracket);
 
 export default bracketSlice.reducer;
