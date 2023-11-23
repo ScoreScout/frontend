@@ -161,27 +161,28 @@ export function constructPositionedMatchesBasic(
 
 export function promoteToNextStage(stages: Stage[], matchId: number, matches: Match[]): void {
   const prevMatch = matches[matchId];
-  if (prevMatch.type !== 'withScore') throw Error('previous match is of incorrect type');
+  if (prevMatch.type !== "withScore") throw Error("previous match is of incorrect type");
   for (let i = 0; i < stages.length; i++) {
     if (stages[i].matchIds.includes(matchId)) {
-      const startIdxOfPlayedStage = stages[i].matchIds[0];
-      const startIdxOfNextStage = Number(stages[i].matchIds.at(-1)) + 1;
-      const relativePositionOfPlayedMatch = matchId - startIdxOfPlayedStage;
-      const relativePositionOfNextMatch = Math.floor(relativePositionOfPlayedMatch / 2);
-      const idxOfNextMatch = startIdxOfNextStage + relativePositionOfNextMatch;
-      
-      if (idxOfNextMatch < matches.length) {
-        const isFirstInNextMatch = relativePositionOfPlayedMatch % 2 === 0;
+      const startIdPlayedStage = stages[i].matchIds[0];
+      const startIdNextStage = Number(stages[i].matchIds.at(-1)) + 1;
+      const relativePositionPlayedMatch = matchId - startIdPlayedStage;
+      const relativePositionNextMatch = Math.floor(relativePositionPlayedMatch / 2);
+      const idNextMatch = startIdNextStage + relativePositionNextMatch;
+
+      if (idNextMatch < matches.length) {
+        const isFirstInNextMatch = relativePositionPlayedMatch % 2 === 0;
         const isFirstWon = prevMatch.firstPlayerScore > prevMatch.secondPlayerScore;
-        const firstPlayer = matches[matchId].firstPlayer
-        const secondPlayer = matches[matchId].secondPlayer
-        const playerToPromote = isFirstWon ? firstPlayer: secondPlayer;
+        const firstPlayer = matches[matchId].firstPlayer;
+        const secondPlayer = matches[matchId].secondPlayer;
+        const playerToPromote = isFirstWon ? firstPlayer : secondPlayer;
         if (isFirstInNextMatch) {
-          matches[idxOfNextMatch].firstPlayer = playerToPromote;
+          matches[idNextMatch].firstPlayer = playerToPromote;
         } else {
-          matches[idxOfNextMatch].secondPlayer = playerToPromote;
+          matches[idNextMatch].secondPlayer = playerToPromote;
         }
       }
+      break;
     }
   }
 }

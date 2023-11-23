@@ -1,21 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type {
   BracketProps,
   StageProps,
   BracketMatchProps,
   MatchWithPositions,
   WinnerProps,
+  PlayerSpanProps,
 } from "../../types/bracketTypes";
-import { StyledGrid, StyledMatchTrigger, StyledPlayerSpan, StyledStageItem } from "./style";
+import {
+  StyledGrid,
+  StyledMatchTrigger,
+  StyledPlayerNumber,
+  StyledPlayerSpan,
+  StyledScoreSpan,
+  StyledStageItem,
+} from "./style";
 import { constructPositionedMatchesBasic } from "../../utils/bracketDistribution";
-import { getMatchById, getStages, getWinner } from "../../redux/selectors/bracketSelectors";
+import {
+  getBracket,
+  getFinalMatch,
+  getMatchById,
+  getPrevMatches,
+  getStages,
+  getWinner,
+} from "../../redux/selectors/bracketSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux";
-import { finishMatch, setPlayers, startMatch } from "../../redux/slices/bracket/bracketSlice";
+import {
+  finishMatch,
+  setBracket,
+  setPlayers,
+  startMatch,
+} from "../../redux/slices/bracket/bracketSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Winner = ({ stageNumber }: WinnerProps): React.JSX.Element => {
   const winner = useAppSelector(getWinner);
+  const finalMatch = useAppSelector(getFinalMatch);
 
   const cellHeight = 2 ** stageNumber;
   const position = cellHeight / 2;
@@ -27,8 +48,21 @@ const Winner = ({ stageNumber }: WinnerProps): React.JSX.Element => {
       $endPosition={position + 1}
       $isSecondPlayer={false}
     >
-      <StyledPlayerSpan>{winner?.name}</StyledPlayerSpan>
+      <PlayerSpan match={finalMatch} player={winner} />
     </StyledStageItem>
+  );
+};
+
+const PlayerSpan = ({ match, player }: PlayerSpanProps): React.JSX.Element => {
+  return (
+    <StyledPlayerSpan>
+      {match !== undefined && match.type === "withScore" && (
+        <StyledScoreSpan>
+          {match.firstPlayerScore}:{match.secondPlayerScore}
+        </StyledScoreSpan>
+      )}
+      {player?.name}
+    </StyledPlayerSpan>
   );
 };
 
@@ -39,10 +73,34 @@ const BracketMatch = ({
   stageNumber,
 }: BracketMatchProps): React.JSX.Element => {
   const match = useSelector((state: RootState) => getMatchById(state, matchId));
+
+  const { firstPlayerMatch, secondPlayerMatch } = useSelector((state: RootState) =>
+    getPrevMatches(state, matchId),
+  );
   const dispatch = useDispatch();
 
   return (
     <>
+      {(firstPlayerMatch === undefined || firstPlayerMatch.type === "onePlayer") &&
+        match.firstPlayer !== undefined && (
+          <StyledPlayerNumber
+            $stageNumber={stageNumber}
+            $startPosition={startPosition}
+            $endPosition={startPosition + 1}
+          >
+            {match.firstPlayer?.id + 1}.
+          </StyledPlayerNumber>
+        )}
+      {(secondPlayerMatch === undefined || secondPlayerMatch.type === "onePlayer") &&
+        match.secondPlayer !== undefined && (
+          <StyledPlayerNumber
+            $stageNumber={stageNumber}
+            $startPosition={endPosition - 1}
+            $endPosition={endPosition}
+          >
+            {match.secondPlayer?.id + 1}.
+          </StyledPlayerNumber>
+        )}
       <StyledStageItem
         key={startPosition}
         $stageNumber={stageNumber}
@@ -50,7 +108,7 @@ const BracketMatch = ({
         $endPosition={startPosition + 1}
         $isSecondPlayer={false}
       >
-        <StyledPlayerSpan>{match.firstPlayer?.name}</StyledPlayerSpan>
+        <PlayerSpan match={firstPlayerMatch} player={match.firstPlayer} />
       </StyledStageItem>
       <StyledStageItem
         key={startPosition + 1}
@@ -70,7 +128,7 @@ const BracketMatch = ({
               $isStarted={match.isStarted}
             />
           )}
-        <StyledPlayerSpan>{match.secondPlayer?.name}</StyledPlayerSpan>
+        <PlayerSpan match={secondPlayerMatch} player={match.secondPlayer} />
       </StyledStageItem>
     </>
   );
@@ -97,25 +155,36 @@ const Stage = ({ matchIds, stageNumber }: StageProps): React.JSX.Element => {
   );
 };
 
-const Bracket = ({ bracket }: BracketProps): React.JSX.Element => {
+const Bracket = ({ customBracket, playerNames }: BracketProps): React.JSX.Element => {
+  const dispatch = useAppDispatch();
+  const bracket = useAppSelector(getBracket);
+  const stages = useAppSelector(getStages);
+
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (playerNames !== undefined) {
+      dispatch(setPlayers({ playerNames }));
+    }
+    if (customBracket !== undefined) {
+      dispatch(setBracket({ bracket: customBracket }));
+    }
+    setLoaded(true);
+  }, []);
+
+  if (!loaded) return <></>;
+
   const playersAmountPowOf2 = Math.ceil(Math.log(bracket.players.length) / Math.log(2));
   const playersAmountLog2 = 2 ** playersAmountPowOf2;
   const gridHeight = playersAmountLog2 * 2 - 1;
   const stagesAmount = playersAmountPowOf2;
-
-  const dispatch = useAppDispatch();
-  const stages = useAppSelector(getStages);
-
-  if (stages.length === 0) {
-    dispatch(setPlayers({ players: bracket.players }));
-  }
 
   return (
     <StyledGrid $height={gridHeight} $width={stagesAmount + 1}>
       {stages.map((stage, i) => (
         <Stage key={i} matchIds={stage.matchIds} stageNumber={i + 1} />
       ))}
-	  <Winner stageNumber={stages.length + 1}/>
+      <Winner stageNumber={stages.length + 1} />
     </StyledGrid>
   );
 };

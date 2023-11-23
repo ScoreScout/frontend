@@ -1,9 +1,14 @@
 export interface BracketProps {
-  bracket: Bracket;
+  customBracket?: Bracket;
+  playerNames?: string[];
 }
-
 export interface WinnerProps {
   stageNumber: number;
+}
+
+export interface PlayerSpanProps {
+  match?: Match;
+  player?: Player;
 }
 
 export interface Bracket {
@@ -15,6 +20,7 @@ export interface Bracket {
 export interface Player {
   name: string;
   rating?: number;
+  id: number;
 }
 
 export interface PlaceWithPlayer {
@@ -23,7 +29,7 @@ export interface PlaceWithPlayer {
 }
 
 export interface FinishedMatchWithScore {
-  type: 'withScore'
+  type: "withScore";
   firstPlayer: Player;
   secondPlayer: Player;
   isFinished: true;
@@ -33,7 +39,7 @@ export interface FinishedMatchWithScore {
 }
 
 export interface FinishedMatchOnePlayer {
-  type: 'onePlayer';
+  type: "onePlayer";
   firstPlayer?: Player;
   secondPlayer?: Player;
   isFinished: true;
@@ -41,7 +47,7 @@ export interface FinishedMatchOnePlayer {
 }
 
 export interface PendingMatch {
-  type: 'pending';
+  type: "pending";
   firstPlayer?: Player;
   secondPlayer?: Player;
   isStarted: boolean;

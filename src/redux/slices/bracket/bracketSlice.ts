@@ -11,8 +11,16 @@ export const bracketSlice = createSlice({
   name: "bracket",
   initialState,
   reducers: {
-    setPlayers: (state, action: PayloadAction<{ players: Player[] }>) => {
-      state = { ...initializeBracket(action.payload.players) };
+    setPlayers: (state, action: PayloadAction<{ playerNames: string[] }>) => {
+      const players = action.payload.playerNames.map((name, i): Player => {
+        return { name, id: i };
+      });
+      state = { ...initializeBracket(players) };
+
+      return state;
+    },
+    setBracket: (state, action: PayloadAction<{ bracket: Bracket }>) => {
+      state = action.payload.bracket;
       return state;
     },
     startMatch: (state, action: PayloadAction<number>) => {
@@ -37,6 +45,6 @@ export const bracketSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setPlayers, startMatch, finishMatch } = bracketSlice.actions;
+export const { setPlayers, setBracket, startMatch, finishMatch } = bracketSlice.actions;
 
 export default bracketSlice.reducer;
