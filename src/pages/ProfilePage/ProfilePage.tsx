@@ -12,6 +12,7 @@ import {
   EmailText,
   CreateTournamentButton,
   CreateIcon,
+  EmptyBox,
 } from "./style";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
@@ -131,7 +132,9 @@ const ProfilePage = (): React.JSX.Element => {
       </Sidebar>
 
       <MainContent>
-        {activeTab === "active"
+        <EmptyBox/>
+        {
+        activeTab === "active"
           ? activeTournaments.map((tournament, index) => (
               <TournamentCard key={index} tournament={tournament}></TournamentCard>
             ))

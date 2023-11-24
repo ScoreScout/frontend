@@ -25,7 +25,6 @@ const ProfileLogo = styled.div`
 `;
 
 const MainContent = styled.div`
-  margin-top: 8rem;
   padding: 0rem 10rem 0rem 5rem;
   height: 100vh;
   overflow-y: scroll;
@@ -80,7 +79,7 @@ const TournamentTab = styled.button<TournamentTabProps>`
     ${(props) => (props.active ? props.theme.color.mainColor : props.theme.color.secondryBgColor)};
 
   ${(props) => (props.active ? globalSemiBoldFontStyles : globalRegularFontStyles)}
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: ${(props) =>
     props.active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
 
@@ -126,7 +125,13 @@ const CreateIcon = styled.span`
   padding-bottom: 0.2rem;
 `;
 
+const EmptyBox = styled.div`
+  height: 12.5rem;
+  background: none;
+`;
+
 export {
+  EmptyBox,
   ProfileContainer,
   ProfileLogo,
   MainContent,

@@ -10,7 +10,7 @@ const Card = styled.div`
   padding: 1rem 2rem;
   width: 60rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  margin-bottom: 2%;
+  margin: 1rem 0;
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   }
