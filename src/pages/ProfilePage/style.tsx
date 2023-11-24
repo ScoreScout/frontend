@@ -78,7 +78,7 @@ const TournamentTab = styled.button<TournamentTabProps>`
   border-right: 0.5rem solid
     ${(props) => (props.$active ? props.theme.color.mainColor : props.theme.color.secondryBgColor)};
 
-  ${(props) => (props.active ? globalSemiBoldFontStyles : globalRegularFontStyles)}
+  ${(props) => (props.$active ? globalSemiBoldFontStyles : globalRegularFontStyles)};
   font-size: 1.8rem;
 
   color: ${(props) =>
