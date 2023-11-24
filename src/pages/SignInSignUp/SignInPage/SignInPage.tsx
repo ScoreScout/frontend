@@ -16,9 +16,9 @@ import {
   LinkToAnotherEntry,
 } from "../style";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignInPage = (): JSX.Element => {
-  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,6 +31,23 @@ const SignInPage = (): JSX.Element => {
 
   const onSubmit = (e): void => {
     e.preventDefault();
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const body = JSON.stringify({ email, password });
+
+    axios
+      .post(`http://localhost:8000/auth/jwt/create/`, body, { headers })
+      .then((res) => {
+        // TODO: handle success
+        // res.data = {"refresh": refresh_token, "access": access_token}
+      })
+      .catch((e) => {
+        // TODO: handle failure
+        // if (e.response.data)
+        // try: e.response.data to check for missing fields or wrong credintials
+        // otherwise, it might be network errors
+      });
   };
 
   return (

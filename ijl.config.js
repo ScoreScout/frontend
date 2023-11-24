@@ -8,10 +8,10 @@ module.exports = {
     },
   },
   navigations: {
-    "undefined.main": "/undefined",
+    "scorescout.main": "/scorescout",
   },
   features: {
-    undefined: {
+    scorescout: {
       // add your features here in the format [featureName]: { value: string }
     },
   },
