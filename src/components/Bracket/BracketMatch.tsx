@@ -1,11 +1,13 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../redux";
 import { getMatchById, getPrevMatches } from "../../redux/selectors/bracketSelectors";
 import { startMatch, finishMatch } from "../../redux/slices/bracket/bracketSlice";
 import type { BracketMatchProps } from "../../types/bracketTypes";
 import PlayerSpan from "./PlayerSpan";
 import { StyledPlayerNumber, StyledStageItem, StyledMatchTrigger } from "./style";
+import { awaitModalInput } from "../../redux/slices/modal/modalSlice";
+import type { ModalOutput } from "../../types/modalTypes";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const BracketMatch = ({
   matchId,
@@ -13,12 +15,14 @@ const BracketMatch = ({
   endPosition,
   stageNumber,
 }: BracketMatchProps): React.JSX.Element => {
-  const match = useSelector((state: RootState) => getMatchById(state, matchId));
+  const match = useAppSelector((state: RootState) => getMatchById(state, matchId));
+  const dispatch = useAppDispatch();
 
-  const { firstPlayerMatch, secondPlayerMatch } = useSelector((state: RootState) =>
+  const { firstPlayer, secondPlayer } = match;
+
+  const { firstPlayerMatch, secondPlayerMatch } = useAppSelector((state: RootState) =>
     getPrevMatches(state, matchId),
   );
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -56,17 +60,31 @@ const BracketMatch = ({
         $endPosition={endPosition}
         $isSecondPlayer={true}
       >
-        {match.firstPlayer !== undefined &&
-          match.secondPlayer !== undefined &&
-          !match.isFinished && (
-            <StyledMatchTrigger
-              onClick={() => {
-                if (!match.isStarted) dispatch(startMatch(matchId));
-                else dispatch(finishMatch({ matchId }));
-              }}
-              $isStarted={match.isStarted}
-            />
-          )}
+        {firstPlayer !== undefined && secondPlayer !== undefined && !match.isFinished && (
+          <StyledMatchTrigger
+            onClick={() => {
+              if (!match.isStarted) {
+                dispatch(startMatch(matchId));
+              } else {
+                dispatch(
+                  awaitModalInput({
+                    firstPlayerName: firstPlayer.name,
+                    secondPlayerName: secondPlayer.name,
+                  }),
+                )
+                  .then((res) => {
+                    const score = res.payload as ModalOutput;
+                    dispatch(finishMatch({ matchId, ...score }));
+                  })
+                  .catch((err) => {
+                    // eslint-disable-next-line no-console
+                    console.error(err);
+                  });
+              }
+            }}
+            $isStarted={match.isStarted}
+          />
+        )}
         <PlayerSpan match={secondPlayerMatch} player={match.secondPlayer} />
       </StyledStageItem>
     </>

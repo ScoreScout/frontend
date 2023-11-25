@@ -5,16 +5,20 @@ export const StyledModalOverlay = styled.div`
   position: absolute;
   width: 100vw;
   height: 100vh;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
+
+  &:hover {
+    cursor: default;
+  }
 `;
 
-export const StyledModal = styled.div`
+export const StyledModal = styled.form`
   width: 37rem;
   border-radius: 30px;
   background-color: ${(props) => props.theme.color.bgColor};
