@@ -1,19 +1,23 @@
 import styled from "styled-components";
-import { globalRegularFontStyles, globalSemiBoldFontStyles, globalBoldFontStyles } from "../../theme/FontStyles";
+import {
+  globalRegularFontStyles,
+  globalSemiBoldFontStyles,
+  globalBoldFontStyles,
+} from "../../theme/FontStyles";
 
 const Card = styled.div`
   box-sizing: border-box;
   flex-shrink: 0;
   padding: 1.25rem 1.25rem 1.25rem 1.87rem;
   margin: 1.25rem 5rem 1.25rem 5rem;
-  
+
   width: 50rem;
   height: 11rem;
   background-color: ${(props) => props.theme.color.bgColor};
-  
+
   border-radius: 1.25rem;
   box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
-  
+
   &:hover {
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.25);
   }

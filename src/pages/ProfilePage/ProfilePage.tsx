@@ -20,7 +20,6 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-
 const ProfilePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState("active");
   const userEmail = "emailemail@gmail.com";
@@ -139,9 +138,8 @@ const ProfilePage = (): React.JSX.Element => {
       </Sidebar>
 
       <MainContent>
-        <EmptyBox/>
-        {
-        activeTab === "active"
+        <EmptyBox />
+        {activeTab === "active"
           ? activeTournaments.map((tournament, index) => (
               <TournamentCard key={index} tournament={tournament}></TournamentCard>
             ))

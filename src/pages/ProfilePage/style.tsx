@@ -17,7 +17,7 @@ const ProfileLogo = styled.div`
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
-  
+
   height: 2.5rem;
   width: 2.5rem;
   font-size: 2.5rem;
@@ -83,9 +83,8 @@ const TournamentTab = styled.button<TournamentTabProps>`
 
   border-right: 0.5rem solid
     ${(props) => (props.$active ? props.theme.color.mainColor : props.theme.color.secondaryBgColor)};
-  
 
-  ${(globalRegularFontStyles)};
+  ${globalRegularFontStyles};
   /* ${(props) => (props.$active ? globalSemiBoldFontStyles : globalRegularFontStyles)}; */
   font-size: 1.25rem;
 
@@ -127,7 +126,7 @@ const CreateIcon = styled.div`
   align-items: center;
   justify-content: space-around;
   border-radius: 50%;
-  background-color: ${props => props.theme.color.mainColor};
+  background-color: ${(props) => props.theme.color.mainColor};
   ${globalRegularFontStyles};
   width: 1.875rem;
   height: 1.875rem;
