@@ -5,6 +5,7 @@ const StyledButton = styled.button<{
   $padding: string;
   $fontSize: string;
   $margin?: string;
+  onClick?: (e: Event) => void;
 }>`
   background-color: ${(props) =>
     props.$primary ? props.theme.color.mainColor : props.theme.color.bgColor};

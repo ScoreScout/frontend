@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AddCircleIcon from "../../../components/icons/AddCircleIcon";
 import ArrowRightIcon from "../../../components/icons/ArrowRightIcon";
 import Button from "../../../components/Button/Button";
@@ -16,30 +16,74 @@ import {
   LinkToAnotherEntry,
 } from "../style";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignInPage = (): JSX.Element => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+  const onChange = (e): void => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e): void => {
+    e.preventDefault();
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const body = JSON.stringify({ email, password });
+
+    axios
+      .post(`http://31.31.198.23:8000/auth/jwt/create/`, body, { headers })
+      .then((res) => {
+        // TODO: handle success
+        // res.data = {"refresh": refresh_token, "access": access_token}
+        // console.log(res.data);
+      })
+      .catch((e) => {
+        // TODO: handle failure
+        // if (e.response.data)
+        // try: e.response.data to check for missing fields or wrong credintials
+        // otherwise, it might be network errors
+        // console.log(e.response.data);
+      });
+  };
+
   return (
     <EntryWrapper>
       <EntryContainer>
-        <EntryBlock>
-          <TextWrapper>Sign up</TextWrapper>
+        <EntryBlock onSubmit={onSubmit}>
+          <TextWrapper>Sign in</TextWrapper>
           <InputsContainer>
-            <Input placeholder='E-mail' type='email' />
-            <Input placeholder='Password' type='password' />
+            <Input
+              placeholder='E-mail'
+              type='email'
+              name='email'
+              value={email}
+              onChange={onChange}
+            />
+            <Input
+              placeholder='Password'
+              type='password'
+              name='password'
+              value={password}
+              onChange={onChange}
+            />
           </InputsContainer>
           <ButtonContainer>
-            <Link to={`/score-scout/profile`}>
-              <Button primary={true} size={ButtonSize.S}>
-                <ButtonText>
-                  Log in account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
-                </ButtonText>
-              </Button>
-            </Link>
+            <Button primary={true} size={ButtonSize.S}>
+              <ButtonText>
+                Log in account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
+              </ButtonText>
+            </Button>
           </ButtonContainer>
         </EntryBlock>
         <GoToAnotherEntryBlock>
           <Link to={`/score-scout/sign-up`}>
-            <LinkToAnotherEntry>{"I don't have an account"}</LinkToAnotherEntry>
+            <LinkToAnotherEntry>I don&apos;t have an account</LinkToAnotherEntry>
           </Link>
           <ArrowRightIcon size={30} color='#331515' />
         </GoToAnotherEntryBlock>
