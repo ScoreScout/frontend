@@ -37,7 +37,7 @@ const SignUpPage = (): JSX.Element => {
       };
       const body = JSON.stringify({ uid: parms.uid, token: parms.token });
       axios
-        .post("http://localhost:8000/auth/users/activation/", body, { headers })
+        .post("http://31.31.198.23:8000/auth/users/activation/", body, { headers })
         .then((res) => {
           navigate("/score-scout/sign-in");
         })
@@ -57,15 +57,17 @@ const SignUpPage = (): JSX.Element => {
     e.preventDefault();
     const body = JSON.stringify({ email, password, re_password: rePassword });
     axios
-      .post(`http://localhost:8000/auth/users/`, body, { headers })
+      .post(`http://31.31.198.23:8000/auth/users/`, body, { headers })
       .then((res) => {
         // TODO: handle success
         // you will get activation email
+        // console.log(res.data)
       })
       .catch((e) => {
         // TODO: handle failure
         // if (e.response.data)
         // check: e.response.data to find all errors
+        // console.log(e.response.data)
       });
   };
   return (

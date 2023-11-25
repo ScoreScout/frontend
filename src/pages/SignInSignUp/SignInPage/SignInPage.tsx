@@ -37,16 +37,18 @@ const SignInPage = (): JSX.Element => {
     const body = JSON.stringify({ email, password });
 
     axios
-      .post(`http://localhost:8000/auth/jwt/create/`, body, { headers })
+      .post(`http://31.31.198.23:8000/auth/jwt/create/`, body, { headers })
       .then((res) => {
         // TODO: handle success
         // res.data = {"refresh": refresh_token, "access": access_token}
+        // console.log(res.data);
       })
       .catch((e) => {
         // TODO: handle failure
         // if (e.response.data)
         // try: e.response.data to check for missing fields or wrong credintials
         // otherwise, it might be network errors
+        // console.log(e.response.data);
       });
   };
 
