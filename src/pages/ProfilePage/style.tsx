@@ -103,7 +103,7 @@ const CreateTournamentButton = styled.button`
   align-self: self-end;
   align-items: center;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   border: none;
   background: none;
   border-radius: 50%;
@@ -131,8 +131,8 @@ const CreateIcon = styled.div`
   ${globalRegularFontStyles};
   width: 1.875rem;
   height: 1.875rem;
-  margin-right: 0.5rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  color: white;
 `;
 
 const EmptyBox = styled.div`
