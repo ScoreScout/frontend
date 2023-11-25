@@ -29,8 +29,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/score-scout/activate/:uid/:token",
-    element: <SignUpPage />
-  }
+    element: <SignUpPage />,
+  },
 ]);
 
 const App = (): React.JSX.Element => {
