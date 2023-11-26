@@ -10,6 +10,7 @@ import SignUpPage from "./pages/SignInSignUp/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { Provider } from "react-redux";
 import { store } from "./redux";
+import ScoreModal from "./components/Modal/ScoreModal";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const App = (): React.JSX.Element => {
       <Provider store={store}>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
+          <ScoreModal />
           <RouterProvider router={router} />
         </ThemeProvider>
       </Provider>

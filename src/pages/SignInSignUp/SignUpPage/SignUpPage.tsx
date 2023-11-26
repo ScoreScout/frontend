@@ -32,7 +32,7 @@ const SignUpPage = (): JSX.Element => {
             <Link to={`/score-scout/sign-in`}>
               <Button primary={true} size={ButtonSize.S}>
                 <ButtonText>
-                  Create account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
+                  Create account <AddCircleIcon size={"24px"} color='#FFFFFF' />{" "}
                 </ButtonText>
               </Button>
             </Link>
@@ -42,7 +42,7 @@ const SignUpPage = (): JSX.Element => {
           <Link to={`/score-scout/sign-in`}>
             <LinkToAnotherEntry>I already have an account</LinkToAnotherEntry>
           </Link>
-          <ArrowRightIcon size={30} color='#331515' />
+          <ArrowRightIcon size={"30px"} color='#331515' />
         </GoToAnotherEntryBlock>
       </EntryContainer>
     </EntryWrapper>
