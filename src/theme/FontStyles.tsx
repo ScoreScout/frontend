@@ -16,4 +16,15 @@ const globalSemiBoldFontStyles = `
     font-weight: 600;
 `;
 
-export { globalRegularFontStyles, globalBoldFontStyles, globalSemiBoldFontStyles };
+const globalMediumFontStyles = `
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 1.25em;
+    font-weight: 500;
+`;
+
+export {
+  globalRegularFontStyles,
+  globalBoldFontStyles,
+  globalSemiBoldFontStyles,
+  globalMediumFontStyles,
+};
