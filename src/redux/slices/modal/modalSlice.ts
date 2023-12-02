@@ -39,6 +39,7 @@ export const awaitModalInput = createAsyncThunk(
             form?.addEventListener("submit", handleSubmit);
           })
           .catch((err) => {
+            // TODO: handle errors
             // eslint-disable-next-line no-console
             console.error(err);
           });
