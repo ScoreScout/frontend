@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "data": [
+    {
+      "title": "1st Archived Tournament",
+      "n_participants": 9999,
+      "n_games": 80,
+      "status": "Finished",
+      "date": "2005-12-04"
+    },
+    {
+      "title": "2nd Archived Tournament",
+      "n_participants": 10,
+      "n_games": 80,
+      "status": "Finished",
+      "date": "2005-12-04"
+    },
+    {
+      "title": "3rd Archived Tournament",
+      "n_participants": 4,
+      "n_games": 6,
+      "status": "Finished",
+      "date": "2023-11-11"
+    },
+    {
+      "title": "4th Archived Tournament",
+      "n_participants": 4,
+      "n_games": 6,
+      "status": "Finished",
+      "date": "2023-11-11"
+    },
+    {
+      "title": "5th Archived Tournament",
+      "n_participants": 4,
+      "n_games": 6,
+      "status": "Finished",
+      "date": "2023-11-11"
+    },
+    {
+      "title": "6th Archived Tournament",
+      "n_participants": 4,
+      "n_games": 6,
+      "status": "Finished",
+      "date": "2023-11-11"
+    },
+    {
+      "title": "7th Archived Tournament",
+      "n_participants": 4,
+      "n_games": 6,
+      "status": "Finished",
+      "date": "2023-11-11"
+    },
+    {
+      "title": "8th Archived Tournament",
+      "n_participants": 4,
+      "n_games": 6,
+      "status": "Finished",
+      "date": "2023-11-11"
+    }
+  ]
+}
