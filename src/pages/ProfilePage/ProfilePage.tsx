@@ -12,10 +12,12 @@ import {
   EmailText,
   CreateTournamentButton,
   CreateIcon,
+  EmptyBox,
 } from "./style";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
+import { MdAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const ProfilePage = (): React.JSX.Element => {
@@ -129,11 +131,14 @@ const ProfilePage = (): React.JSX.Element => {
         </TournamentSlider>
         <CreateTournamentButton>
           Create tournament
-          <CreateIcon>+</CreateIcon>
+          <CreateIcon>
+            <MdAdd />
+          </CreateIcon>
         </CreateTournamentButton>
       </Sidebar>
 
       <MainContent>
+        <EmptyBox />
         {activeTab === "active"
           ? activeTournaments.map((tournament, index) => (
               <TournamentCard key={index} tournament={tournament}></TournamentCard>
