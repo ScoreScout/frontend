@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { Provider } from "react-redux";
 import { store } from "./redux";
 import ScoreModal from "./components/Modal/ScoreModal";
+import TournamentViewPage from "./pages/TournamentViewPage/TournamentViewPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/score-scout/profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "/score-scout/tournament/:tournamentId",
+    element: <TournamentViewPage />
   },
 ]);
 
