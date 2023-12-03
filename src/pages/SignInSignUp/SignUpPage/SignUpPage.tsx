@@ -83,7 +83,7 @@ const SignUpPage = (): JSX.Element => {
           <Link to={`/score-scout/sign-in`}>
             <LinkToAnotherEntry>I already have an account</LinkToAnotherEntry>
           </Link>
-          <ArrowRightIcon size={30} color='#331515' />
+          <ArrowRightIcon size={"30px"} color='#331515' />
         </GoToAnotherEntryBlock>
       </EntryContainer>
     </EntryWrapper>

@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bracketReducer from "./slices/bracket/bracketSlice";
 import userReducer from "./slices/user/userSlice";
+import modalReducer from "./slices/modal/modalSlice";
 
 export const store = configureStore({
   reducer: {
     bracket: bracketReducer,
     user: userReducer,
+    modal: modalReducer,
   },
 });
 

@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProfileActivationPage from "./pages/ProfileActivationPage/ProfileActivationPage";
 import { CookiesProvider } from "react-cookie";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import ScoreModal from "./components/Modal/ScoreModal";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ const App = (): React.JSX.Element => {
       <Provider store={store}>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
+          <ScoreModal />
           <RouterProvider router={router} />
         </ThemeProvider>
       </Provider>
