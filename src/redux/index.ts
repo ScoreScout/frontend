@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bracketReducer from "./slices/bracket/bracketSlice";
+import userReducer from "./slices/user/userSlice";
 
 export const store = configureStore({
   reducer: {
     bracket: bracketReducer,
+    user: userReducer,
   },
 });
 

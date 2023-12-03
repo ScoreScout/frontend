@@ -56,7 +56,7 @@ const GoToAnotherEntryBlock = styled.div`
     `}
 `;
 
-const EntryBlock = styled.div`
+const EntryBlock = styled.form`
   background-color: ${(props) => props.theme.color.bgColor};
   border-radius: 30px;
   box-shadow: 4px 4px 100px 8px #ff6d4c40;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TournamentCard from "../../components/TournamentCard/TournamentCard";
 import { TournamentStatus, type Tournament } from "../../types/tournamentCardTypes";
 import {
@@ -16,11 +16,16 @@ import {
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { loadUser, logout } from "../../redux/slices/user/userSlice";
+import { useCookies } from "react-cookie";
+import { getUser } from "../../redux/selectors/userSelection";
 
 const ProfilePage = (): React.JSX.Element => {
+  const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
+  const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState("active");
-  const userEmail = "emailemail@gmail.com";
+  const user = useAppSelector(getUser);
   const activeTournaments: Tournament[] = [
     {
       title: "Fall Students Tournament",
@@ -96,56 +101,82 @@ const ProfilePage = (): React.JSX.Element => {
       date: "2023-11-11",
     },
   ];
+  const handleLogout = (): void => {
+    removeCookie("access", { path: "/" });
+    removeCookie("refresh", { path: "/" });
+    dispatch(logout());
+  };
+
+  useEffect(() => {
+    dispatch(loadUser(user))
+      .then((res) => {
+        if (res.payload?.access != null) {
+          setCookie("access", res.payload.access, { path: "/" });
+        }
+        if (res.type === "user/getUser/rejected") {
+          removeCookie("access", { path: "/" });
+          removeCookie("refresh", { path: "/" });
+          dispatch(logout());
+        }
+      })
+      .catch((e) => {});
+  }, []);
 
   return (
-    <ProfileContainer>
-      <Sidebar>
-        <Link to={`/score-scout`}>
-          <LogoutButton>
-            <LogoutIcon>
-              <TbLogout2 />
-            </LogoutIcon>
-            Log out
-          </LogoutButton>
-        </Link>
-        <EmailText>{userEmail}</EmailText>
-        <TournamentSlider>
-          <TournamentTab
-            $active={activeTab === "active"}
-            onClick={() => {
-              setActiveTab("active");
-            }}
-          >
-            Active tournaments
-          </TournamentTab>
-          <TournamentTab
-            $active={activeTab === "archived"}
-            onClick={() => {
-              setActiveTab("archived");
-            }}
-          >
-            Archived tournaments
-          </TournamentTab>
-        </TournamentSlider>
-        <CreateTournamentButton>
-          Create tournament
-          <CreateIcon>+</CreateIcon>
-        </CreateTournamentButton>
-      </Sidebar>
+    <>
+      {user.loadState === "success" ? (
+        <ProfileContainer>
+          <Sidebar>
+            <div onClick={handleLogout}>
+              <LogoutButton>
+                <LogoutIcon>
+                  <TbLogout2 />
+                </LogoutIcon>
+                Log out
+              </LogoutButton>
+            </div>
+            <EmailText>{user.email}</EmailText>
+            <TournamentSlider>
+              <TournamentTab
+                $active={activeTab === "active"}
+                onClick={() => {
+                  setActiveTab("active");
+                }}
+              >
+                Active tournaments
+              </TournamentTab>
+              <TournamentTab
+                $active={activeTab === "archived"}
+                onClick={() => {
+                  setActiveTab("archived");
+                }}
+              >
+                Archived tournaments
+              </TournamentTab>
+            </TournamentSlider>
+            <CreateTournamentButton>
+              Create tournament
+              <CreateIcon>+</CreateIcon>
+            </CreateTournamentButton>
+          </Sidebar>
 
-      <MainContent>
-        {activeTab === "active"
-          ? activeTournaments.map((tournament, index) => (
-              <TournamentCard key={index} tournament={tournament}></TournamentCard>
-            ))
-          : archivedTournaments.map((tournament, index) => (
-              <TournamentCard key={index} tournament={tournament}></TournamentCard>
-            ))}
-      </MainContent>
-      <ProfileLogo>
-        <FaUserCircle />
-      </ProfileLogo>
-    </ProfileContainer>
+          <MainContent>
+            {activeTab === "active"
+              ? activeTournaments.map((tournament, index) => (
+                  <TournamentCard key={index} tournament={tournament}></TournamentCard>
+                ))
+              : archivedTournaments.map((tournament, index) => (
+                  <TournamentCard key={index} tournament={tournament}></TournamentCard>
+                ))}
+          </MainContent>
+          <ProfileLogo>
+            <FaUserCircle />
+          </ProfileLogo>
+        </ProfileContainer>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

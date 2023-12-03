@@ -10,4 +10,6 @@ export interface ButtonProps {
   primary?: boolean;
   children: React.ReactNode;
   margin?: string;
+  onClick?: (e: Event) => void;
+  disabled?: boolean;
 }
