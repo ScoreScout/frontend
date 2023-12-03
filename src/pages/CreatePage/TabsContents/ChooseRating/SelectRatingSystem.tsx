@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-import { FaAngleDown } from "react-icons/fa6";
 
 import { StyledRatingSystemSelectorContainer, customStyles } from "./style";
 
 const SelectRatingSystem = (): React.JSX.Element => {
   const options = [
-    { value: "rs1", label: "Rating System 1" },
-    { value: "rs2", label: "Rating System 2" },
-    { value: "rs3", label: "Rating System 3" },
+    { value: "ttw", label: "TTW" },
   ];
 
  
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);

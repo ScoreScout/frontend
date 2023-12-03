@@ -28,15 +28,27 @@ import {
 
 import { FaUserCircle } from "react-icons/fa";
 
+interface Player {
+  name: string;
+  rating?: number;
+}
+
 const CreatePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState("chooseRating");
+
+  const [ratingToggleOn, setRatingToggleOn] = useState(false);
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  const handleRatingToggle = () => {
+    setRatingToggleOn(!ratingToggleOn);
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
       case "chooseRating":
-        return <ChooseRating />;
+        return <ChooseRating toggleOn={ratingToggleOn} handleToggle={handleRatingToggle} />;
       case "addPlayers":
-        return <AddPlayers />;
+        return <AddPlayers ratingToggleOn={ratingToggleOn} players={players} setPlayers={setPlayers} />;
       case "numStages":
         return <NumStages />;
       case "firstStage":
@@ -137,24 +149,29 @@ const CreatePage = (): React.JSX.Element => {
         {renderTabContent()}
 
         <ButtonsContainer>
-          {activeTab !== "chooseRating" ?
-          <Button primary={false} size={ButtonSize.S} onClick={handleBack}>
-            <ButtonText>
-              <ArrowLeftIcon size={24} color="#D22D19"/>
-              Back
-            </ButtonText>
-          </Button> : <div></div>}
-          { activeTab !== "secondStage" ? 
-          <Button primary={true} size={ButtonSize.S} onClick={handleNext}>
-          <ButtonText>
-            Next <ArrowRightIcon size={24} color='#FFFFFF' />
-          </ButtonText>
-        </Button> : 
-        <Button primary={true} size={ButtonSize.S} >
-          <ButtonText>
-            Create <CupIcon size={24} color='#FFFFFF' />
-          </ButtonText>
-        </Button> }
+          {activeTab !== "chooseRating" ? (
+            <Button primary={false} size={ButtonSize.S} onClick={handleBack}>
+              <ButtonText>
+                <ArrowLeftIcon size={24} color='#D22D19' />
+                Back
+              </ButtonText>
+            </Button>
+          ) : (
+            <div></div>
+          )}
+          {activeTab !== "secondStage" ? (
+            <Button primary={true} size={ButtonSize.S} onClick={handleNext}>
+              <ButtonText>
+                Next <ArrowRightIcon size={24} color='#FFFFFF' />
+              </ButtonText>
+            </Button>
+          ) : (
+            <Button primary={true} size={ButtonSize.S}>
+              <ButtonText>
+                Create <CupIcon size={24} color='#FFFFFF' />
+              </ButtonText>
+            </Button>
+          )}
         </ButtonsContainer>
       </MainContentContainer>
     </CreateContainer>

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { globalRegularFontStyles } from "../../../../theme/FontStyles";
-import Select from "react-select";
 
 const ChooseRatingWrapper = styled.div`
   padding: 12.5rem 6.25rem 0 6.25rem;
@@ -42,17 +41,7 @@ const customStyles = {
     ...provided,
     backgroundColor: state.isSelected ? "#D22D19" : state.isFocused ? "#E8968C" : state.isHovered ? "orange" : "white",
     color: state.isSelected || state.isFocused ? "white" : "black",
-    // backgroundColor: state.isSelected
-    //   ? `${(props) => props.theme.color.mainColor}`
-    //   : state.isFocused
-    //     ? `${(props) => props.theme.color.secondaryBgColor}`
-    //     : `${(props) => props.theme.color.bgColor}`,
-    // color: "black",
   }),
-  // singleValue: (provided, state) => ({
-  //   ...provided,
-  //   color: state.isSelected ? "white" : "black",
-  // }),
 };
 
 export {
