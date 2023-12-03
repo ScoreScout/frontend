@@ -43,6 +43,11 @@ const CreatePage = (): React.JSX.Element => {
     setRatingToggleOn(!ratingToggleOn);
   };
 
+  const [numStages, setNumStages] = useState<number | null>(null);
+  const handleNumStagesOptionClick = (option: number) => {
+    setNumStages(option);
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "chooseRating":
@@ -50,7 +55,7 @@ const CreatePage = (): React.JSX.Element => {
       case "addPlayers":
         return <AddPlayers ratingToggleOn={ratingToggleOn} players={players} setPlayers={setPlayers} />;
       case "numStages":
-        return <NumStages />;
+        return <NumStages selectedOption={numStages} handleOptionClick={handleNumStagesOptionClick}/>;
       case "firstStage":
         return <FirstStage />;
       case "secondStage":
