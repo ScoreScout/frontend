@@ -10,7 +10,6 @@ const AddPlayersWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 6rem;
-  /* background-color: #9effae; */
 `;
 
 const AddPlayersContainer = styled.div`
@@ -19,7 +18,6 @@ const AddPlayersContainer = styled.div`
   align-items: left;
   gap: 1.25rem;
   margin-top: 4.375rem;
-  /* background-color: #9ed3ff; */
 `;
 
 const AddPLayersTitle = styled.div`
@@ -36,12 +34,14 @@ const TableColumnName = styled.div`
   ${globalSemiBoldFontStyles};
   color: ${(props) => props.theme.color.mainColor};
 `;
+
 const TableLine = styled.div`
   margin-left: 2rem;
   border-radius: 0.325rem;
   height: 0.625rem;
   background-color: ${(props) => props.theme.color.secondaryBgColor};
 `;
+
 const ColumnNamesContainer = styled.div`
   padding-left: 2rem;
   padding-right: 0.625rem;
@@ -66,16 +66,16 @@ const TableContainer = styled.div`
 
   &::-webkit-scrollbar {
     height: 0.5rem;
-    width: 0; 
+    width: 0;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #CCC; 
-    border-radius: 5px; 
+    background-color: #ccc;
+    border-radius: 5px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: ${(props) => props.theme.color.bgColor}; 
-    border-radius: 5px; 
+    background-color: ${(props) => props.theme.color.bgColor};
+    border-radius: 5px;
   }
 `;
 
@@ -114,9 +114,14 @@ const AddPlayersInput = styled.input`
   padding-left: 1.125rem;
   ${globalRegularFontStyles}
 
-  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.25);
   border-radius: 1rem;
   padding-left: 1rem;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 const ButtonContainer = styled.div`
