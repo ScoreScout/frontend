@@ -20,8 +20,9 @@ const StageBoxesContainer = styled.div`
   gap: 1.875rem;
 `;
 
-const StageBox = styled.div.attrs<{ isSelected: boolean }>((props) => ({
-  isSelected: props.isSelected || false,
+const StageBox = styled.div.attrs<{ isselected: string }>((props) => ({
+  isselected:
+    props.isselected !== "" ? (props.isselected === "true" ? props.isselected : "false") : "false",
 }))`
   width: 15.625rem;
   height: 15rem;
@@ -42,23 +43,25 @@ const StageBox = styled.div.attrs<{ isSelected: boolean }>((props) => ({
   }
 
   background-color: ${(props) =>
-    props.isSelected ? props.theme.color.mainColor : props.theme.color.bgColor};
+    props.isselected === "true" ? props.theme.color.mainColor : props.theme.color.bgColor};
 `;
 
-const StageBoxTitle = styled.div.attrs<{ isSelected: boolean }>((props) => ({
-  isSelected: props.isSelected || false,
+const StageBoxTitle = styled.div.attrs<{ isselected: string }>((props) => ({
+  isselected:
+    props.isselected !== "" ? (props.isselected === "true" ? props.isselected : "false") : "false",
 }))`
   ${globalSemiBoldFontStyles}
   font-size: 1.25rem;
-  color: ${(props) => (props.isSelected ? "white" : props.theme.color.mainColor)};
+  color: ${(props) => (props.isselected === "true" ? "white" : props.theme.color.mainColor)};
 `;
 
-const StageBoxDescription = styled.div.attrs<{ isSelected: boolean }>((props) => ({
-  isSelected: props.isSelected || false,
+const StageBoxDescription = styled.div.attrs<{ isselected: string }>((props) => ({
+  isselected:
+    props.isselected !== "" ? (props.isselected === "true" ? props.isselected : "false") : "false",
 }))`
   ${globalRegularFontStyles}
   font-size: 1rem;
-  color: ${(props) => (props.isSelected ? "white" : props.theme.color.fontColor)};
+  color: ${(props) => (props.isselected === "true" ? "white" : props.theme.color.fontColor)};
 `;
 
 export {

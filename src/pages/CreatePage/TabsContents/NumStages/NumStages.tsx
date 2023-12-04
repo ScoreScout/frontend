@@ -26,10 +26,10 @@ const NumStages: React.FC<NumStagesProps> = ({
           onClick={() => {
             handleOptionClick(1);
           }}
-          isSelected={selectedOption === 1}
+          isselected={(selectedOption === 1).toString()}
         >
-          <StageBoxTitle isSelected={selectedOption === 1}>1 stage</StageBoxTitle>
-          <StageBoxDescription isSelected={selectedOption === 1}>
+          <StageBoxTitle isselected={(selectedOption === 1).toString()}>1 stage</StageBoxTitle>
+          <StageBoxDescription isselected={(selectedOption === 1).toString()}>
             You will have only one stage. It can be groups or bracket.{" "}
           </StageBoxDescription>
         </StageBox>
@@ -37,10 +37,10 @@ const NumStages: React.FC<NumStagesProps> = ({
           onClick={() => {
             handleOptionClick(2);
           }}
-          isSelected={selectedOption === 2}
+          isselected={(selectedOption === 2).toString()}
         >
-          <StageBoxTitle isSelected={selectedOption === 2}>2 stages</StageBoxTitle>
-          <StageBoxDescription isSelected={selectedOption === 2}>
+          <StageBoxTitle isselected={(selectedOption === 2).toString()}>2 stages</StageBoxTitle>
+          <StageBoxDescription isselected={(selectedOption === 2).toString()}>
             You will have two stages. First stage is groups, the second can be groups or bracket.
             You can have several finals.
           </StageBoxDescription>
