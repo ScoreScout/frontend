@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {
   PlayersTableContainer,
@@ -12,8 +12,15 @@ import {
   TableLine,
 } from "./style";
 
+interface TableProps {
+  players: Array<{ name: string; rating?: number }>;
+  ratingToggleOn: boolean;
+}
 
-const Table = ({ players, ratingToggleOn }): React.JSX.Element => {
+const Table: React.FC<TableProps> = ({
+  players,
+  ratingToggleOn,
+}: TableProps): React.ReactElement => {
   return (
     <PlayersTableContainer>
       <ColumnNamesContainer>
@@ -29,7 +36,7 @@ const Table = ({ players, ratingToggleOn }): React.JSX.Element => {
               <TablePlayerName>{player.name}</TablePlayerName>
             </div>
             <TableRating>
-              {ratingToggleOn ? player.rating !== undefined ? `${player.rating}` : "None" : " "}
+              {ratingToggleOn ? (player.rating !== undefined ? `${player.rating}` : "None") : " "}
             </TableRating>
           </TableRow>
         ))}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import SelectRatingSystem from "./SelectRatingSystem";
 import { ChooseRatingWrapper, StyledToggle, ChooseRatingContainer } from "./style";

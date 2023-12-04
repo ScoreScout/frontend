@@ -34,28 +34,32 @@ interface Player {
 }
 
 const CreatePage = (): React.JSX.Element => {
-  const [activeTab, setActiveTab] = useState("chooseRating");
+  const [activeTab, setActiveTab] = useState<string>("chooseRating");
 
-  const [ratingToggleOn, setRatingToggleOn] = useState(false);
+  const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
 
-  const handleRatingToggle = () => {
+  const handleRatingToggle = (): void => {
     setRatingToggleOn(!ratingToggleOn);
   };
 
   const [numStages, setNumStages] = useState<number | null>(null);
-  const handleNumStagesOptionClick = (option: number) => {
+  const handleNumStagesOptionClick = (option: number): void => {
     setNumStages(option);
   };
 
-  const renderTabContent = () => {
+  const renderTabContent = (): React.ReactNode => {
     switch (activeTab) {
       case "chooseRating":
         return <ChooseRating toggleOn={ratingToggleOn} handleToggle={handleRatingToggle} />;
       case "addPlayers":
-        return <AddPlayers ratingToggleOn={ratingToggleOn} players={players} setPlayers={setPlayers} />;
+        return (
+          <AddPlayers ratingToggleOn={ratingToggleOn} players={players} setPlayers={setPlayers} />
+        );
       case "numStages":
-        return <NumStages selectedOption={numStages} handleOptionClick={handleNumStagesOptionClick}/>;
+        return (
+          <NumStages selectedOption={numStages} handleOptionClick={handleNumStagesOptionClick} />
+        );
       case "firstStage":
         return <FirstStage />;
       case "secondStage":
@@ -65,39 +69,47 @@ const CreatePage = (): React.JSX.Element => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = (): void => {
     switch (activeTab) {
-      case "chooseRating":
+      case "chooseRating": {
         setActiveTab("addPlayers");
         break;
-      case "addPlayers":
+      }
+      case "addPlayers": {
         setActiveTab("numStages");
         break;
-      case "numStages":
+      }
+      case "numStages": {
         setActiveTab("firstStage");
         break;
-      case "firstStage":
+      }
+      case "firstStage": {
         setActiveTab("secondStage");
         break;
+      }
       default:
         break;
     }
   };
 
-  const handleBack = () => {
+  const handleBack = (): void => {
     switch (activeTab) {
-      case "addPlayers":
+      case "addPlayers": {
         setActiveTab("chooseRating");
         break;
-      case "numStages":
+      }
+      case "numStages": {
         setActiveTab("addPlayers");
         break;
-      case "firstStage":
+      }
+      case "firstStage": {
         setActiveTab("numStages");
         break;
-      case "secondStage":
+      }
+      case "secondStage": {
         setActiveTab("firstStage");
         break;
+      }
       default:
         break;
     }
@@ -111,32 +123,31 @@ const CreatePage = (): React.JSX.Element => {
           <SidebarSlider>
             <SliderTab
               $active={activeTab === "chooseRating"}
-              onClick={() => setActiveTab("chooseRating")}
+              onClick={() => { setActiveTab("chooseRating"); }}
             >
               Choose rating
             </SliderTab>
             <SliderTab
               $active={activeTab === "addPlayers"}
-              onClick={() => setActiveTab("addPlayers")}
+              onClick={() => { setActiveTab("addPlayers"); }}
             >
               Add players
             </SliderTab>
-
             <SliderTab
               $active={activeTab === "numStages"}
-              onClick={() => setActiveTab("numStages")}
+              onClick={() => { setActiveTab("numStages"); }}
             >
               Number of stages
             </SliderTab>
             <SliderTab
               $active={activeTab === "firstStage"}
-              onClick={() => setActiveTab("firstStage")}
+              onClick={() => { setActiveTab("firstStage"); }}
             >
               First stage
             </SliderTab>
             <SliderTab
               $active={activeTab === "secondStage"}
-              onClick={() => setActiveTab("secondStage")}
+              onClick={() => { setActiveTab("secondStage"); }}
             >
               Second stage
             </SliderTab>
@@ -157,7 +168,7 @@ const CreatePage = (): React.JSX.Element => {
           {activeTab !== "chooseRating" ? (
             <Button primary={false} size={ButtonSize.S} onClick={handleBack}>
               <ButtonText>
-                <ArrowLeftIcon size={24} color='#D22D19' />
+                <ArrowLeftIcon size={"24"} color='#D22D19' />
                 Back
               </ButtonText>
             </Button>
@@ -167,13 +178,13 @@ const CreatePage = (): React.JSX.Element => {
           {activeTab !== "secondStage" ? (
             <Button primary={true} size={ButtonSize.S} onClick={handleNext}>
               <ButtonText>
-                Next <ArrowRightIcon size={24} color='#FFFFFF' />
+                Next <ArrowRightIcon size={"24"} color='#FFFFFF' />
               </ButtonText>
             </Button>
           ) : (
             <Button primary={true} size={ButtonSize.S}>
               <ButtonText>
-                Create <CupIcon size={24} color='#FFFFFF' />
+                Create <CupIcon size={"24"} color='#FFFFFF' />
               </ButtonText>
             </Button>
           )}

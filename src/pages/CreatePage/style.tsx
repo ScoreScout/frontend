@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {
   globalRegularFontStyles,
-  globalSemiBoldFontStyles,
   globalBoldFontStyles,
   globalMediumFontStyles,
 } from "../../theme/FontStyles";

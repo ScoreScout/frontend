@@ -29,7 +29,7 @@ const StyledRatingSystemSelectorContainer = styled.div`
 `;
 
 const customStyles = {
-  control: (provided, state) => ({
+  control: (provided: any, state: any) => ({
     ...provided,
     border: "1px solid #ACA4A2",
     borderRadius: "1rem",
@@ -37,10 +37,17 @@ const customStyles = {
     height: "3.125rem",
     paddingLeft: "1rem",
   }),
-  option: (provided, state) => ({
+  option: (provided: any, state: any) => ({
     ...provided,
-    backgroundColor: state.isSelected ? "#D22D19" : state.isFocused ? "#E8968C" : state.isHovered ? "orange" : "white",
-    color: state.isSelected || state.isFocused ? "white" : "black",
+    backgroundColor:
+      state.isSelected === true
+        ? "#D22D19"
+        : state.isFocused === true
+          ? "#E8968C"
+          : state.isHovered === true
+            ? "#E8968C"
+            : "white",
+    color: state.isSelected === true || state.isFocused === true ? "white" : "black",
   }),
 };
 

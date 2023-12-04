@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-
 import { StyledRatingSystemSelectorContainer, customStyles } from "./style";
 
-const SelectRatingSystem = (): React.JSX.Element => {
-  const options = [
-    { value: "ttw", label: "TTW" },
-  ];
-
- 
+const SelectRatingSystem = (): React.ReactElement => {
+  const options = [{ value: "ttw", label: "TTW" }];
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
-  const handleChange = (selectedOption) => {
+  const handleChange = (selectedOption: any): void => {
     setSelectedOption(selectedOption);
   };
 
@@ -29,4 +24,5 @@ const SelectRatingSystem = (): React.JSX.Element => {
     </StyledRatingSystemSelectorContainer>
   );
 };
+
 export default SelectRatingSystem;
