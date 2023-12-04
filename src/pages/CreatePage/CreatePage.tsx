@@ -34,7 +34,6 @@ import { FaUserCircle } from "react-icons/fa";
 const CreatePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState<string>(Tabs.CHOOSE_RATING);
 
-
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
 
