@@ -11,5 +11,5 @@ export interface ButtonProps {
   children: React.ReactNode;
   margin?: string;
   onClick?: () => void;
-  type?: "button" | "submit" | "reset"; 
+  type?: "button" | "submit" | "reset";
 }

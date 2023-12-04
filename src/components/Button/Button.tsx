@@ -21,7 +21,14 @@ const buttonSizes = {
   },
 };
 
-const Button = ({ primary, size, children, margin, onClick, type }: ButtonProps): React.ReactElement => {
+const Button = ({
+  primary,
+  size,
+  children,
+  margin,
+  onClick,
+  type,
+}: ButtonProps): React.ReactElement => {
   return (
     <StyledButton
       $primary={primary ?? false}
