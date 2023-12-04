@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bracketReducer from "./slices/bracket/bracketSlice";
+import modalReducer from "./slices/modal/modalSlice";
 
 export const store = configureStore({
   reducer: {
     bracket: bracketReducer,
+    modal: modalReducer,
   },
 });
 
