@@ -5,7 +5,14 @@ export interface User {
   accessToken?: string;
   refreshToken?: string;
   activeState?: boolean;
-  signupState?: "pending" | "idle" | "error" | "success";
+  signupState?: LoadType;
   message?: string;
-  loadState?: "pending" | "idle" | "error" | "success";
+  loadState?: LoadType;
+}
+
+export enum LoadType {
+  pending,
+  idle,
+  error,
+  success,
 }

@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { loadUser, logout } from "../../redux/slices/user/userSlice";
 import { useCookies } from "react-cookie";
 import { getUser } from "../../redux/selectors/userSelection";
+import { LoadType } from "../../types/userTypes";
 
 const ProfilePage = (): React.JSX.Element => {
   const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
@@ -126,7 +127,7 @@ const ProfilePage = (): React.JSX.Element => {
 
   return (
     <>
-      {user.loadState === "success" ? (
+      {user.loadState === LoadType.success ? (
         <ProfileContainer>
           <Sidebar>
             <div onClick={handleLogout}>

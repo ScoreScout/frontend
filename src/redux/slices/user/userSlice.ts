@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { User } from "../../../types/userTypes";
+import { LoadType, type User } from "../../../types/userTypes";
 import axios from "axios";
 import { getConfigValue } from "@ijl/cli";
 import { toast } from "react-toastify";
@@ -17,7 +17,7 @@ const initialState: User = {
   accessToken: cookies.get("access"),
   refreshToken: cookies.get("refresh"),
   activeState: false,
-  signupState: "idle",
+  signupState: LoadType.idle,
 };
 
 export const loadUser = createAsyncThunk(
@@ -164,6 +164,7 @@ export const userSlice = createSlice({
       };
       return state;
     },
+    // TODO: redirect to login page directly 
     activate: (state, action: PayloadAction<{ uid: string; token: string }>) => {
       const body = JSON.stringify({
         uid: action.payload.uid,
@@ -198,13 +199,13 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.fulfilled, (state, action) => {
-      state.signupState = "success";
+      state.signupState = LoadType.success;
     });
     builder.addCase(signUp.rejected, (state, action) => {
-      state.signupState = "error";
+      state.signupState = LoadType.error;
     });
     builder.addCase(signUp.pending, (state, action) => {
-      state.signupState = "pending";
+      state.signupState = LoadType.pending;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.accessToken = action.payload.accessToken;
@@ -215,13 +216,13 @@ export const userSlice = createSlice({
     builder.addCase(loadUser.fulfilled, (state, action) => {
       if (action.payload.access != null) state.accessToken = action.payload.access;
       state.email = action.payload.email;
-      state.loadState = "success";
+      state.loadState = LoadType.success;
     });
     builder.addCase(loadUser.pending, (state, action) => {
-      state.loadState = "pending";
+      state.loadState = LoadType.pending;
     });
     builder.addCase(loadUser.rejected, (state, action) => {
-      state.loadState = "error";
+      state.loadState = LoadType.error;
     });
   },
 });
