@@ -28,6 +28,7 @@ const Button = ({
   margin,
   onClick,
   disabled,
+  type,
 }: ButtonProps): React.ReactElement => {
   return (
     <StyledButton
@@ -37,6 +38,7 @@ const Button = ({
       $margin={margin}
       onClick={onClick}
       disabled={disabled === true}
+      type={type}
     >
       {children}
     </StyledButton>

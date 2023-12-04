@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const router = require("express").Router();
 
 module.exports = router;

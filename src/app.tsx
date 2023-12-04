@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignInPage from "./pages/SignInSignUp/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignInSignUp/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import CreatePage from "./pages/CreatePage/CreatePage";
 import { Provider } from "react-redux";
 import { store } from "./redux";
 import { toast, ToastContainer } from "react-toastify";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         element: <ProfilePage />,
       },
     ],
+  },
+  {
+    path: "/score-scout/create",
+    element: <CreatePage />,
   },
 ]);
 

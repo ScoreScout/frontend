@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "data": [
+    {
+      "title": "Fall Students Tournament",
+      "amountPlayers": 32,
+      "amountGamesPlayed": 124,
+      "status": "In Progress",
+      "date": "2023-10-22"
+    },
+    {
+      "title": "Fall Students Tournament",
+      "amountPlayers": 32,
+      "amountGamesPlayed": 124,
+      "status": "In Progress",
+      "date": "2023-10-22"
+    }
+  ]
+}

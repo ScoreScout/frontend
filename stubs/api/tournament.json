@@ -1,0 +1,335 @@
+{
+  "title": "Fall Students Tournament",
+  "amountGamesPlayed": 90,
+  "date": "2020-11-30",
+  "isFinished": false,
+  "isRatingSystem": false,
+  "players": [
+    "Kailee Escamilla",
+    "Chiara Shultz",
+    "Jensen Hillman",
+    "Marques Cotter",
+    "Dequan Harms",
+    "Alexcia Gaston",
+    "Bruno Smalley",
+    "Dorian Fenton",
+    "Brian Thorpe",
+    "Laura Raymond",
+    "Ireland Acuna",
+    "Mallory Whitaker",
+    "Cinthia Garibay",
+    "Teresa Tong",
+    "Santana Custer",
+    "Shemar Sander"
+  ],
+  "first_stage": {
+    "type": "bracket",
+    "players": [
+      {
+        "name": "Kailee Escamilla",
+        "id": 0
+      },
+      {
+        "name": "Chiara Shultz",
+        "id": 1
+      },
+      {
+        "name": "Jensen Hillman",
+        "id": 2
+      },
+      {
+        "name": "Marques Cotter",
+        "id": 3
+      },
+      {
+        "name": "Dequan Harms",
+        "id": 4
+      },
+      {
+        "name": "Alexcia Gaston",
+        "id": 5
+      },
+      {
+        "name": "Bruno Smalley",
+        "id": 6
+      },
+      {
+        "name": "Dorian Fenton",
+        "id": 7
+      },
+      {
+        "name": "Brian Thorpe",
+        "id": 8
+      },
+      {
+        "name": "Laura Raymond",
+        "id": 9
+      },
+      {
+        "name": "Ireland Acuna",
+        "id": 10
+      },
+      {
+        "name": "Mallory Whitaker",
+        "id": 11
+      },
+      {
+        "name": "Cinthia Garibay",
+        "id": 12
+      },
+      {
+        "name": "Teresa Tong",
+        "id": 13
+      },
+      {
+        "name": "Santana Custer",
+        "id": 14
+      },
+      {
+        "name": "Shemar Sander",
+        "id": 15
+      }
+    ],
+    "stages": [
+      {
+        "matchIds": [0, 1, 2, 3, 4, 5, 6, 7]
+      },
+      {
+        "matchIds": [8, 9, 10, 11]
+      },
+      {
+        "matchIds": [12, 13]
+      },
+      {
+        "matchIds": [14]
+      }
+    ],
+    "matches": [
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Kailee Escamilla",
+          "id": 0
+        },
+        "secondPlayer": {
+          "name": "Shemar Sander",
+          "id": 15
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 2,
+        "secondPlayerScore": 0
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Dorian Fenton",
+          "id": 7
+        },
+        "secondPlayer": {
+          "name": "Brian Thorpe",
+          "id": 8
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 0,
+        "secondPlayerScore": 2
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Marques Cotter",
+          "id": 3
+        },
+        "secondPlayer": {
+          "name": "Cinthia Garibay",
+          "id": 12
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 0,
+        "secondPlayerScore": 3
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Dequan Harms",
+          "id": 4
+        },
+        "secondPlayer": {
+          "name": "Mallory Whitaker",
+          "id": 11
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 3,
+        "secondPlayerScore": 0
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Chiara Shultz",
+          "id": 1
+        },
+        "secondPlayer": {
+          "name": "Santana Custer",
+          "id": 14
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 0,
+        "secondPlayerScore": 2
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Bruno Smalley",
+          "id": 6
+        },
+        "secondPlayer": {
+          "name": "Laura Raymond",
+          "id": 9
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 2,
+        "secondPlayerScore": 0
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Jensen Hillman",
+          "id": 2
+        },
+        "secondPlayer": {
+          "name": "Teresa Tong",
+          "id": 13
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 1,
+        "secondPlayerScore": 2
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Alexcia Gaston",
+          "id": 5
+        },
+        "secondPlayer": {
+          "name": "Ireland Acuna",
+          "id": 10
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 2,
+        "secondPlayerScore": 1
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Kailee Escamilla",
+          "id": 0
+        },
+        "secondPlayer": {
+          "name": "Brian Thorpe",
+          "id": 8
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 0,
+        "secondPlayerScore": 3
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Cinthia Garibay",
+          "id": 12
+        },
+        "secondPlayer": {
+          "name": "Dequan Harms",
+          "id": 4
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 3,
+        "secondPlayerScore": 0
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Santana Custer",
+          "id": 14
+        },
+        "secondPlayer": {
+          "name": "Bruno Smalley",
+          "id": 6
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 3,
+        "secondPlayerScore": 1
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Teresa Tong",
+          "id": 13
+        },
+        "secondPlayer": {
+          "name": "Alexcia Gaston",
+          "id": 5
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 3,
+        "secondPlayerScore": 0
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Brian Thorpe",
+          "id": 8
+        },
+        "secondPlayer": {
+          "name": "Cinthia Garibay",
+          "id": 12
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 3,
+        "secondPlayerScore": 2
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Santana Custer",
+          "id": 14
+        },
+        "secondPlayer": {
+          "name": "Teresa Tong",
+          "id": 13
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 1,
+        "secondPlayerScore": 3
+      },
+      {
+        "type": "withScore",
+        "firstPlayer": {
+          "name": "Brian Thorpe",
+          "id": 8
+        },
+        "secondPlayer": {
+          "name": "Teresa Tong",
+          "id": 13
+        },
+        "isFinished": true,
+        "isStarted": true,
+        "firstPlayerScore": 3,
+        "secondPlayerScore": 0
+      }
+    ]
+  }
+}
