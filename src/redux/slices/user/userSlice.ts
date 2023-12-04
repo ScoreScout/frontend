@@ -164,7 +164,7 @@ export const userSlice = createSlice({
       };
       return state;
     },
-    // TODO: redirect to login page directly 
+    // TODO: redirect to login page directly
     activate: (state, action: PayloadAction<{ uid: string; token: string }>) => {
       const body = JSON.stringify({
         uid: action.payload.uid,
