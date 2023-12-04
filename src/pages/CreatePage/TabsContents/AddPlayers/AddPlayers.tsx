@@ -25,7 +25,11 @@ interface AddPlayersProps {
   setPlayers: React.Dispatch<React.SetStateAction<any[]>>; // Update the type based on your actual Player type
 }
 
-const AddPlayers: FC<AddPlayersProps> = ({ ratingToggleOn, players, setPlayers }: AddPlayersProps): ReactElement => {
+const AddPlayers: FC<AddPlayersProps> = ({
+  ratingToggleOn,
+  players,
+  setPlayers,
+}: AddPlayersProps): ReactElement => {
   const [name, setName] = useState<string>("");
   const [rating, setRating] = useState<string>("");
 
@@ -68,13 +72,17 @@ const AddPlayers: FC<AddPlayersProps> = ({ ratingToggleOn, players, setPlayers }
         <AddPlayersInput
           placeholder="Player's name"
           value={name}
-          onChange={(e) => { setName(e.target.value); }}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         />
         {ratingToggleOn && (
           <AddPlayersInput
             placeholder='Rating (Optional)'
             value={rating}
-            onChange={(e) => { setRating(e.target.value); }}
+            onChange={(e) => {
+              setRating(e.target.value);
+            }}
           />
         )}
         <ButtonContainer>

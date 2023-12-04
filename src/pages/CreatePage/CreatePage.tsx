@@ -123,31 +123,41 @@ const CreatePage = (): React.JSX.Element => {
           <SidebarSlider>
             <SliderTab
               $active={activeTab === "chooseRating"}
-              onClick={() => { setActiveTab("chooseRating"); }}
+              onClick={() => {
+                setActiveTab("chooseRating");
+              }}
             >
               Choose rating
             </SliderTab>
             <SliderTab
               $active={activeTab === "addPlayers"}
-              onClick={() => { setActiveTab("addPlayers"); }}
+              onClick={() => {
+                setActiveTab("addPlayers");
+              }}
             >
               Add players
             </SliderTab>
             <SliderTab
               $active={activeTab === "numStages"}
-              onClick={() => { setActiveTab("numStages"); }}
+              onClick={() => {
+                setActiveTab("numStages");
+              }}
             >
               Number of stages
             </SliderTab>
             <SliderTab
               $active={activeTab === "firstStage"}
-              onClick={() => { setActiveTab("firstStage"); }}
+              onClick={() => {
+                setActiveTab("firstStage");
+              }}
             >
               First stage
             </SliderTab>
             <SliderTab
               $active={activeTab === "secondStage"}
-              onClick={() => { setActiveTab("secondStage"); }}
+              onClick={() => {
+                setActiveTab("secondStage");
+              }}
             >
               Second stage
             </SliderTab>

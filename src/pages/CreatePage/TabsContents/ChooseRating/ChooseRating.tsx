@@ -5,7 +5,13 @@ import { ChooseRatingWrapper, StyledToggle, ChooseRatingContainer } from "./styl
 
 import { FaToggleOn, FaToggleOff } from "react-icons/fa6";
 
-const ChooseRating = ({ toggleOn, handleToggle }: { toggleOn: boolean; handleToggle: () => void }): React.JSX.Element => {
+const ChooseRating = ({
+  toggleOn,
+  handleToggle,
+}: {
+  toggleOn: boolean;
+  handleToggle: () => void;
+}): React.JSX.Element => {
   return (
     <ChooseRatingWrapper>
       <ChooseRatingContainer>

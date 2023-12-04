@@ -14,13 +14,18 @@ interface NumStagesProps {
   handleOptionClick: (option: number) => void;
 }
 
-const NumStages: React.FC<NumStagesProps> = ({ selectedOption, handleOptionClick }: NumStagesProps): React.ReactElement => {
+const NumStages: React.FC<NumStagesProps> = ({
+  selectedOption,
+  handleOptionClick,
+}: NumStagesProps): React.ReactElement => {
   return (
     <NumStagesWrapper>
       <NumStagesTitle>Choose number of stages in your tournament</NumStagesTitle>
       <StageBoxesContainer>
         <StageBox
-          onClick={() => { handleOptionClick(1); }}
+          onClick={() => {
+            handleOptionClick(1);
+          }}
           isSelected={selectedOption === 1}
         >
           <StageBoxTitle isSelected={selectedOption === 1}>1 stage</StageBoxTitle>
@@ -29,7 +34,9 @@ const NumStages: React.FC<NumStagesProps> = ({ selectedOption, handleOptionClick
           </StageBoxDescription>
         </StageBox>
         <StageBox
-          onClick={() => { handleOptionClick(2); }}
+          onClick={() => {
+            handleOptionClick(2);
+          }}
           isSelected={selectedOption === 2}
         >
           <StageBoxTitle isSelected={selectedOption === 2}>2 stages</StageBoxTitle>

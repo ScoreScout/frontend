@@ -41,7 +41,8 @@ const StageBox = styled.div.attrs<{ isSelected: boolean }>((props) => ({
     border: 1.5px solid #6d6766;
   }
 
-  background-color: ${(props) => (props.isSelected ? props.theme.color.mainColor : props.theme.color.bgColor)};
+  background-color: ${(props) =>
+    props.isSelected ? props.theme.color.mainColor : props.theme.color.bgColor};
 `;
 
 const StageBoxTitle = styled.div.attrs<{ isSelected: boolean }>((props) => ({
@@ -49,8 +50,7 @@ const StageBoxTitle = styled.div.attrs<{ isSelected: boolean }>((props) => ({
 }))`
   ${globalSemiBoldFontStyles}
   font-size: 1.25rem;
-  color: ${(props) => (props.isSelected ? 'white' : props.theme.color.mainColor)};
-
+  color: ${(props) => (props.isSelected ? "white" : props.theme.color.mainColor)};
 `;
 
 const StageBoxDescription = styled.div.attrs<{ isSelected: boolean }>((props) => ({
@@ -58,8 +58,7 @@ const StageBoxDescription = styled.div.attrs<{ isSelected: boolean }>((props) =>
 }))`
   ${globalRegularFontStyles}
   font-size: 1rem;
-  color: ${(props) => (props.isSelected ? 'white' : props.theme.color.fontColor)};
-
+  color: ${(props) => (props.isSelected ? "white" : props.theme.color.fontColor)};
 `;
 
 export {
