@@ -36,18 +36,7 @@ const customStyles = {
     width: "24rem",
     height: "3.125rem",
     paddingLeft: "1rem",
-  }),
-  option: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor:
-      state.isSelected === true
-        ? "#D22D19"
-        : state.isFocused === true
-          ? "#E8968C"
-          : state.isHovered === true
-            ? "#E8968C"
-            : "white",
-    color: state.isSelected === true || state.isFocused === true ? "white" : "black",
+    boxShadow: "0px 0px 4px 2px rgba(0, 0, 0, 0.25)",
   }),
 };
 

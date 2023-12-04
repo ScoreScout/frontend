@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -14,6 +14,9 @@ import FirstStage from "./TabsContents/FirstStage/FirstStage";
 import NumStages from "./TabsContents/NumStages/NumStages";
 import SecondStage from "./TabsContents/SecondStage/SecondStage";
 
+import { type Player } from "../../types/playerTypes";
+import { CreatePageTabs as Tabs } from "../../types/createPageTabTypes";
+
 import {
   CreateContainer,
   CreateTitle,
@@ -28,41 +31,36 @@ import {
 
 import { FaUserCircle } from "react-icons/fa";
 
-interface Player {
-  name: string;
-  rating?: number;
-}
-
 const CreatePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState<string>("chooseRating");
 
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
 
-  const handleRatingToggle = (): void => {
-    setRatingToggleOn(!ratingToggleOn);
-  };
+  const handleRatingToggle = useCallback((): void => {
+    setRatingToggleOn((prev) => !prev);
+  }, []);
 
   const [numStages, setNumStages] = useState<number | null>(null);
-  const handleNumStagesOptionClick = (option: number): void => {
+  const handleNumStagesOptionClick = useCallback((option: number): void => {
     setNumStages(option);
-  };
+  }, []);
 
   const renderTabContent = (): React.ReactNode => {
     switch (activeTab) {
-      case "chooseRating":
+      case Tabs.CHOOSE_RATING:
         return <ChooseRating toggleOn={ratingToggleOn} handleToggle={handleRatingToggle} />;
-      case "addPlayers":
+      case Tabs.ADD_PLAYERS:
         return (
           <AddPlayers ratingToggleOn={ratingToggleOn} players={players} setPlayers={setPlayers} />
         );
-      case "numStages":
+      case Tabs.NUM_STAGES:
         return (
           <NumStages selectedOption={numStages} handleOptionClick={handleNumStagesOptionClick} />
         );
-      case "firstStage":
+      case Tabs.FIRST_STAGE:
         return <FirstStage />;
-      case "secondStage":
+      case Tabs.SECOND_STAGE:
         return <SecondStage />;
       default:
         return null;
@@ -71,22 +69,18 @@ const CreatePage = (): React.JSX.Element => {
 
   const handleNext = (): void => {
     switch (activeTab) {
-      case "chooseRating": {
-        setActiveTab("addPlayers");
+      case Tabs.CHOOSE_RATING:
+        setActiveTab(Tabs.ADD_PLAYERS);
         break;
-      }
-      case "addPlayers": {
-        setActiveTab("numStages");
+      case Tabs.ADD_PLAYERS:
+        setActiveTab(Tabs.NUM_STAGES);
         break;
-      }
-      case "numStages": {
-        setActiveTab("firstStage");
+      case Tabs.NUM_STAGES:
+        setActiveTab(Tabs.FIRST_STAGE);
         break;
-      }
-      case "firstStage": {
-        setActiveTab("secondStage");
+      case Tabs.FIRST_STAGE:
+        setActiveTab(Tabs.SECOND_STAGE);
         break;
-      }
       default:
         break;
     }
@@ -94,22 +88,18 @@ const CreatePage = (): React.JSX.Element => {
 
   const handleBack = (): void => {
     switch (activeTab) {
-      case "addPlayers": {
-        setActiveTab("chooseRating");
+      case Tabs.ADD_PLAYERS:
+        setActiveTab(Tabs.CHOOSE_RATING);
         break;
-      }
-      case "numStages": {
-        setActiveTab("addPlayers");
+      case Tabs.NUM_STAGES:
+        setActiveTab(Tabs.ADD_PLAYERS);
         break;
-      }
-      case "firstStage": {
-        setActiveTab("numStages");
+      case Tabs.FIRST_STAGE:
+        setActiveTab(Tabs.NUM_STAGES);
         break;
-      }
-      case "secondStage": {
-        setActiveTab("firstStage");
+      case Tabs.SECOND_STAGE:
+        setActiveTab(Tabs.FIRST_STAGE);
         break;
-      }
       default:
         break;
     }

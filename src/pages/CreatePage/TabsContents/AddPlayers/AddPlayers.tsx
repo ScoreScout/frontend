@@ -3,6 +3,7 @@ import CSVReader from "react-csv-reader";
 
 import Button from "../../../../components/Button/Button";
 import { ButtonSize } from "../../../../types/buttonTypes";
+import { type AddPlayersProps } from "../../../../types/playerTypes";
 
 import { FaCirclePlus, FaUpload } from "react-icons/fa6";
 
@@ -19,12 +20,6 @@ import {
   CsvText,
   AddPlayersForm,
 } from "./style";
-
-interface AddPlayersProps {
-  ratingToggleOn: boolean;
-  players: any[]; // Update the type based on your actual Player type
-  setPlayers: React.Dispatch<React.SetStateAction<any[]>>; // Update the type based on your actual Player type
-}
 
 const AddPlayers: FC<AddPlayersProps> = ({
   ratingToggleOn,

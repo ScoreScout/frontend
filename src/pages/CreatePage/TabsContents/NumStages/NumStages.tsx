@@ -9,10 +9,7 @@ import {
   StageBoxDescription,
 } from "./style";
 
-interface NumStagesProps {
-  selectedOption: number | null;
-  handleOptionClick: (option: number) => void;
-}
+import { type NumStagesProps } from "../../../../types/createPageTabTypes";
 
 const NumStages: React.FC<NumStagesProps> = ({
   selectedOption,
