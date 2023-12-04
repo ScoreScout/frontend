@@ -14,7 +14,7 @@ import FirstStage from "./TabsContents/FirstStage/FirstStage";
 import NumStages from "./TabsContents/NumStages/NumStages";
 import SecondStage from "./TabsContents/SecondStage/SecondStage";
 
-import { type Player } from "../../types/playerTypes";
+import { type Player } from "../../types/bracketTypes";
 import { CreatePageTabs as Tabs } from "../../types/createPageTabTypes";
 
 import {
@@ -32,7 +32,8 @@ import {
 import { FaUserCircle } from "react-icons/fa";
 
 const CreatePage = (): React.JSX.Element => {
-  const [activeTab, setActiveTab] = useState<string>("chooseRating");
+  // const [activeTab, setActiveTab] = useState<string>(Tabs.CHOOSE_RATING);
+  const [activeTab, setActiveTab] = useState<string>(Tabs.FIRST_STAGE);
 
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
@@ -59,7 +60,9 @@ const CreatePage = (): React.JSX.Element => {
           <NumStages selectedOption={numStages} handleOptionClick={handleNumStagesOptionClick} />
         );
       case Tabs.FIRST_STAGE:
-        return <FirstStage />;
+        return (
+          <FirstStage players={players} numStages={numStages} ratingToggleOn={ratingToggleOn} />
+        );
       case Tabs.SECOND_STAGE:
         return <SecondStage />;
       default:

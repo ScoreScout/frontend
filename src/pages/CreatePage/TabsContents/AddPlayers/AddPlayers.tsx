@@ -3,7 +3,7 @@ import CSVReader from "react-csv-reader";
 
 import Button from "../../../../components/Button/Button";
 import { ButtonSize } from "../../../../types/buttonTypes";
-import { type AddPlayersProps } from "../../../../types/playerTypes";
+import { type AddPlayersProps } from "../../../../types/createPageTabTypes";
 
 import { FaCirclePlus, FaUpload } from "react-icons/fa6";
 
@@ -41,6 +41,7 @@ const AddPlayers: FC<AddPlayersProps> = ({
     }
 
     const newPlayer = {
+      id: players.length,
       name,
       rating: ratingToggleOn ? parseInt(rating, 10) : undefined,
     };
@@ -58,7 +59,8 @@ const AddPlayers: FC<AddPlayersProps> = ({
 
   const handleFileUpload = (data: any, fileInfo: any): void => {
     // Assuming your CSV file has a header row with "name" and "rating" columns
-    const csvPlayers = data.slice(1).map((row: any) => ({
+    const csvPlayers = data.slice(1).map((row: any, index: number) => ({
+      id: players.length + index,
       name: row[0],
       rating: ratingToggleOn ? parseInt(row[1], 10) : undefined,
     }));

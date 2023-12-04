@@ -13,7 +13,7 @@ import {
 } from "./style";
 
 interface TableProps {
-  players: Array<{ name: string; rating?: number }>;
+  players: Array<{ name: string; rating?: number; id: number }>;
   ratingToggleOn: boolean;
 }
 
@@ -29,10 +29,10 @@ const Table: React.FC<TableProps> = ({
       </ColumnNamesContainer>
       <TableLine />
       <TableContainer>
-        {players.map((player, index) => (
-          <TableRow key={index}>
+        {players.map((player) => (
+          <TableRow key={player.id}>
             <div>
-              <TableIndex>{index + 1 + "."}</TableIndex>
+              <TableIndex>{player.id + 1 + "."}</TableIndex>
               <TablePlayerName>{player.name}</TablePlayerName>
             </div>
             <TableRating>
