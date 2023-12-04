@@ -124,6 +124,13 @@ const AddPlayersInput = styled.input`
   }
 `;
 
+const AddPlayersForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 1.25rem;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -172,4 +179,5 @@ export {
   TablePlayerName,
   TableRating,
   TableLine,
+  AddPlayersForm,
 };

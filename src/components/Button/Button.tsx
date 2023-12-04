@@ -21,7 +21,7 @@ const buttonSizes = {
   },
 };
 
-const Button = ({ primary, size, children, margin, onClick }: ButtonProps): React.ReactElement => {
+const Button = ({ primary, size, children, margin, onClick, type }: ButtonProps): React.ReactElement => {
   return (
     <StyledButton
       $primary={primary ?? false}
@@ -29,6 +29,7 @@ const Button = ({ primary, size, children, margin, onClick }: ButtonProps): Reac
       $padding={buttonSizes[size].padding}
       $margin={margin}
       onClick={onClick}
+      type={type}
     >
       {children}
     </StyledButton>

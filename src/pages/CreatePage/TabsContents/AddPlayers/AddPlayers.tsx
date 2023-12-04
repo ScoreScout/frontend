@@ -17,6 +17,7 @@ import {
   ButtonText,
   CsvBox,
   CsvText,
+  AddPlayersForm,
 } from "./style";
 
 interface AddPlayersProps {
@@ -55,6 +56,11 @@ const AddPlayers: FC<AddPlayersProps> = ({
     setRating("");
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    handleAddPlayer();
+  };
+
   const handleFileUpload = (data: any, fileInfo: any): void => {
     // Assuming your CSV file has a header row with "name" and "rating" columns
     const csvPlayers = data.slice(1).map((row: any) => ({
@@ -69,29 +75,31 @@ const AddPlayers: FC<AddPlayersProps> = ({
     <AddPlayersWrapper>
       <AddPlayersContainer>
         <AddPLayersTitle>Add Players</AddPLayersTitle>
-        <AddPlayersInput
-          placeholder="Player's name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        {ratingToggleOn && (
+        <AddPlayersForm onSubmit={handleSubmit}>
           <AddPlayersInput
-            placeholder='Rating (Optional)'
-            value={rating}
+            placeholder="Player's name"
+            value={name}
             onChange={(e) => {
-              setRating(e.target.value);
+              setName(e.target.value);
             }}
           />
-        )}
-        <ButtonContainer>
-          <Button primary={true} size={ButtonSize.S} onClick={handleAddPlayer}>
-            <ButtonText>
-              Add <FaCirclePlus />{" "}
-            </ButtonText>
-          </Button>
-        </ButtonContainer>
+          {ratingToggleOn && (
+            <AddPlayersInput
+              placeholder='Rating (Optional)'
+              value={rating}
+              onChange={(e) => {
+                setRating(e.target.value);
+              }}
+            />
+          )}
+          <ButtonContainer>
+            <Button primary={true} size={ButtonSize.S} type='submit'>
+              <ButtonText>
+                Add <FaCirclePlus />{" "}
+              </ButtonText>
+            </Button>
+          </ButtonContainer>
+        </AddPlayersForm>
         <CsvBox>
           <CsvText>or you can upload csv</CsvText>
           <Button primary={false} size={ButtonSize.S}>
