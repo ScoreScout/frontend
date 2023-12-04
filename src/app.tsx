@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignInPage from "./pages/SignInSignUp/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignInSignUp/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import CreatePage from "./pages/CreatePage/CreatePage";
 import { Provider } from "react-redux";
 import { store } from "./redux";
 import ScoreModal from "./components/Modal/ScoreModal";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/score-scout/profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "/score-scout/create",
+    element: <CreatePage />,
   },
 ]);
 
