@@ -2,23 +2,19 @@ import { createSelector } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import type { TournamentsState } from "../slices/tournament/tournamentSlice";
 
-const selectActiveTournaments = (state: RootState): TournamentsState => {
-  return state.tournaments;
-};
-
-const selectArchivedTournaments = (state: RootState): TournamentsState => {
+const selectTournaments = (state: RootState): TournamentsState => {
   return state.tournaments;
 };
 
 export const getActiveTournaments = createSelector(
-  [selectActiveTournaments],
+  [selectTournaments],
   (tournamentsState) => {
     return tournamentsState.activeTournaments;
   },
 );
 
 export const getArchivedTournaments = createSelector(
-  [selectArchivedTournaments],
+  [selectTournaments],
   (tournamentsState) => {
     return tournamentsState.archivedTournaments;
   },
