@@ -27,6 +27,7 @@ const Button = ({
   children,
   margin,
   onClick,
+  disabled,
   type,
 }: ButtonProps): React.ReactElement => {
   return (
@@ -36,6 +37,7 @@ const Button = ({
       $padding={buttonSizes[size].padding}
       $margin={margin}
       onClick={onClick}
+      disabled={disabled === true}
       type={type}
     >
       {children}
