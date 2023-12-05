@@ -6,16 +6,10 @@ const selectTournaments = (state: RootState): TournamentsState => {
   return state.tournaments;
 };
 
-export const getActiveTournaments = createSelector(
-  [selectTournaments],
-  (tournamentsState) => {
-    return tournamentsState.activeTournaments;
-  },
-);
+export const getActiveTournaments = createSelector([selectTournaments], (tournamentsState) => {
+  return tournamentsState.activeTournaments;
+});
 
-export const getArchivedTournaments = createSelector(
-  [selectTournaments],
-  (tournamentsState) => {
-    return tournamentsState.archivedTournaments;
-  },
-);
+export const getArchivedTournaments = createSelector([selectTournaments], (tournamentsState) => {
+  return tournamentsState.archivedTournaments;
+});
