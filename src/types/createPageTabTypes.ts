@@ -6,6 +6,12 @@ export enum CreatePageTabs {
   SECOND_STAGE = "secondStage",
 }
 
+export enum CompetitionOptions {
+  TABLE = "Table",
+  BRACKET = "Bracket",
+  NONE = "None",
+}
+
 export interface AddPlayersProps {
   ratingToggleOn: boolean;
   players: any[];
@@ -13,7 +19,7 @@ export interface AddPlayersProps {
 }
 
 export interface NumStagesProps {
-  selectedOption: number | null;
+  selectedOption: number;
   handleOptionClick: (option: number) => void;
 }
 

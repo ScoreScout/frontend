@@ -33,7 +33,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 const CreatePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState<string>(Tabs.CHOOSE_RATING);
-
+  
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
 
@@ -41,7 +41,7 @@ const CreatePage = (): React.JSX.Element => {
     setRatingToggleOn((prev) => !prev);
   }, []);
 
-  const [numStages, setNumStages] = useState<number | null>(null);
+  const [numStages, setNumStages] = useState<number>(1);
   const handleNumStagesOptionClick = useCallback((option: number): void => {
     setNumStages(option);
   }, []);

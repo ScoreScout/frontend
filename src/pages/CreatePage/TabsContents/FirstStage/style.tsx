@@ -2,13 +2,9 @@ import styled from "styled-components";
 
 import { globalSemiBoldFontStyles } from "../../../../theme/FontStyles";
 
-enum CompetitionOptions {
-  TABLE = "Table",
-  BRACKET = "Bracket",
-  NONE = "None",
-}
+import { CompetitionOptions } from "../../../../types/createPageTabTypes";
 
-const AddPlayersWrapper = styled.div`
+const FirstStageWrapper = styled.div`
   padding: 5rem 6.25rem 0 6.25rem;
   display: flex;
   flex-direction: column;
@@ -79,9 +75,42 @@ const BracketSystemButtonText = styled(ButtonText)`
   display: inline-block;
 `;
 
+const BracketWrapper = styled.div`
+  display: flex;
+  margin-top: 3.75rem;
+  margin-bottom: 0.25rem;
+  flex-direction: column;
+  max-height: 20rem;
+  max-width: 26rem;
+
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    height: 0.5rem;
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${(props) => props.theme.color.bgColor};
+    border-radius: 5px;
+  }
+`;
+
+const NoPlayersText = styled.div`
+  margin-top: 12.5rem;
+  color: ${(props) => props.theme.color.fontColor};
+  ${globalSemiBoldFontStyles};
+  padding-left: 6.25rem;
+`;
 
 export {
-  AddPlayersWrapper,
+  FirstStageWrapper,
   ChooseWayWrapper,
   ChooseTitle,
   ChooseWay,
@@ -90,4 +119,6 @@ export {
   TableChooseNumber,
   BracketSystemTypesWrapper,
   BracketSystemButtonText,
+  BracketWrapper,
+  NoPlayersText,
 };
