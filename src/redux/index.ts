@@ -4,12 +4,14 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import bracketReducer from "./slices/bracket/bracketSlice";
 import userReducer from "./slices/user/userSlice";
 import modalReducer from "./slices/modal/modalSlice";
+import tournamentsReducer from "./slices/tournament/tournamentSlice";
 
 export const store = configureStore({
   reducer: {
     bracket: bracketReducer,
     user: userReducer,
     modal: modalReducer,
+    tournaments: tournamentsReducer,
   },
 });
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import TournamentCard from "../../components/TournamentCard/TournamentCard";
-import { TournamentStatus, type Tournament } from "../../types/tournamentCardTypes";
 import {
   ProfileContainer,
   ProfileLogo,
@@ -23,91 +22,47 @@ import { loadUser, logout } from "../../redux/slices/user/userSlice";
 import { useCookies } from "react-cookie";
 import { getUser } from "../../redux/selectors/userSelection";
 import { LoadType } from "../../types/userTypes";
+import {
+  fetchActiveTournaments,
+  fetchArchivedTournaments,
+} from "../../redux/slices/tournament/tournamentSlice";
+import {
+  getActiveTournaments,
+  getArchivedTournaments,
+} from "../../redux/selectors/tournamentSelectors";
 
 const ProfilePage = (): React.JSX.Element => {
   const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState("active");
   const user = useAppSelector(getUser);
-  const activeTournaments: Tournament[] = [
-    {
-      title: "Fall Students Tournament",
-      n_participants: 32,
-      n_games: 124,
-      status: TournamentStatus.InProgress,
-      date: "2023-10-22",
-    },
-    {
-      title: "Fall Students Tournament",
-      n_participants: 32,
-      n_games: 124,
-      status: TournamentStatus.InProgress,
-      date: "2023-10-22",
-    },
-  ];
+  const activeTournaments = useAppSelector(getActiveTournaments);
+  const archivedTournaments = useAppSelector(getArchivedTournaments);
+  const [archivedLoaded, setArchivedLoaded] = useState(false);
+  const [activeLoaded, setActiveLoaded] = useState(false);
 
-  const archivedTournaments: Tournament[] = [
-    {
-      title: "1st Archived Tournament",
-      n_participants: 9999,
-      n_games: 80,
-      status: TournamentStatus.Finished,
-      date: "2005-12-04",
-    },
-    {
-      title: "2nd Archived Tournament",
-      n_participants: 10,
-      n_games: 80,
-      status: TournamentStatus.Finished,
-      date: "2005-12-04",
-    },
-    {
-      title: "3rd Archived Tournament",
-      n_participants: 4,
-      n_games: 6,
-      status: TournamentStatus.Finished,
-      date: "2023-11-11",
-    },
-    {
-      title: "4th Archived Tournament",
-      n_participants: 4,
-      n_games: 6,
-      status: TournamentStatus.Finished,
-      date: "2023-11-11",
-    },
-    {
-      title: "5th Archived Tournament",
-      n_participants: 4,
-      n_games: 6,
-      status: TournamentStatus.Finished,
-      date: "2023-11-11",
-    },
-    {
-      title: "6th Archived Tournament",
-      n_participants: 4,
-      n_games: 6,
-      status: TournamentStatus.Finished,
-      date: "2023-11-11",
-    },
-    {
-      title: "7th Archived Tournament",
-      n_participants: 4,
-      n_games: 6,
-      status: TournamentStatus.Finished,
-      date: "2023-11-11",
-    },
-    {
-      title: "8th Archived Tournament",
-      n_participants: 4,
-      n_games: 6,
-      status: TournamentStatus.Finished,
-      date: "2023-11-11",
-    },
-  ];
   const handleLogout = (): void => {
     removeCookie("access", { path: "/" });
     removeCookie("refresh", { path: "/" });
     dispatch(logout());
+  };
+
+  const handleActiveTabClick = (): void => {
+    // Only fetch active tournaments if they haven't been loaded yet
+    if (!activeLoaded) {
+      void dispatch(fetchActiveTournaments());
+      setActiveLoaded(true);
+    }
+    setActiveTab("active");
+  };
+
+  const handleArchivedTabClick = (): void => {
+    // Only fetch archived tournaments if they haven't been loaded yet
+    if (!archivedLoaded) {
+      void dispatch(fetchArchivedTournaments());
+      setArchivedLoaded(true);
+    }
+    setActiveTab("archived");
   };
 
   useEffect(() => {
@@ -123,7 +78,11 @@ const ProfilePage = (): React.JSX.Element => {
         }
       })
       .catch((e) => {});
-  }, []);
+
+    // Dispatch Active tournaments by default
+    void dispatch(fetchActiveTournaments());
+    setActiveLoaded(true);
+  }, [dispatch]);
 
   return (
     <>
@@ -143,22 +102,22 @@ const ProfilePage = (): React.JSX.Element => {
               <TournamentTab
                 $active={activeTab === "active"}
                 onClick={() => {
-                  setActiveTab("active");
+                  handleActiveTabClick();
                 }}
               >
-                Active tournaments
+                Active Tournaments
               </TournamentTab>
               <TournamentTab
                 $active={activeTab === "archived"}
                 onClick={() => {
-                  setActiveTab("archived");
+                  handleArchivedTabClick();
                 }}
               >
-                Archived tournaments
+                Archived Tournaments
               </TournamentTab>
             </TournamentSlider>
             <CreateTournamentButton>
-              Create tournament
+              Create Tournament
               <CreateIcon>
                 <MdAdd />
               </CreateIcon>
