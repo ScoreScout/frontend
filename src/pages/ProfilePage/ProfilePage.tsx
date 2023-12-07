@@ -147,7 +147,7 @@ const ProfilePage = (): React.JSX.Element => {
               <TournamentCard key={index} tournament={tournament}></TournamentCard>
             ))}
       </MainContent>
-      <ProfileLogo>
+      <ProfileLogo $isActive={true}>
         <FaUserCircle />
       </ProfileLogo>
     </ProfileContainer>
