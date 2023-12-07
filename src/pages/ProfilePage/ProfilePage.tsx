@@ -12,6 +12,8 @@ import {
   CreateTournamentButton,
   CreateIcon,
   EmptyBox,
+  ErrorMessage,
+  Spinner,
 } from "./style";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
@@ -27,8 +29,8 @@ import {
   fetchArchivedTournaments,
 } from "../../redux/slices/tournament/tournamentSlice";
 import {
-  getActiveTournaments,
-  getArchivedTournaments,
+  getActiveTournamentsState,
+  getArchivedTournamentsState,
 } from "../../redux/selectors/tournamentSelectors";
 
 const ProfilePage = (): React.JSX.Element => {
@@ -36,11 +38,8 @@ const ProfilePage = (): React.JSX.Element => {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState("active");
   const user = useAppSelector(getUser);
-  const activeTournaments = useAppSelector(getActiveTournaments);
-  const archivedTournaments = useAppSelector(getArchivedTournaments);
-  const [archivedLoaded, setArchivedLoaded] = useState(false);
-  const [activeLoaded, setActiveLoaded] = useState(false);
-
+  const activeTournamentsState = useAppSelector(getActiveTournamentsState);
+  const archivedTournamentsState = useAppSelector(getArchivedTournamentsState);
   const handleLogout = (): void => {
     removeCookie("access", { path: "/" });
     removeCookie("refresh", { path: "/" });
@@ -49,19 +48,13 @@ const ProfilePage = (): React.JSX.Element => {
 
   const handleActiveTabClick = (): void => {
     // Only fetch active tournaments if they haven't been loaded yet
-    if (!activeLoaded) {
-      void dispatch(fetchActiveTournaments());
-      setActiveLoaded(true);
-    }
+    void dispatch(fetchActiveTournaments());
     setActiveTab("active");
   };
 
   const handleArchivedTabClick = (): void => {
     // Only fetch archived tournaments if they haven't been loaded yet
-    if (!archivedLoaded) {
-      void dispatch(fetchArchivedTournaments());
-      setArchivedLoaded(true);
-    }
+    void dispatch(fetchArchivedTournaments());
     setActiveTab("archived");
   };
 
@@ -81,7 +74,6 @@ const ProfilePage = (): React.JSX.Element => {
 
     // Dispatch Active tournaments by default
     void dispatch(fetchActiveTournaments());
-    setActiveLoaded(true);
   }, [dispatch]);
 
   return (
@@ -126,13 +118,30 @@ const ProfilePage = (): React.JSX.Element => {
 
           <MainContent>
             <EmptyBox />
-            {activeTab === "active"
-              ? activeTournaments.map((tournament, index) => (
-                  <TournamentCard key={index} tournament={tournament}></TournamentCard>
+            {activeTab === "active" &&
+              (activeTournamentsState.error !== null ? (
+                <ErrorMessage>{activeTournamentsState.error}</ErrorMessage>
+              ) : activeTournamentsState.isLoading ? (
+                <Spinner />
+              ) : activeTournamentsState.tournaments.length === 0 ? (
+                <ErrorMessage>There are no active tournaments</ErrorMessage>
+              ) : (
+                activeTournamentsState.tournaments.map((tournament, index) => (
+                  <TournamentCard key={index} tournament={tournament} />
                 ))
-              : archivedTournaments.map((tournament, index) => (
-                  <TournamentCard key={index} tournament={tournament}></TournamentCard>
-                ))}
+              ))}
+            {activeTab === "archived" &&
+              (archivedTournamentsState.error !== null ? (
+                <ErrorMessage>{archivedTournamentsState.error}</ErrorMessage>
+              ) : archivedTournamentsState.isLoading ? (
+                <Spinner />
+              ) : archivedTournamentsState.tournaments.length === 0 ? (
+                <ErrorMessage>There are no archived tournaments</ErrorMessage>
+              ) : (
+                archivedTournamentsState.tournaments.map((tournament, index) => (
+                  <TournamentCard key={index} tournament={tournament} />
+                ))
+              ))}
           </MainContent>
           <ProfileLogo>
             <FaUserCircle />
