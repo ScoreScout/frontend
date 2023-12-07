@@ -21,7 +21,7 @@ import {
 
 import { TbTournament } from "react-icons/tb";
 import { FaTableCells } from "react-icons/fa6";
-import { type Player } from "../../../../types/bracketTypes";
+import type { Player } from "../../../../types/bracketTypes";
 import { CompetitionOptions } from "../../../../types/createPageTabTypes";
 
 const FirstStage = ({ players, numStages, ratingToggleOn }: StageProps): React.JSX.Element => {
