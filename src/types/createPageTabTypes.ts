@@ -25,6 +25,6 @@ export interface NumStagesProps {
 
 export interface StageProps {
   players: any[];
-  numStages: number | null;
-  ratingToggleOn: boolean;
+  optionChosen: CompetitionOptions;
+  handleOptionClick: (option: CompetitionOptions) => void;
 }

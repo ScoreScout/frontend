@@ -15,7 +15,7 @@ import NumStages from "./TabsContents/NumStages/NumStages";
 import SecondStage from "./TabsContents/SecondStage/SecondStage";
 
 import { type Player } from "../../types/bracketTypes";
-import { CreatePageTabs as Tabs } from "../../types/createPageTabTypes";
+import { CreatePageTabs as Tabs, CompetitionOptions } from "../../types/createPageTabTypes";
 
 import {
   CreateContainer,
@@ -33,7 +33,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 const CreatePage = (): React.JSX.Element => {
   const [activeTab, setActiveTab] = useState<string>(Tabs.CHOOSE_RATING);
-  
+
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
 
@@ -45,6 +45,11 @@ const CreatePage = (): React.JSX.Element => {
   const handleNumStagesOptionClick = useCallback((option: number): void => {
     setNumStages(option);
   }, []);
+
+  const [tournamentType, setTournamentType] = useState<CompetitionOptions>(CompetitionOptions.NONE);
+  const handleTournamentOptionClick = (option: CompetitionOptions): void => {
+    setTournamentType(option);
+  };
 
   const renderTabContent = (): React.ReactNode => {
     switch (activeTab) {
@@ -60,7 +65,11 @@ const CreatePage = (): React.JSX.Element => {
         );
       case Tabs.FIRST_STAGE:
         return (
-          <FirstStage players={players} numStages={numStages} ratingToggleOn={ratingToggleOn} />
+          <FirstStage
+            players={players}
+            optionChosen={tournamentType}
+            handleOptionClick={handleTournamentOptionClick}
+          />
         );
       case Tabs.SECOND_STAGE:
         return <SecondStage />;
@@ -106,6 +115,10 @@ const CreatePage = (): React.JSX.Element => {
         break;
     }
   };
+
+  const submitTournament = (): void => {
+    alert("Tournament submitted!");
+  }
 
   return (
     <CreateContainer>
@@ -185,7 +198,7 @@ const CreatePage = (): React.JSX.Element => {
             </Button>
           ) : (
             <Button primary={true} size={ButtonSize.S}>
-              <ButtonText>
+              <ButtonText onClick={submitTournament}>
                 Create <CupIcon size={"24"} color='#FFFFFF' />
               </ButtonText>
             </Button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { type StageProps } from "../../../../types/createPageTabTypes";
 import { ButtonSize } from "../../../../types/buttonTypes";
@@ -24,21 +24,18 @@ import { FaTableCells } from "react-icons/fa6";
 import type { Player } from "../../../../types/bracketTypes";
 import { CompetitionOptions } from "../../../../types/createPageTabTypes";
 
-const FirstStage = ({ players, numStages, ratingToggleOn }: StageProps): React.JSX.Element => {
-  const [optionChosen, setOptionChosen] = useState<CompetitionOptions>(CompetitionOptions.NONE);
-
-  const handleOptionClick = (option: CompetitionOptions): void => {
-    setOptionChosen(option);
-  };
-
+const FirstStage = ({
+  players,
+  optionChosen,
+  handleOptionClick,
+}: StageProps): React.JSX.Element => {
   const sortedPlayers: Player[] = [...players]
     .sort((a, b) => {
-      return (
-        (b.rating ?? (Number.isFinite(b.rating) ? b.rating : 0)) -
-        (a.rating ?? (Number.isFinite(a.rating) ? a.rating : 0))
-      );
+      return b.rating || 0 - a.rating || 0;
     })
     .map((player, index) => ({ ...player, id: index + 1 }));
+
+  console.log(sortedPlayers);
 
   return (
     <>
@@ -95,7 +92,6 @@ const FirstStage = ({ players, numStages, ratingToggleOn }: StageProps): React.J
                 </BracketSystemTypesWrapper>
               </ChooseCompetitionConfigWrapper>
               <BracketWrapper>
-                {/* Comment this for site to work */} {/* TODO: fix the issue */}
                 {optionChosen === CompetitionOptions.BRACKET ? (
                   <Bracket playerNames={sortedPlayers.map((player) => player.name)} />
                 ) : (
