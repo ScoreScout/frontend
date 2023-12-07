@@ -95,7 +95,7 @@ const FirstStage = ({ players, numStages, ratingToggleOn }: StageProps): React.J
                 </BracketSystemTypesWrapper>
               </ChooseCompetitionConfigWrapper>
               <BracketWrapper>
-                <Bracket playerNames={sortedPlayers.map((player) => player.name)} />{" "} {/* Comment this line for site to work */} {/* TODO: fix the issue */}
+                {/* Comment this for site to work */} {/* TODO: fix the issue */}
                 {optionChosen === CompetitionOptions.BRACKET ? (
                   <Bracket playerNames={sortedPlayers.map((player) => player.name)} />
                 ) : (
