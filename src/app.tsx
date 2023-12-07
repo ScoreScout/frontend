@@ -17,6 +17,16 @@ import ProfileActivationPage from "./pages/ProfileActivationPage/ProfileActivati
 import { CookiesProvider } from "react-cookie";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import ScoreModal from "./components/Modal/ScoreModal";
+import GroupTable from "./components/GroupTable/GroupTable";
+
+const players = [
+  { firstName: "Ghadeer", lastName: "Akleh" },
+  { firstName: "Anvar", lastName: "Ishakov" },
+  { firstName: "Hamada", lastName: "Salhab" },
+  { firstName: "Ahmad", lastName: "Alhussin" },
+  // { firstName: "Test", lastName: "Test" },
+  // { firstName: "Test2", lastName: "Test2" }
+];
 
 const router = createBrowserRouter([
   {
@@ -49,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/score-scout/create",
     element: <CreatePage />,
+  },
+  {
+    path: "/score-scout/table",
+    element: <GroupTable PlayerNames={players} />
   },
 ]);
 
