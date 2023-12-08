@@ -6,8 +6,8 @@ export enum TournamentStatus {
 export interface Tournament {
   title: string;
   date: string;
-  n_participants: number;
-  n_games: number;
+  amountPlayers: number;
+  amountGamesPlayed: number;
   status: TournamentStatus;
 }
 
