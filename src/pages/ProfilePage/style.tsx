@@ -17,15 +17,18 @@ const ProfileContainer = styled.div`
   overflow-y: hidden;
 `;
 
-const ProfileLogo = styled.div`
+const ProfileLogo = styled.div<{
+  $isActive: boolean;
+}>`
   position: absolute;
   top: 1.25rem;
-  right: 1.25rem;
+  right: 2.5rem;
 
   height: 2.5rem;
   width: 2.5rem;
   font-size: 2.5rem;
-  color: ${(props) => props.theme.color.mainColor};
+  color: ${(props) =>
+    props.$isActive ? props.theme.color.mainColor : props.theme.color.notActiveColor};
   cursor: pointer;
 `;
 

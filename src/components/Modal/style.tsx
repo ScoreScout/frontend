@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { globalBoldFontStyles, globalRegularFontStyles } from "../../theme/FontStyles";
 
 export const StyledModalOverlay = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
