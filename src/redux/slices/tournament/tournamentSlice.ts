@@ -1,23 +1,103 @@
-import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
-import type { Tournament } from "../../../types/tournamentTypes";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { Tournament } from "../../../types/tournamentCardTypes";
 
-const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: "http://localhost:8099/api/" }), {
-  maxRetries: 5,
+export const fetchActiveTournaments = createAsyncThunk(
+  "tournaments/fetchActive",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch("/api/tournaments/active");
+      const data = await response.json();
+      if (!response.ok || data.ok !== true || data.data === undefined) {
+        return rejectWithValue(
+          "An error occured while fetching active tournaments. Please try to refresh the page",
+        );
+      }
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(
+        "An error occured while fetching active tournaments. Please try to refresh the page",
+      );
+    }
+  },
+);
+
+export const fetchArchivedTournaments = createAsyncThunk(
+  "tournaments/fetchArchived",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch("/api/tournaments/archived");
+      const data = await response.json();
+      if (!response.ok || (data.ok !== true) === undefined) {
+        return rejectWithValue(
+          "An error occured while fetching archived tournaments. Please try to refresh the page",
+        );
+      }
+      return data.data;
+    } catch (error) {
+      return rejectWithValue(
+        "An error occured while fetching archived tournaments. Please try to refresh the page",
+      );
+    }
+  },
+);
+
+export interface TournamentsState {
+  activeTournaments: Tournament[];
+  archivedTournaments: Tournament[];
+  isLoadingActive: boolean;
+  isLoadingArchived: boolean;
+  // TODO: Change any to a known type
+  errorActive: any;
+  errorArchived: any;
+}
+
+const initialState: TournamentsState = {
+  activeTournaments: [],
+  archivedTournaments: [],
+  isLoadingActive: false,
+  isLoadingArchived: false,
+  errorActive: null,
+  errorArchived: null,
+};
+
+export const TournamentsSlice = createSlice({
+  name: "tournaments",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchActiveTournaments.fulfilled, (state, action) => {
+        state.activeTournaments = action.payload;
+        state.isLoadingActive = false;
+        state.errorActive = null;
+      })
+      .addCase(fetchActiveTournaments.pending, (state) => {
+        state.isLoadingActive = true;
+        state.errorActive = null;
+      })
+      .addCase(fetchActiveTournaments.rejected, (state, action) => {
+        state.isLoadingActive = false;
+        state.errorActive = action.payload;
+      })
+      .addCase(fetchArchivedTournaments.fulfilled, (state, action) => {
+        state.archivedTournaments = action.payload;
+        state.isLoadingArchived = false;
+        state.errorArchived = null;
+      })
+      .addCase(fetchArchivedTournaments.pending, (state) => {
+        state.isLoadingArchived = true;
+        state.errorArchived = null;
+      })
+      .addCase(fetchArchivedTournaments.rejected, (state, action) => {
+        state.isLoadingArchived = false;
+        state.errorArchived = action.payload;
+      });
+  },
 });
 
-const tournamentApi = createApi({
-  reducerPath: "tournament",
-  keepUnusedDataFor: 0, // Do we need to cache tournament state?
-  refetchOnFocus: true,
-  refetchOnReconnect: true,
-  refetchOnMountOrArgChange: true,
-  baseQuery: staggeredBaseQuery,
-  endpoints: (builder) => ({
-    getTournament: builder.query<Tournament, { tournamentId: number }>({
-      query: (args) => `tournaments/${args.tournamentId}`,
-    }),
-  }),
-});
+export const selectActiveTournaments = (state: TournamentsState): Tournament[] =>
+  state.activeTournaments;
+export const selectArchivedTournaments = (state: TournamentsState): Tournament[] =>
+  state.archivedTournaments;
 
-export default tournamentApi;
-export const { useGetTournamentQuery } = tournamentApi;
+export default TournamentsSlice.reducer;

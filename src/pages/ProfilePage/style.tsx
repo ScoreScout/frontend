@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { globalRegularFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
+import {
+  globalBoldFontStyles,
+  globalRegularFontStyles,
+  globalSemiBoldFontStyles,
+} from "../../theme/FontStyles";
 
 interface TournamentTabProps {
   $active: boolean;
@@ -35,6 +39,13 @@ const MainContent = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) => props.theme.color.bgColor};
+`;
+
+const EmptyTournamentsMessage = styled.div`
+  justify-content: center;
+  ${globalBoldFontStyles};
+  padding-top: 20rem;
+  display: flex;
 `;
 
 const LogoutButton = styled.button`
@@ -147,6 +158,7 @@ export {
   ProfileContainer,
   ProfileLogo,
   MainContent,
+  EmptyTournamentsMessage,
   LogoutButton,
   LogoutIcon,
   TournamentSlider,

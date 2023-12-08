@@ -62,3 +62,15 @@ export const StyledStageTitle = styled.div`
 export const StyledBracketContainer = styled.div`
   margin: 2.5rem 0;
 `;
+
+export const SpinnerOverlay = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+`;

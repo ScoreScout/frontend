@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const fs = require("fs");
 const express = require("express");
 const router = express.Router();
 
@@ -39,7 +38,7 @@ router.get("/tournaments/archived/toggle", (req, res) => {
 
 router.get("/tournaments/:id", (req, res) => {
   id = req.params.id;
-  if (tournamentsActiveActivated) {
+  if (tournamentActivated) {
     if (id === "2") {
       res.status(200).send(require("./tournament-empty.json"));
     } else {

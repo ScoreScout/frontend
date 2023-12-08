@@ -4,6 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import bracketReducer from "./slices/bracket/bracketSlice";
 import userReducer from "./slices/user/userSlice";
 import modalReducer from "./slices/modal/modalSlice";
+import tournamentsReducer from "./slices/tournament/tournamentSlice";
 
 import tournamentApi from "./apis/tournament/tournamentApi";
 
@@ -13,6 +14,7 @@ export const store = configureStore({
     bracket: bracketReducer,
     user: userReducer,
     modal: modalReducer,
+    tournaments: tournamentsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(tournamentApi.middleware),
 });

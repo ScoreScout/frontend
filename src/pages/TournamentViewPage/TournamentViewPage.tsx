@@ -4,10 +4,10 @@ import {
   useGetTournamentQuery,
   useUpdateTournamentMutation,
 } from "../../redux/apis/tournament/tournamentApi";
-import Loading from "../../components/Loading/Loading";
 import { ProfileLogo } from "../ProfilePage/style";
 import { FaUserCircle } from "react-icons/fa";
 import {
+  SpinnerOverlay,
   StyledBoldSpan,
   StyledBracketContainer,
   StyledFinishButtonContainer,
@@ -28,6 +28,8 @@ import { ButtonSize } from "../../types/buttonTypes";
 import Bracket from "../../components/Bracket/Bracket";
 import type { Tournament } from "../../types/tournamentTypes";
 import type { Bracket as BracketType } from "../../types/bracketTypes";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import { toast } from "react-toastify";
 
 const TournamentViewPage = (): React.JSX.Element => {
   const { tournamentId } = useParams();
@@ -36,34 +38,47 @@ const TournamentViewPage = (): React.JSX.Element => {
 
   const {
     data: tournament,
-    error,
     isUninitialized,
     isSuccess,
     isError,
     isFetching,
-    refetch,
   } = useGetTournamentQuery(
     { tournamentId: Number(tournamentId) },
     // { pollingInterval: viewOnly ? 5000 : 0 },
   );
 
-  const [updateTournament, { isLoading: isMutating }] = useUpdateTournamentMutation();
+  const [updateTournament] = useUpdateTournamentMutation();
 
   const handleUpdate = (bracket: BracketType): void => {
     if (tournament !== undefined) {
       const data: Tournament = { ...tournament, firstStage: bracket };
       updateTournament(data).catch((err) => {
-        console.error(err);
+        toast.error("Error updating tournament:", err.message);
       });
     }
   };
 
   if (isFetching || isUninitialized || tournamentId === undefined) {
-    return <Loading />;
+    return (
+      <SpinnerOverlay>
+        <LoadingSpinner />
+      </SpinnerOverlay>
+    );
   }
 
   if (isError) {
-    return <>Some error occurred: {error}</>;
+    toast.error("Error fetching tournament");
+    return (
+      <>
+        <StyledHeader>
+          <Link to={`/score-scout/profile`}>
+            <ProfileLogo $isActive={false}>
+              <FaUserCircle />
+            </ProfileLogo>
+          </Link>
+        </StyledHeader>
+      </>
+    );
   }
 
   if (isSuccess) {
