@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme/Theme";
 import GlobalStyle from "./theme/GlobalStyle";
@@ -8,8 +8,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignInPage from "./pages/SignInSignUp/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignInSignUp/SignUpPage/SignUpPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import CreatePage from "./pages/CreatePage/CreatePage";
 import { Provider } from "react-redux";
 import { store } from "./redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ProfileActivationPage from "./pages/ProfileActivationPage/ProfileActivationPage";
+import { CookiesProvider } from "react-cookie";
+import ProtectedRoute from "./utils/ProtectedRoute";
 import ScoreModal from "./components/Modal/ScoreModal";
 import TournamentViewPage from "./pages/TournamentViewPage/TournamentViewPage";
 
@@ -28,8 +34,22 @@ const router = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
+    path: "/score-scout/activate/:uid/:token",
+    element: <ProfileActivationPage />,
+  },
+  {
     path: "/score-scout/profile",
-    element: <ProfilePage />,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <ProfilePage />,
+      },
+    ],
+  },
+  {
+    path: "/score-scout/create",
+    element: <CreatePage />,
   },
   {
     path: "/score-scout/tournaments/:tournamentId",
@@ -39,7 +59,7 @@ const router = createBrowserRouter([
 
 const App = (): React.JSX.Element => {
   return (
-    <Fragment>
+    <CookiesProvider>
       <Provider store={store}>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
@@ -47,7 +67,8 @@ const App = (): React.JSX.Element => {
           <RouterProvider router={router} />
         </ThemeProvider>
       </Provider>
-    </Fragment>
+      <ToastContainer autoClose={2000} position={toast.POSITION.BOTTOM_RIGHT} />
+    </CookiesProvider>
   );
 };
 
