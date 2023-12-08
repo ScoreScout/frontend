@@ -7,7 +7,7 @@ export const fetchActiveTournaments = createAsyncThunk(
     try {
       const response = await fetch("/api/tournaments/active");
       const data = await response.json();
-      if (!response.ok || data.data === undefined) {
+      if (!response.ok || data.ok !== true || data.data === undefined) {
         return rejectWithValue(
           "An error occured while fetching active tournaments. Please try to refresh the page",
         );
@@ -27,7 +27,7 @@ export const fetchArchivedTournaments = createAsyncThunk(
     try {
       const response = await fetch("/api/tournaments/archived");
       const data = await response.json();
-      if (!response.ok || data.data === undefined) {
+      if (!response.ok || (data.ok !== true) === undefined) {
         return rejectWithValue(
           "An error occured while fetching archived tournaments. Please try to refresh the page",
         );
@@ -69,9 +69,11 @@ export const TournamentsSlice = createSlice({
       .addCase(fetchActiveTournaments.fulfilled, (state, action) => {
         state.activeTournaments = action.payload;
         state.isLoadingActive = false;
+        state.errorActive = null;
       })
       .addCase(fetchActiveTournaments.pending, (state) => {
         state.isLoadingActive = true;
+        state.errorActive = null;
       })
       .addCase(fetchActiveTournaments.rejected, (state, action) => {
         state.isLoadingActive = false;
@@ -80,9 +82,11 @@ export const TournamentsSlice = createSlice({
       .addCase(fetchArchivedTournaments.fulfilled, (state, action) => {
         state.archivedTournaments = action.payload;
         state.isLoadingArchived = false;
+        state.errorArchived = null;
       })
       .addCase(fetchArchivedTournaments.pending, (state) => {
         state.isLoadingArchived = true;
+        state.errorArchived = null;
       })
       .addCase(fetchArchivedTournaments.rejected, (state, action) => {
         state.isLoadingArchived = false;

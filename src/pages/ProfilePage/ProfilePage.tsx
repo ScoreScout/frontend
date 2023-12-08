@@ -12,9 +12,10 @@ import {
   CreateTournamentButton,
   CreateIcon,
   EmptyBox,
-  ErrorMessage,
-  Spinner,
+  EmptyTournamentsMessage,
 } from "./style";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
@@ -47,15 +48,16 @@ const ProfilePage = (): React.JSX.Element => {
   };
 
   const handleActiveTabClick = (): void => {
-    // Only fetch active tournaments if they haven't been loaded yet
-    void dispatch(fetchActiveTournaments());
     setActiveTab("active");
+    void dispatch(fetchActiveTournaments());
+    if (activeTournamentsState.error !== null) {
+      toast.error(activeTournamentsState.error);
+    }
   };
 
   const handleArchivedTabClick = (): void => {
-    // Only fetch archived tournaments if they haven't been loaded yet
-    void dispatch(fetchArchivedTournaments());
     setActiveTab("archived");
+    void dispatch(fetchArchivedTournaments());
   };
 
   useEffect(() => {
@@ -75,6 +77,18 @@ const ProfilePage = (): React.JSX.Element => {
     // Dispatch Active tournaments by default
     void dispatch(fetchActiveTournaments());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (activeTournamentsState.error !== null) {
+      toast.error(activeTournamentsState.error);
+    }
+  }, [activeTournamentsState.error]);
+
+  useEffect(() => {
+    if (archivedTournamentsState.error !== null) {
+      toast.error(archivedTournamentsState.error);
+    }
+  }, [archivedTournamentsState.error]);
 
   return (
     <>
@@ -118,25 +132,27 @@ const ProfilePage = (): React.JSX.Element => {
 
           <MainContent>
             <EmptyBox />
+
+            {/* Active tab is Active Tournaments */}
             {activeTab === "active" &&
-              (activeTournamentsState.error !== null ? (
-                <ErrorMessage>{activeTournamentsState.error}</ErrorMessage>
-              ) : activeTournamentsState.isLoading ? (
-                <Spinner />
-              ) : activeTournamentsState.tournaments.length === 0 ? (
-                <ErrorMessage>There are no active tournaments</ErrorMessage>
+              (activeTournamentsState.isLoading ? (
+                <LoadingSpinner />
+              ) : activeTournamentsState.error === null &&
+                activeTournamentsState.tournaments.length === 0 ? (
+                <EmptyTournamentsMessage>There are no active tournaments</EmptyTournamentsMessage>
               ) : (
                 activeTournamentsState.tournaments.map((tournament, index) => (
                   <TournamentCard key={index} tournament={tournament} />
                 ))
               ))}
+
+            {/* Active tab is Archived Tournaments */}
             {activeTab === "archived" &&
-              (archivedTournamentsState.error !== null ? (
-                <ErrorMessage>{archivedTournamentsState.error}</ErrorMessage>
-              ) : archivedTournamentsState.isLoading ? (
-                <Spinner />
-              ) : archivedTournamentsState.tournaments.length === 0 ? (
-                <ErrorMessage>There are no archived tournaments</ErrorMessage>
+              (archivedTournamentsState.isLoading ? (
+                <LoadingSpinner />
+              ) : archivedTournamentsState.error === null &&
+                archivedTournamentsState.tournaments.length === 0 ? (
+                <EmptyTournamentsMessage>There are no archived tournaments</EmptyTournamentsMessage>
               ) : (
                 archivedTournamentsState.tournaments.map((tournament, index) => (
                   <TournamentCard key={index} tournament={tournament} />

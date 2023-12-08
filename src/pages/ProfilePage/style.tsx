@@ -1,31 +1,9 @@
-import styled, { keyframes } from "styled-components";
-import {
-  globalRegularFontStyles,
-  globalSemiBoldFontStyles,
-  globalBoldFontStyles,
-} from "../../theme/FontStyles";
+import styled from "styled-components";
+import { globalBoldFontStyles, globalRegularFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
 
 interface TournamentTabProps {
   $active: boolean;
 }
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const Spinner = styled.div`
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid ${(props) => props.theme.color.mainColor};
-  border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
-  animation: ${rotate} 2s linear infinite;
-  margin: 10rem 30rem;
-`;
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -54,6 +32,13 @@ const MainContent = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) => props.theme.color.bgColor};
+`;
+
+const EmptyTournamentsMessage = styled.div`
+  justify-content: center;
+  ${globalBoldFontStyles};
+  padding-top: 20rem;
+  display: flex;
 `;
 
 const LogoutButton = styled.button`
@@ -161,18 +146,12 @@ const EmptyBox = styled.div`
   background: none;
 `;
 
-const ErrorMessage = styled.div`
-  justify-content: center;
-  ${globalBoldFontStyles};
-  padding-top: 20rem;
-  display: flex;
-`;
-
 export {
   EmptyBox,
   ProfileContainer,
   ProfileLogo,
   MainContent,
+  EmptyTournamentsMessage,
   LogoutButton,
   LogoutIcon,
   TournamentSlider,
@@ -180,6 +159,4 @@ export {
   TournamentTab,
   CreateTournamentButton,
   CreateIcon,
-  ErrorMessage,
-  Spinner,
 };
