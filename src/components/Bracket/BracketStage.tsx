@@ -11,7 +11,7 @@ const BracketStage = ({ matchIds, stageNumber }: StageProps): React.JSX.Element 
   const positionedMatches: MatchWithPositions[] = constructPositionedMatchesBasic(
     matchIds,
     stageNumber,
-    bracket.matches
+    bracket.matches,
   );
 
   return (

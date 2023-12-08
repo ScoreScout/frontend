@@ -1,10 +1,6 @@
 import React from "react";
 
-import {
-  TournamentTitleContainer,
-  TournamentTitleTitle,
-  TournamentTitleInput,
-} from "./style";
+import { TournamentTitleContainer, TournamentTitleTitle, TournamentTitleInput } from "./style";
 
 const TournamentTitle = ({
   tournamentTitle,

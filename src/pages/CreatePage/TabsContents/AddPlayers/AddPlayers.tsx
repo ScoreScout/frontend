@@ -41,17 +41,16 @@ const AddPlayers: FC<AddPlayersProps> = ({
       return;
     }
 
-    const newPlayer : Player = {
+    const newPlayer: Player = {
       id: players.length,
       name,
     };
 
-    const newRating = parseInt(rating, 10)
+    const newRating = parseInt(rating, 10);
 
     if (!isNaN(newRating) || !ratingToggleOn) {
-      newPlayer.rating = newRating
+      newPlayer.rating = newRating;
     }
-
 
     setPlayers([...players, newPlayer]);
 

@@ -60,7 +60,7 @@ export const addTournament = createAsyncThunk(
         return rejectWithValue("An error occurred while adding a tournament");
       }
 
-      return fulfillWithValue(tournament); 
+      return fulfillWithValue(tournament);
     } catch (error) {
       return rejectWithValue("An error occurred while adding a tournament");
     }
