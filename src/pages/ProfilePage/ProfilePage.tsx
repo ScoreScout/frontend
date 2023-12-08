@@ -13,6 +13,7 @@ import {
   CreateIcon,
   EmptyBox,
   EmptyTournamentsMessage,
+  StyledLink,
 } from "./style";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
@@ -143,9 +144,9 @@ const ProfilePage = (): React.JSX.Element => {
                 <EmptyTournamentsMessage>There are no active tournaments</EmptyTournamentsMessage>
               ) : (
                 activeTournamentsState.tournaments.map((tournament, index) => (
-                  <Link key={index} to={"/score-scout/tournaments/2"}>
+                  <StyledLink key={index} to={"/score-scout/tournaments/2"}>
                     <TournamentCard tournament={tournament} />
-                  </Link>
+                  </StyledLink>
                 ))
               ))}
 
