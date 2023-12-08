@@ -72,7 +72,7 @@ const TournamentViewPage = (): React.JSX.Element => {
       <>
         <StyledHeader>
           <Link to={`/score-scout/profile`}>
-            <ProfileLogo $isActive={false}>
+            <ProfileLogo $isActive={true}>
               <FaUserCircle />
             </ProfileLogo>
           </Link>
@@ -86,7 +86,7 @@ const TournamentViewPage = (): React.JSX.Element => {
       <>
         <StyledHeader>
           <Link to={`/score-scout/profile`}>
-            <ProfileLogo $isActive={false}>
+            <ProfileLogo $isActive={true}>
               <FaUserCircle />
             </ProfileLogo>
           </Link>
