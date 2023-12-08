@@ -130,7 +130,7 @@ export function initializeBracket(players: Player[]): Bracket {
     }
   }
 
-  const bracket: Bracket = { players, stages, matches, type:TournamentStageType.Bracket};
+  const bracket: Bracket = { players, stages, matches, type: TournamentStageType.Bracket };
   return bracket;
 }
 

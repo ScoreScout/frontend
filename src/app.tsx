@@ -53,7 +53,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/score-scout/tournaments/:tournamentId",
-    element: <TournamentViewPage />
+    element: <TournamentViewPage />,
   },
 ]);
 

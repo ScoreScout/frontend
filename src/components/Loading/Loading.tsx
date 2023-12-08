@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 
 const Loading = (): React.JSX.Element => {
-    return <>Loading</>
-}
+  return <>Loading</>;
+};
 
-export default Loading
+export default Loading;

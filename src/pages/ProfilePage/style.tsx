@@ -23,7 +23,8 @@ const ProfileLogo = styled.div<{
   height: 2.5rem;
   width: 2.5rem;
   font-size: 2.5rem;
-  color: ${(props) => props.$isActive ? props.theme.color.mainColor : props.theme.color.notActiveColor};
+  color: ${(props) =>
+    props.$isActive ? props.theme.color.mainColor : props.theme.color.notActiveColor};
   cursor: pointer;
 `;
 

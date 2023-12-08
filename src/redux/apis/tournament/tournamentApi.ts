@@ -17,22 +17,25 @@ const tournamentApi = createApi({
       query: (args) => `tournaments/${args.tournamentId}`,
     }),
     updateTournament: builder.mutation({
-      query: ({tournamentId, ...body}) => ({
+      query: ({ tournamentId, ...body }) => ({
         url: `tournaments/${tournamentId}`,
-        method: 'POST',
+        method: "POST",
         body,
       }),
       // invalidatesTags: (result, error, {tournamentId}) => [{type: "Tournament", tournamentId}],
-      async onQueryStarted({tournamentId, ...body}, {dispatch, queryFulfilled}) {
+      async onQueryStarted({ tournamentId, ...body }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
-            tournamentApi.util.updateQueryData('getTournament', {tournamentId}, (draft) => Object.assign(draft, body)))
+          tournamentApi.util.updateQueryData("getTournament", { tournamentId }, (draft) =>
+            Object.assign(draft, body),
+          ),
+        );
         try {
-          await queryFulfilled
+          await queryFulfilled;
         } catch {
-          patchResult.undo()
+          patchResult.undo();
         }
       },
-    })
+    }),
   }),
 });
 

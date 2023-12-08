@@ -63,7 +63,7 @@ const BracketMatch = ({
       >
         {firstPlayer !== undefined && secondPlayer !== undefined && !match.isFinished && (
           <StyledMatchTrigger
-          $viewOnly = {viewOnly}
+            $viewOnly={viewOnly}
             onClick={() => {
               if (viewOnly) return;
               if (!match.isStarted) {

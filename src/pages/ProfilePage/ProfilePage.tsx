@@ -23,6 +23,7 @@ import { loadUser, logout } from "../../redux/slices/user/userSlice";
 import { useCookies } from "react-cookie";
 import { getUser } from "../../redux/selectors/userSelection";
 import { LoadType } from "../../types/userTypes";
+import { Link } from "react-router-dom";
 
 const ProfilePage = (): React.JSX.Element => {
   const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
@@ -165,26 +166,28 @@ const ProfilePage = (): React.JSX.Element => {
             </CreateTournamentButton>
           </Sidebar>
 
-      <MainContent>
-        <EmptyBox />
-        {activeTab === "active"
-          ? activeTournaments.map((tournament, index) => (
-            <Link key={index} to={`/score-scout/tournaments/1`}>
-
-              <TournamentCard key={index} tournament={tournament}></TournamentCard>
-            </Link>
-            ))
-          : archivedTournaments.map((tournament, index) => (
-            <Link key={index} to={`/score-scout/tournaments/2`}>
-
-              <TournamentCard key={index} tournament={tournament}></TournamentCard>
-            </Link>
-            ))}
-      </MainContent>
-      <ProfileLogo>
-        <FaUserCircle />
-      </ProfileLogo>
-    </ProfileContainer>
+          <MainContent>
+            <EmptyBox />
+            {activeTab === "active"
+              ? activeTournaments.map((tournament, index) => (
+                  <Link key={index} to={"/score-scout/tournaments/2"}>
+                    <TournamentCard tournament={tournament}></TournamentCard>
+                  </Link>
+                ))
+              : archivedTournaments.map((tournament, index) => (
+                  <Link key={index} to={"/score-scout/tournaments/1"}>
+                    <TournamentCard tournament={tournament}></TournamentCard>
+                  </Link>
+                ))}
+          </MainContent>
+          <ProfileLogo $isActive={false}>
+            <FaUserCircle />
+          </ProfileLogo>
+        </ProfileContainer>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

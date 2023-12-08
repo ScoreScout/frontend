@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import type { BracketProps, Bracket as BracketType, Match } from "../../types/bracketTypes";
+import type { BracketProps, Match } from "../../types/bracketTypes";
 import { StyledGrid } from "./style";
 import { getBracket, getStages } from "../../redux/selectors/bracketSelectors";
 import { setBracket, setPlayers } from "../../redux/slices/bracket/bracketSlice";
@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Winner from "./BracketWinner";
 import Stage from "./BracketStage";
 import { store } from "../../redux";
-import debounce from "lodash/debounce";
 
 function areArraysDifferent(arr1: Match[], arr2: Match[]): boolean {
   if (arr1.length !== arr2.length) {
@@ -66,7 +65,7 @@ const Bracket = ({
         previousValue.matches.length !== 0 &&
         onUpdate !== undefined &&
         areArraysDifferent(previousValue.matches, currentValue.matches)
-      ) {        
+      ) {
         onUpdate(currentValue);
       }
     };

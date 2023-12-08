@@ -41,24 +41,24 @@ export const StyledBoldSpan = styled.span`
 `;
 
 export const StyledFinishButtonContainer = styled.div`
-display: flex;
-flex-direction: column-reverse;
-`
+  display: flex;
+  flex-direction: column-reverse;
+`;
 
 export const StyledInfoLowerContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export const StyledMainContainer = styled.div`
-    margin: 2.5rem;
-`
+  margin: 2.5rem;
+`;
 
 export const StyledStageTitle = styled.div`
-    ${globalSemiBoldFontStyles}
-`
+  ${globalSemiBoldFontStyles}
+`;
 
 export const StyledBracketContainer = styled.div`
-    margin: 2.5rem 0;
-`
+  margin: 2.5rem 0;
+`;
