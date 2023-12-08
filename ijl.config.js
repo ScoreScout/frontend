@@ -18,6 +18,7 @@ module.exports = {
   config: {
     key: "value",
     // "score-scout.url": "http://31.31.198.23:8000",
+    // "score-scout.url": "http://localhost:8000",
     "score-scout.url": "https://6f2d-188-130-155-160.ngrok-free.app",
   },
 };
