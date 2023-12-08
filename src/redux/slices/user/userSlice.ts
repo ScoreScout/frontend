@@ -2,15 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { LoadType, type User } from "../../../types/userTypes";
 import axios from "axios";
-import { getConfigValue } from "@ijl/cli";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
+
+const url = "http://localhost:8000";
 
 const headers = {
   "Content-Type": "application/json",
 };
 const cookies = new Cookies();
-const initialState: User = {
+export const initialState: User = {
   email: "",
   password: "",
   rePassword: "",
@@ -30,7 +31,7 @@ export const loadUser = createAsyncThunk(
       },
     };
     return await axios
-      .get(`${getConfigValue("score-scout.url")}/auth/users/me/`, config)
+      .get(`${url}/auth/users/me/`, config)
       .then(async (res) => {
         return fulfillWithValue(res.data);
       })
@@ -40,7 +41,7 @@ export const loadUser = createAsyncThunk(
           refresh: state.refreshToken,
         });
         return await axios
-          .post(`${getConfigValue("score-scout.url")}/auth/jwt/refresh/`, body, config)
+          .post(`${url}/auth/jwt/refresh/`, body, config)
           .then(async (res) => {
             const config = {
               headers: {
@@ -49,7 +50,7 @@ export const loadUser = createAsyncThunk(
               },
             };
             return await axios
-              .get(`${getConfigValue("score-scout.url")}/auth/users/me/`, config)
+              .get(`${url}/auth/users/me/`, config)
               .then((ret) => {
                 return fulfillWithValue({ ...ret.data, ...res.data });
               })
@@ -82,7 +83,7 @@ export const signIn = createAsyncThunk(
       password: state.password,
     });
     return await axios
-      .post(`${getConfigValue("score-scout.url")}/auth/jwt/create/`, body, { headers })
+      .post(`${url}/auth/jwt/create/`, body, { headers })
       .then(async (res) => {
         return fulfillWithValue(res.data);
       })
@@ -111,7 +112,7 @@ export const signUp = createAsyncThunk(
       re_password: state.rePassword,
     });
     return await axios
-      .post(`${getConfigValue("score-scout.url")}/auth/users/`, body, { headers })
+      .post(`${url}/auth/users/`, body, { headers })
       .then(async (res) => {
         return fulfillWithValue(res.data);
       })
@@ -171,7 +172,7 @@ export const userSlice = createSlice({
         token: action.payload.token,
       });
       axios
-        .post(`${getConfigValue("score-scout.url")}/auth/users/activation/`, body, { headers })
+        .post(`${url}/auth/users/activation/`, body, { headers })
         .then((res) => {
           toast.success("Your account is successfully activated");
           state = { ...state, activeState: true };
