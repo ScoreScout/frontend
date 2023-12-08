@@ -34,7 +34,6 @@ import {
   getActiveTournamentsState,
   getArchivedTournamentsState,
 } from "../../redux/selectors/tournamentSelectors";
-import { Link } from "react-router-dom";
 
 const ProfilePage = (): React.JSX.Element => {
   const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
@@ -159,9 +158,9 @@ const ProfilePage = (): React.JSX.Element => {
                 <EmptyTournamentsMessage>There are no archived tournaments</EmptyTournamentsMessage>
               ) : (
                 archivedTournamentsState.tournaments.map((tournament, index) => (
-                  <Link key={index} to={"/score-scout/tournaments/1"}>
+                  <StyledLink key={index} to={"/score-scout/tournaments/1"}>
                     <TournamentCard key={index} tournament={tournament} />
-                  </Link>
+                  </StyledLink>
                 ))
               ))}
           </MainContent>

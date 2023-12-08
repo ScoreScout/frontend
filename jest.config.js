@@ -5,4 +5,8 @@ module.exports = {
     "^.+\\.ts?$": "ts-jest",
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  automock: false,
+  setupFiles: [
+    "./setupJest.js"
+  ]
 };
