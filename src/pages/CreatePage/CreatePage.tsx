@@ -20,8 +20,7 @@ import { CreatePageTabs as Tabs, CompetitionOptions } from "../../types/createPa
 import { type Tournament, TournamentStatus } from "../../types/tournamentCardTypes";
 
 import { toast } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks";
 import { addTournament } from "../../redux/slices/tournament/tournamentSlice";
 
 import {
@@ -141,7 +140,7 @@ const CreatePage = (): React.JSX.Element => {
     }
   };
 
-  const submitTournament = (): void => {
+  const submitTournament = async (): Promise<void> => {
     const newTournament: Tournament = {
       title: tournamentTitle,
       date: new Date().toLocaleDateString(),
@@ -149,14 +148,14 @@ const CreatePage = (): React.JSX.Element => {
       amountGamesPlayed: 0,
       status: TournamentStatus.InProgress,
     };
-    console.log(newTournament);
+
     if (newTournament.title === "") {
       toast.error("Please write a title for your tournament");
     } else if (newTournament.amountPlayers === 0) {
       toast.error("Please add players to your tournament");
     } else {
       try {
-        dispatch(addTournament(newTournament));
+        await dispatch(addTournament(newTournament));
         toast.success("Tournament created successfully!");
         navigate("/score-scout/profile");
       } catch (error) {
@@ -250,8 +249,20 @@ const CreatePage = (): React.JSX.Element => {
               </ButtonText>
             </Button>
           ) : (
-            <Button primary={true} size={ButtonSize.S}>
-              <ButtonText onClick={submitTournament}>
+            <Button
+              primary={true}
+              size={ButtonSize.S}
+              onClick={() => {
+                submitTournament()
+                  .then(() => {
+                    // Any additional synchronous code after the promise resolves
+                  })
+                  .catch(() => {
+                    toast.error("Error creating tournament");
+                  });
+              }}
+            >
+              <ButtonText>
                 Create <CupIcon size={"24"} color='#FFFFFF' />
               </ButtonText>
             </Button>
