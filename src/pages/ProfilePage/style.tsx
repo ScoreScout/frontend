@@ -155,12 +155,16 @@ const EmptyBox = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-    text-decoration: none;
+  text-decoration: none;
 
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-        background-color: none;
-    }
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    background-color: none;
+  }
 `;
 
 export {
