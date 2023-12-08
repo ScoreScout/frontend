@@ -1,6 +1,6 @@
-interface Player {
-  firstName: string;
-  lastName: string;
+export interface Player {
+  name: string;
+  rating?: number;
 }
 
 export interface GroupTableProps {
@@ -10,4 +10,5 @@ export interface GroupTableProps {
 export interface PlayerRowProps {
   player: Player;
   numOfPlayers: number;
+  rowIndex: number
 }

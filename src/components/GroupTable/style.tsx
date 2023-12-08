@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
-interface styleProbs {
+interface styleProps {
     numPlayers: number;
   }
 
-export const TableContainer = styled.div<styleProbs>`
+interface cellProps {
+    rowIndex: number;
+    cellIndex: number;
+}
+
+export const TableContainer = styled.div<styleProps>`
     box-sizing: border-box;
-    max-width: ${(props) => (props.numPlayers > 4 ? "85vh" : "70vh")};
+    max-width: ${(props) =>
+      props.numPlayers > 4
+        ? "85vh"
+        : props.numPlayers > 2
+        ? "70vh"
+        : "55vh"};
     border-radius: 4.5%;
     border: #d8d7d7 0.5px solid;
     box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.1);
@@ -18,30 +28,9 @@ export const TableContainer = styled.div<styleProbs>`
         border-bottom-right-radius: 20%;
         }
     }
-    :nth-child(2){
-        :nth-child(2){
-            background-color: #d5d3d3;
-        }
-    }
-    :nth-child(3){
-        :nth-child(3){
-            background-color: #d5d3d3;
-        }
-    }
-    :nth-child(4){
-        :nth-child(4){
-            background-color: #d5d3d3;
-        }
-    }
-    :nth-child(5){
-        :nth-child(5){
-            background-color: #d5d3d3;
-        }
-    }
-
 `;
 
-export const HeadRow = styled.div<styleProbs>`
+export const HeadRow = styled.div<styleProps>`
     width: 100%;
     height: 2.5rem;
     display: grid;
@@ -58,7 +47,7 @@ export const HeadRow = styled.div<styleProbs>`
     }
 `;
 
-export const RowStyle = styled.div<styleProbs>`
+export const RowStyle = styled.div<styleProps>`
     width: 100%;
     height: 3rem;
     display: grid;
@@ -66,7 +55,7 @@ export const RowStyle = styled.div<styleProbs>`
     /* background-color: #f2e0b2; */
 `;
 
-export const Cell = styled.div`
+export const Cell = styled.div<cellProps>`
     color: #000000;
     font-size: 0.9rem;
     font-family: sans-serif;
@@ -75,4 +64,5 @@ export const Cell = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: ${(props) => (props.rowIndex === props.cellIndex && props.rowIndex !== 0 ? '#d5d3d3' : '#ffffff')}; 
 `;

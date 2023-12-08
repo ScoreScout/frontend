@@ -20,12 +20,12 @@ import ScoreModal from "./components/Modal/ScoreModal";
 import GroupTable from "./components/GroupTable/GroupTable";
 
 const players = [
-  { firstName: "Ghadeer", lastName: "Akleh" },
-  { firstName: "Anvar", lastName: "Ishakov" },
-  { firstName: "Hamada", lastName: "Salhab" },
-  { firstName: "Ahmad", lastName: "Alhussin" },
-  // { firstName: "Test", lastName: "Test" },
-  // { firstName: "Test2", lastName: "Test2" }
+  { name: "Ghadeer Akleh"},
+  { name: "Anvar Ishakov" },
+  { name: "Hamada Salhab" },
+  { name: "Ahmad Alhussin" },
+  // { name: "Test Test" },
+  // { name: "Test2 Test2" }
 ];
 
 const router = createBrowserRouter([
