@@ -62,7 +62,7 @@ const HomePage = (): React.JSX.Element => {
       </StyledButtonsContainer>
       <StyledStartButton>
         <Link to={`sign-up`}>
-          <Button primary={true} size={ButtonSize.XL}>
+          <Button primary={true} size={ButtonSize.XL} data-testid='start-button'>
             Start right now!
           </Button>
         </Link>
