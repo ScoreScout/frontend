@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const fs = require("fs");
 
 module.exports = router;
 
@@ -46,28 +45,16 @@ router.get("/tournaments/:id/toggle", (req, res) => {
   res.send(tournamentActivated ? "Activated" : "Deactivated");
 });
 
-const writeTournamentsActive = (data) => {
-  fs.writeFileSync("./stubs/api/tournaments_active.json", JSON.stringify(data, null, 2));
-};
+router.post("/tournaments/:id", (req, res) => {
+  const data = req.body;
 
-router.post("/tournaments/active", (req, res) => {
-  const newTournament = req.body;
-  if (newTournament) {
-    // Assuming the tournament object has necessary properties like title, date, etc.
-    // You may need to adjust this based on your actual data structure
-    const createdTournament = {
-      title: newTournament.title,
-      date: new Date().toLocaleDateString(),
-      amountPlayers: newTournament.amountPlayers,
-      amountGamesPlayed: 0,
-      status: "Created", // You can set the initial status as needed
-    };
-    const tournaments = require("./tournaments_active.json");
-    tournaments.data.push(createdTournament);
-    writeTournamentsActive(tournaments);
+  if (data === undefined) {
+    return res.status(400).send("Bad Request: No data provided");
+  }
 
-    res.status(201).send({ ok: true, data: createdTournament });
-  } else {
-    res.status(400).send({ ok: false, error: "Invalid tournament data" });
+  try {
+    res.status(200).send("Data successfully written to file");
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
   }
 });

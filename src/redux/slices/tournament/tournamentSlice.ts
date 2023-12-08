@@ -45,20 +45,24 @@ export const addTournament = createAsyncThunk(
   "tournaments/addTournament",
   async (tournament: Tournament, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const response = await fetch("/api/tournaments/active", {
+      const response = await fetch(`/api/tournaments/1`, {
+        // Assuming you want to use the tournament's ID in the URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(tournament),
       });
-      const data = await response.json();
-      if (!response.ok || data.ok !== true || data.data === undefined) {
+
+      const data = await response.text();
+
+      if (!response.ok || data !== "Data successfully written to file") {
         return rejectWithValue("An error occurred while adding a tournament");
       }
-      return fulfillWithValue(data.data);
+
+      return fulfillWithValue(tournament); 
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue("An error occurred while adding a tournament");
     }
   },
 );
