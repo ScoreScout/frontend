@@ -35,8 +35,6 @@ const FirstStage = ({
     })
     .map((player, index) => ({ ...player, id: index + 1 }));
 
-  console.log(sortedPlayers);
-
   return (
     <>
       {players.length > 0 ? (
