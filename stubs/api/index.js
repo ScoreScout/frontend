@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+
+router.use(express.json());
 
 module.exports = router;
 
@@ -34,8 +37,13 @@ router.get("/tournaments/archived/toggle", (req, res) => {
 });
 
 router.get("/tournaments/:id", (req, res) => {
-  if (tournamentsActiveActivated) {
-    res.status(200).send(require("./tournament.json"));
+  id = req.params.id;
+  if (tournamentActivated) {
+    if (id === "2") {
+      res.status(200).send(require("./tournament-empty.json"));
+    } else {
+      res.status(200).send(require("./tournament.json"));
+    }
   } else {
     res.status(500).send();
   }
