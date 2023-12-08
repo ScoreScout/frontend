@@ -43,9 +43,23 @@ export const fetchArchivedTournaments = createAsyncThunk(
 
 export const addTournament = createAsyncThunk(
   "tournaments/addTournament",
-  async (tournament: Tournament) => {
-    // You can perform any async logic here if needed
-    return tournament;
+  async (tournament: Tournament, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const response = await fetch("/api/tournaments/active", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tournament),
+      });
+      const data = await response.json();
+      if (!response.ok || data.ok !== true || data.data === undefined) {
+        return rejectWithValue("An error occured while adding a tournament");
+      }
+      return fulfillWithValue(data.data);
+    } catch (error) {
+      return rejectWithValue("An error occured while adding a tournament");
+    }
   },
 );
 
@@ -108,8 +122,7 @@ export const TournamentsSlice = createSlice({
       })
       .addCase(addTournament.pending, (state) => {
         state.errorActive = null;
-      })
-      ;
+      });
   },
 });
 
