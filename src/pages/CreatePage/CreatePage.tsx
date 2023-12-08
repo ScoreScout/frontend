@@ -155,18 +155,13 @@ const CreatePage = (): React.JSX.Element => {
     } else if (newTournament.amountPlayers === 0) {
       toast.error("Please add players to your tournament");
     } else {
-      dispatch(addTournament(newTournament))
-        .then((ret) => {
-          if (ret.type === "tournament/addTournament/fulfilled") {
-            toast.success("Tournament created successfully!");
-            navigate("/score-scout/profile");
-          } else {
-            toast.error(ret.payload);
-          }
-        })
-        .catch((e) => {
-          toast.error("Unknown error, please try again later");
-        });
+      try {
+        dispatch(addTournament(newTournament));
+        toast.success("Tournament created successfully!");
+        navigate("/score-scout/profile");
+      } catch (error) {
+        toast.error("Error creating tournament");
+      }
     }
   };
 

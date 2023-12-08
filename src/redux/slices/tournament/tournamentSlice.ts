@@ -54,11 +54,11 @@ export const addTournament = createAsyncThunk(
       });
       const data = await response.json();
       if (!response.ok || data.ok !== true || data.data === undefined) {
-        return rejectWithValue("An error occured while adding a tournament");
+        return rejectWithValue("An error occurred while adding a tournament");
       }
       return fulfillWithValue(data.data);
     } catch (error) {
-      return rejectWithValue("An error occured while adding a tournament");
+      return rejectWithValue(error);
     }
   },
 );
