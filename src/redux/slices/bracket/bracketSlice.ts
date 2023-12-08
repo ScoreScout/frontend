@@ -2,25 +2,38 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { Bracket, FinishedMatchWithScore, Player } from "../../../types/bracketTypes";
 import { initializeBracket, promoteToNextStage } from "../../../utils/bracketDistribution";
+import { TournamentStageType } from "../../../types/tournamentTypes";
 
-type bracketState = Bracket;
+interface bracketState extends Bracket {
+  viewOnly: boolean;
+}
 
-const initialState: bracketState = { matches: [], stages: [], players: [] };
+const initialState: bracketState = {
+  type: TournamentStageType.Bracket,
+  matches: [],
+  stages: [],
+  players: [],
+  viewOnly: false,
+};
 
 export const bracketSlice = createSlice({
   name: "bracket",
   initialState,
   reducers: {
-    setPlayers: (state, action: PayloadAction<{ playerNames: string[] }>) => {
+    setPlayers: (state, action: PayloadAction<{ playerNames: string[]; viewOnly: boolean }>) => {
       const players = action.payload.playerNames.map((name, i): Player => {
         return { name, id: i };
       });
-      state = { ...initializeBracket(players) };
+      state = { ...initializeBracket(players), viewOnly: action.payload.viewOnly };
 
       return state;
     },
-    setBracket: (state, action: PayloadAction<{ bracket: Bracket }>) => {
-      state = action.payload.bracket;
+    setBracket: (state, action: PayloadAction<{ bracket: Bracket; viewOnly: boolean }>) => {
+      state = { ...action.payload.bracket, viewOnly: action.payload.viewOnly };
+      return state;
+    },
+    setViewOnly: (state, action: PayloadAction<{ viewOnly: boolean }>) => {
+      state.viewOnly = action.payload.viewOnly;
       return state;
     },
     startMatch: (state, action: PayloadAction<number>) => {

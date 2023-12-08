@@ -19,6 +19,8 @@ export const getStages = (state: RootState): Stage[] => {
 
 export const getBracket = (state: RootState): Bracket => state.bracket;
 
+export const getViewOnly = (state: RootState): boolean => state.bracket.viewOnly;
+
 export const getPrevMatches = createSelector(
   [getBracket, (getBracket, matchId: number) => matchId],
   (

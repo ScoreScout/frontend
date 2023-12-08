@@ -31,7 +31,6 @@ const CardHeader = styled.div`
 `;
 
 const CardContent = styled.div`
-  /* background-color: black; */
   height: 7.5rem;
   display: flex;
   flex-direction: column;
@@ -47,6 +46,7 @@ const Title = styled.h1`
 const Text = styled.span`
   ${globalRegularFontStyles};
   font-size: 1.25rem;
+  color: ${(props) => props.theme.color.fontColor};
 `;
 const Date = styled(Text)`
   ${globalRegularFontStyles};
@@ -69,6 +69,7 @@ const Icon = styled.span`
 const BoldText = styled.span`
   ${globalBoldFontStyles};
   font-size: 1.25rem;
+  color: ${(props) => props.theme.color.fontColor};
 `;
 
 export { Card, CardHeader, CardContent, Title, ParticipantInfo, Icon, Text, Date, BoldText };

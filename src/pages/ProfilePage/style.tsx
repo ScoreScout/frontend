@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { globalRegularFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
+import {
+  globalBoldFontStyles,
+  globalRegularFontStyles,
+  globalSemiBoldFontStyles,
+} from "../../theme/FontStyles";
+import { Link } from "react-router-dom";
 
 interface TournamentTabProps {
   $active: boolean;
@@ -13,15 +18,18 @@ const ProfileContainer = styled.div`
   overflow-y: hidden;
 `;
 
-const ProfileLogo = styled.div`
+const ProfileLogo = styled.div<{
+  $isActive: boolean;
+}>`
   position: absolute;
   top: 1.25rem;
-  right: 1.25rem;
+  right: 2.5rem;
 
   height: 2.5rem;
   width: 2.5rem;
   font-size: 2.5rem;
-  color: ${(props) => props.theme.color.mainColor};
+  color: ${(props) =>
+    props.$isActive ? props.theme.color.mainColor : props.theme.color.notActiveColor};
   cursor: pointer;
 `;
 
@@ -32,6 +40,13 @@ const MainContent = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) => props.theme.color.bgColor};
+`;
+
+const EmptyTournamentsMessage = styled.div`
+  justify-content: center;
+  ${globalBoldFontStyles};
+  padding-top: 20rem;
+  display: flex;
 `;
 
 const LogoutButton = styled.button`
@@ -139,11 +154,25 @@ const EmptyBox = styled.div`
   background: none;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    background-color: none;
+  }
+`;
+
 export {
   EmptyBox,
   ProfileContainer,
   ProfileLogo,
   MainContent,
+  EmptyTournamentsMessage,
   LogoutButton,
   LogoutIcon,
   TournamentSlider,
@@ -151,4 +180,5 @@ export {
   TournamentTab,
   CreateTournamentButton,
   CreateIcon,
+  StyledLink,
 };

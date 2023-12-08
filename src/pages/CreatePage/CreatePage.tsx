@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Button from "../../components/Button/Button";
@@ -13,9 +13,15 @@ import ChooseRating from "./TabsContents/ChooseRating/ChooseRating";
 import FirstStage from "./TabsContents/FirstStage/FirstStage";
 import NumStages from "./TabsContents/NumStages/NumStages";
 import SecondStage from "./TabsContents/SecondStage/SecondStage";
+import TournamentTitle from "./TabsContents/TournamentTitle/TournamentTitle";
 
-import { type Player } from "../../types/playerTypes";
-import { CreatePageTabs as Tabs } from "../../types/createPageTabTypes";
+import { type Player } from "../../types/bracketTypes";
+import { CreatePageTabs as Tabs, CompetitionOptions } from "../../types/createPageTabTypes";
+import { type Tournament, TournamentStatus } from "../../types/tournamentCardTypes";
+
+import { toast } from "react-toastify";
+import { useAppDispatch } from "../../redux/hooks";
+import { addTournament } from "../../redux/slices/tournament/tournamentSlice";
 
 import {
   CreateContainer,
@@ -32,7 +38,9 @@ import {
 import { FaUserCircle } from "react-icons/fa";
 
 const CreatePage = (): React.JSX.Element => {
-  const [activeTab, setActiveTab] = useState<string>("chooseRating");
+  const [tournamentTitle, setTournamentTitle] = useState<string>("" as string);
+
+  const [activeTab, setActiveTab] = useState<string>(Tabs.TOURNAMENT_TITLE);
 
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
@@ -41,10 +49,18 @@ const CreatePage = (): React.JSX.Element => {
     setRatingToggleOn((prev) => !prev);
   }, []);
 
-  const [numStages, setNumStages] = useState<number | null>(null);
+  const [numStages, setNumStages] = useState<number>(1);
   const handleNumStagesOptionClick = useCallback((option: number): void => {
     setNumStages(option);
   }, []);
+
+  const [tournamentType, setTournamentType] = useState<CompetitionOptions>(CompetitionOptions.NONE);
+  const handleTournamentOptionClick = (option: CompetitionOptions): void => {
+    setTournamentType(option);
+  };
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const renderTabContent = (): React.ReactNode => {
     switch (activeTab) {
@@ -59,9 +75,22 @@ const CreatePage = (): React.JSX.Element => {
           <NumStages selectedOption={numStages} handleOptionClick={handleNumStagesOptionClick} />
         );
       case Tabs.FIRST_STAGE:
-        return <FirstStage />;
+        return (
+          <FirstStage
+            players={players}
+            optionChosen={tournamentType}
+            handleOptionClick={handleTournamentOptionClick}
+          />
+        );
       case Tabs.SECOND_STAGE:
         return <SecondStage />;
+      case Tabs.TOURNAMENT_TITLE:
+        return (
+          <TournamentTitle
+            tournamentTitle={tournamentTitle}
+            setTournamentTitle={setTournamentTitle}
+          />
+        );
       default:
         return null;
     }
@@ -69,6 +98,9 @@ const CreatePage = (): React.JSX.Element => {
 
   const handleNext = (): void => {
     switch (activeTab) {
+      case Tabs.TOURNAMENT_TITLE:
+        setActiveTab(Tabs.CHOOSE_RATING);
+        break;
       case Tabs.CHOOSE_RATING:
         setActiveTab(Tabs.ADD_PLAYERS);
         break;
@@ -88,6 +120,9 @@ const CreatePage = (): React.JSX.Element => {
 
   const handleBack = (): void => {
     switch (activeTab) {
+      case Tabs.CHOOSE_RATING:
+        setActiveTab(Tabs.TOURNAMENT_TITLE);
+        break;
       case Tabs.ADD_PLAYERS:
         setActiveTab(Tabs.CHOOSE_RATING);
         break;
@@ -105,6 +140,30 @@ const CreatePage = (): React.JSX.Element => {
     }
   };
 
+  const submitTournament = async (): Promise<void> => {
+    const newTournament: Tournament = {
+      title: tournamentTitle,
+      date: new Date().toLocaleDateString(),
+      amountPlayers: players.length,
+      amountGamesPlayed: 0,
+      status: TournamentStatus.InProgress,
+    };
+
+    if (newTournament.title === "") {
+      toast.error("Please write a title for your tournament");
+    } else if (newTournament.amountPlayers === 0) {
+      toast.error("Please add players to your tournament");
+    } else {
+      try {
+        await dispatch(addTournament(newTournament));
+        toast.success("Tournament created successfully!");
+        navigate("/score-scout/profile");
+      } catch (error) {
+        toast.error("Error creating tournament");
+      }
+    }
+  };
+
   return (
     <CreateContainer>
       <Sidebar>
@@ -112,41 +171,49 @@ const CreatePage = (): React.JSX.Element => {
           <CreateTitle>Create a tournament</CreateTitle>
           <SidebarSlider>
             <SliderTab
-              $active={activeTab === "chooseRating"}
+              $active={activeTab === Tabs.TOURNAMENT_TITLE}
               onClick={() => {
-                setActiveTab("chooseRating");
+                setActiveTab(Tabs.TOURNAMENT_TITLE);
+              }}
+            >
+              Tournament title
+            </SliderTab>
+            <SliderTab
+              $active={activeTab === Tabs.CHOOSE_RATING}
+              onClick={() => {
+                setActiveTab(Tabs.CHOOSE_RATING);
               }}
             >
               Choose rating
             </SliderTab>
             <SliderTab
-              $active={activeTab === "addPlayers"}
+              $active={activeTab === Tabs.ADD_PLAYERS}
               onClick={() => {
-                setActiveTab("addPlayers");
+                setActiveTab(Tabs.ADD_PLAYERS);
               }}
             >
               Add players
             </SliderTab>
             <SliderTab
-              $active={activeTab === "numStages"}
+              $active={activeTab === Tabs.NUM_STAGES}
               onClick={() => {
-                setActiveTab("numStages");
+                setActiveTab(Tabs.NUM_STAGES);
               }}
             >
               Number of stages
             </SliderTab>
             <SliderTab
-              $active={activeTab === "firstStage"}
+              $active={activeTab === Tabs.FIRST_STAGE}
               onClick={() => {
-                setActiveTab("firstStage");
+                setActiveTab(Tabs.FIRST_STAGE);
               }}
             >
               First stage
             </SliderTab>
             <SliderTab
-              $active={activeTab === "secondStage"}
+              $active={activeTab === Tabs.SECOND_STAGE}
               onClick={() => {
-                setActiveTab("secondStage");
+                setActiveTab(Tabs.SECOND_STAGE);
               }}
             >
               Second stage
@@ -165,7 +232,7 @@ const CreatePage = (): React.JSX.Element => {
         {renderTabContent()}
 
         <ButtonsContainer>
-          {activeTab !== "chooseRating" ? (
+          {activeTab !== Tabs.TOURNAMENT_TITLE ? (
             <Button primary={false} size={ButtonSize.S} onClick={handleBack}>
               <ButtonText>
                 <ArrowLeftIcon size={"24"} color='#D22D19' />
@@ -175,14 +242,26 @@ const CreatePage = (): React.JSX.Element => {
           ) : (
             <div></div>
           )}
-          {activeTab !== "secondStage" ? (
+          {activeTab !== Tabs.SECOND_STAGE ? (
             <Button primary={true} size={ButtonSize.S} onClick={handleNext}>
               <ButtonText>
                 Next <ArrowRightIcon size={"24"} color='#FFFFFF' />
               </ButtonText>
             </Button>
           ) : (
-            <Button primary={true} size={ButtonSize.S}>
+            <Button
+              primary={true}
+              size={ButtonSize.S}
+              onClick={() => {
+                submitTournament()
+                  .then(() => {
+                    // Any additional synchronous code after the promise resolves
+                  })
+                  .catch(() => {
+                    toast.error("Error creating tournament");
+                  });
+              }}
+            >
               <ButtonText>
                 Create <CupIcon size={"24"} color='#FFFFFF' />
               </ButtonText>

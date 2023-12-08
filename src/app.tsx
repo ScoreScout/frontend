@@ -17,6 +17,7 @@ import ProfileActivationPage from "./pages/ProfileActivationPage/ProfileActivati
 import { CookiesProvider } from "react-cookie";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import ScoreModal from "./components/Modal/ScoreModal";
+import TournamentViewPage from "./pages/TournamentViewPage/TournamentViewPage";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/score-scout/create",
     element: <CreatePage />,
+  },
+  {
+    path: "/score-scout/tournaments/:tournamentId",
+    element: <TournamentViewPage />,
   },
 ]);
 

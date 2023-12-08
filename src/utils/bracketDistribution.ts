@@ -1,6 +1,5 @@
-import { store } from "../redux";
-import { getMatchById } from "../redux/selectors/bracketSelectors";
 import type { Bracket, Match, MatchWithPositions, Player, Stage } from "../types/bracketTypes";
+import { TournamentStageType } from "../types/tournamentTypes";
 
 const isPowerOfTwo = (x: number): boolean => {
   while (x > 1) {
@@ -129,13 +128,14 @@ export function initializeBracket(players: Player[]): Bracket {
     }
   }
 
-  const bracket: Bracket = { players, stages, matches };
+  const bracket: Bracket = { players, stages, matches, type: TournamentStageType.Bracket };
   return bracket;
 }
 
 export function constructPositionedMatchesBasic(
   matchIds: number[],
   stageNumber: number,
+  matches: Match[],
 ): MatchWithPositions[] {
   const cellHeight = 2 ** stageNumber;
   const startingPosition = 1 + cellHeight / 2;
@@ -150,7 +150,7 @@ export function constructPositionedMatchesBasic(
     })
     // Remove matches from the first stage that do not have the first match
     .filter((positionedMatch) => {
-      const match: Match = getMatchById(store.getState(), positionedMatch.matchId);
+      const match: Match = matches[positionedMatch.matchId];
       return (
         (match.firstPlayer !== undefined && match.secondPlayer !== undefined) || stageNumber !== 1
       );

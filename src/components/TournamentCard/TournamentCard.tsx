@@ -26,7 +26,8 @@ const TournamentCard = ({ tournament }: TournamentCardProps): React.JSX.Element 
             <FaUserGroup />
           </Icon>
           <Text>
-            <BoldText>{tournament.n_participants}</BoldText> participants
+            <BoldText>{tournament.amountPlayers}</BoldText> Participant
+            {tournament.amountPlayers > 1 ? "s" : ""}
           </Text>
         </ParticipantInfo>
         <ParticipantInfo>
@@ -34,7 +35,8 @@ const TournamentCard = ({ tournament }: TournamentCardProps): React.JSX.Element 
             <FaBolt />
           </Icon>
           <Text>
-            <BoldText>{tournament.n_games}</BoldText> games played
+            <BoldText>{tournament.amountGamesPlayed}</BoldText> Game
+            {tournament.amountGamesPlayed > 1 ? "s" : ""} Played
           </Text>
         </ParticipantInfo>
 
