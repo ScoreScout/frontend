@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { globalBoldFontStyles, globalRegularFontStyles, globalSemiBoldFontStyles } from "../../theme/FontStyles";
+import {
+  globalBoldFontStyles,
+  globalRegularFontStyles,
+  globalSemiBoldFontStyles,
+} from "../../theme/FontStyles";
 
 interface TournamentTabProps {
   $active: boolean;
