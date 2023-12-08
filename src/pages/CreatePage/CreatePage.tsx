@@ -13,6 +13,7 @@ import ChooseRating from "./TabsContents/ChooseRating/ChooseRating";
 import FirstStage from "./TabsContents/FirstStage/FirstStage";
 import NumStages from "./TabsContents/NumStages/NumStages";
 import SecondStage from "./TabsContents/SecondStage/SecondStage";
+import TournamentTitle from "./TabsContents/TournamentTitle/TournamentTitle";
 
 import { type Player } from "../../types/bracketTypes";
 import { CreatePageTabs as Tabs, CompetitionOptions } from "../../types/createPageTabTypes";
@@ -40,7 +41,9 @@ import {
 import { FaUserCircle } from "react-icons/fa";
 
 const CreatePage = (): React.JSX.Element => {
-  const [activeTab, setActiveTab] = useState<string>(Tabs.CHOOSE_RATING);
+  const [tournamentTitle, setTournamentTitle] = useState<string>("" as string);
+
+  const [activeTab, setActiveTab] = useState<string>(Tabs.TOURNAMENT_TITLE);
 
   const [ratingToggleOn, setRatingToggleOn] = useState<boolean>(false);
   const [players, setPlayers] = useState<Player[]>([]);
@@ -84,6 +87,13 @@ const CreatePage = (): React.JSX.Element => {
         );
       case Tabs.SECOND_STAGE:
         return <SecondStage />;
+      case Tabs.TOURNAMENT_TITLE:
+        return (
+          <TournamentTitle
+            tournamentTitle={tournamentTitle}
+            setTournamentTitle={setTournamentTitle}
+          />
+        );
       default:
         return null;
     }
@@ -91,6 +101,9 @@ const CreatePage = (): React.JSX.Element => {
 
   const handleNext = (): void => {
     switch (activeTab) {
+      case Tabs.TOURNAMENT_TITLE:
+        setActiveTab(Tabs.CHOOSE_RATING);
+        break;
       case Tabs.CHOOSE_RATING:
         setActiveTab(Tabs.ADD_PLAYERS);
         break;
@@ -110,6 +123,9 @@ const CreatePage = (): React.JSX.Element => {
 
   const handleBack = (): void => {
     switch (activeTab) {
+      case Tabs.CHOOSE_RATING:
+        setActiveTab(Tabs.TOURNAMENT_TITLE);
+        break;
       case Tabs.ADD_PLAYERS:
         setActiveTab(Tabs.CHOOSE_RATING);
         break;
@@ -154,41 +170,49 @@ const CreatePage = (): React.JSX.Element => {
           <CreateTitle>Create a tournament</CreateTitle>
           <SidebarSlider>
             <SliderTab
-              $active={activeTab === "chooseRating"}
+              $active={activeTab === Tabs.TOURNAMENT_TITLE}
               onClick={() => {
-                setActiveTab("chooseRating");
+                setActiveTab(Tabs.TOURNAMENT_TITLE);
+              }}
+            >
+              Tournament title
+            </SliderTab>
+            <SliderTab
+              $active={activeTab === Tabs.CHOOSE_RATING}
+              onClick={() => {
+                setActiveTab(Tabs.CHOOSE_RATING);
               }}
             >
               Choose rating
             </SliderTab>
             <SliderTab
-              $active={activeTab === "addPlayers"}
+              $active={activeTab === Tabs.ADD_PLAYERS}
               onClick={() => {
-                setActiveTab("addPlayers");
+                setActiveTab(Tabs.ADD_PLAYERS);
               }}
             >
               Add players
             </SliderTab>
             <SliderTab
-              $active={activeTab === "numStages"}
+              $active={activeTab === Tabs.NUM_STAGES}
               onClick={() => {
-                setActiveTab("numStages");
+                setActiveTab(Tabs.NUM_STAGES);
               }}
             >
               Number of stages
             </SliderTab>
             <SliderTab
-              $active={activeTab === "firstStage"}
+              $active={activeTab === Tabs.FIRST_STAGE}
               onClick={() => {
-                setActiveTab("firstStage");
+                setActiveTab(Tabs.FIRST_STAGE);
               }}
             >
               First stage
             </SliderTab>
             <SliderTab
-              $active={activeTab === "secondStage"}
+              $active={activeTab === Tabs.SECOND_STAGE}
               onClick={() => {
-                setActiveTab("secondStage");
+                setActiveTab(Tabs.SECOND_STAGE);
               }}
             >
               Second stage
@@ -207,7 +231,7 @@ const CreatePage = (): React.JSX.Element => {
         {renderTabContent()}
 
         <ButtonsContainer>
-          {activeTab !== "chooseRating" ? (
+          {activeTab !== Tabs.TOURNAMENT_TITLE ? (
             <Button primary={false} size={ButtonSize.S} onClick={handleBack}>
               <ButtonText>
                 <ArrowLeftIcon size={"24"} color='#D22D19' />
@@ -217,7 +241,7 @@ const CreatePage = (): React.JSX.Element => {
           ) : (
             <div></div>
           )}
-          {activeTab !== "secondStage" ? (
+          {activeTab !== Tabs.SECOND_STAGE ? (
             <Button primary={true} size={ButtonSize.S} onClick={handleNext}>
               <ButtonText>
                 Next <ArrowRightIcon size={"24"} color='#FFFFFF' />
