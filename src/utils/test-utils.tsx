@@ -7,6 +7,7 @@ import type { RootState } from "../redux";
 import userReducer from "../redux/slices/user/userSlice";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../theme/Theme";
+import { ToastContainer, toast } from "react-toastify";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
   preloadedState?: Partial<RootState>;
@@ -24,6 +25,7 @@ export function renderWithProviders(
   function Wrapper({ children }: any): JSX.Element {
     return (
       <Provider store={store}>
+        <ToastContainer autoClose={2000} position={toast.POSITION.BOTTOM_RIGHT} />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </Provider>
     );
