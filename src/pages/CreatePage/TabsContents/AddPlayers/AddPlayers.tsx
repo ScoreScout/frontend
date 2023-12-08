@@ -48,7 +48,7 @@ const AddPlayers: FC<AddPlayersProps> = ({
 
     const newRating = parseInt(rating, 10);
 
-    if (!isNaN(newRating) || !ratingToggleOn) {
+    if (!isNaN(newRating) && ratingToggleOn) {
       newPlayer.rating = newRating;
     }
 
@@ -65,11 +65,21 @@ const AddPlayers: FC<AddPlayersProps> = ({
 
   const handleFileUpload = (data: any, fileInfo: any): void => {
     // Assuming your CSV file has a header row with "name" and "rating" columns
-    const csvPlayers = data.slice(1).map((row: any, index: number) => ({
-      id: players.length + index,
-      name: row[0],
-      rating: ratingToggleOn ? parseInt(row[1], 10) : undefined,
-    }));
+    const csvPlayers = data.slice(1).map((row: string[], index: number) => {
+      const newPlayer: Player = {
+        id: players.length + index,
+        name: row[0],
+      };
+      const rating: string = row[1];
+
+      const newRating = parseInt(rating, 10);
+
+      if (!isNaN(newRating) && ratingToggleOn) {
+        newPlayer.rating = newRating;
+      }
+
+      return newPlayer;
+    });
 
     setPlayers([...players, ...csvPlayers]);
   };
