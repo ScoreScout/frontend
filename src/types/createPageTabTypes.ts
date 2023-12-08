@@ -1,3 +1,5 @@
+import type { Player } from "./bracketTypes";
+
 export enum CreatePageTabs {
   CHOOSE_RATING = "chooseRating",
   ADD_PLAYERS = "addPlayers",
@@ -15,8 +17,8 @@ export enum CompetitionOptions {
 
 export interface AddPlayersProps {
   ratingToggleOn: boolean;
-  players: any[];
-  setPlayers: React.Dispatch<React.SetStateAction<any[]>>;
+  players: Player[];
+  setPlayers: React.Dispatch<React.SetStateAction<Player[]>>;
 }
 
 export interface NumStagesProps {
@@ -25,7 +27,7 @@ export interface NumStagesProps {
 }
 
 export interface StageProps {
-  players: any[];
+  players: Player[];
   optionChosen: CompetitionOptions;
   handleOptionClick: (option: CompetitionOptions) => void;
 }

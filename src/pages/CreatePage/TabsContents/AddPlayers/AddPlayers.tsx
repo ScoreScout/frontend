@@ -20,6 +20,7 @@ import {
   CsvText,
   AddPlayersForm,
 } from "./style";
+import type { Player } from "../../../../types/bracketTypes";
 
 const AddPlayers: FC<AddPlayersProps> = ({
   ratingToggleOn,
@@ -40,11 +41,17 @@ const AddPlayers: FC<AddPlayersProps> = ({
       return;
     }
 
-    const newPlayer = {
+    const newPlayer : Player = {
       id: players.length,
       name,
-      rating: ratingToggleOn ? parseInt(rating, 10) : undefined,
     };
+
+    const newRating = parseInt(rating, 10)
+
+    if (!isNaN(newRating) || !ratingToggleOn) {
+      newPlayer.rating = newRating
+    }
+
 
     setPlayers([...players, newPlayer]);
 
