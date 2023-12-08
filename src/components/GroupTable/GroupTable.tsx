@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import type { GroupTableProps } from "../../types/groupTableTypes";
 import { TableContainer, HeadRow, Cell } from "./style";
 import PlayerRow from "./PlayerRow";
@@ -6,6 +6,15 @@ import PlayerRow from "./PlayerRow";
 const GroupTable = ({ PlayerNames } : GroupTableProps) => {
 
 const numOfPlayers = PlayerNames.length;
+
+const [scores, setScores] = useState({});
+
+const handleScoreChange = (id, value) => {
+  setScores((prevScores) => ({
+    ...prevScores,
+    [id]: value,
+  }));
+};
 
 return (
     <TableContainer numPlayers = {numOfPlayers}>
@@ -18,7 +27,12 @@ return (
         <Cell rowIndex={0} cellIndex={numOfPlayers - 1}>Place</Cell>
       </HeadRow>
       {PlayerNames.map((player, index) => (
-        <PlayerRow key={index} player={player} numOfPlayers={numOfPlayers} rowIndex={index + 1}/>
+        <PlayerRow key={index}
+          player={player} 
+          numOfPlayers={numOfPlayers} 
+          rowIndex={index + 1}
+          onScoreChange = {handleScoreChange}
+        />
       ))}
     </TableContainer>
   );

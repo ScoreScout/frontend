@@ -59,10 +59,19 @@ export const Cell = styled.div<cellProps>`
     color: #000000;
     font-size: 0.9rem;
     font-family: sans-serif;
-    padding: 8px;
+    padding: 5px;
     border: #d3d3d3 1px solid;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${(props) => (props.rowIndex === props.cellIndex && props.rowIndex !== 0 ? '#d5d3d3' : '#ffffff')}; 
+    background-color: ${(props) => (props.rowIndex === props.cellIndex && props.rowIndex !== 0 ? '#d5d3d3' : '#ffffff')};
+    .cellInput {
+        height: 100%;
+        width: 100%;
+        font-size: 1rem;
+        border: none;
+    }
+`;
+
+export const StyledInputCell = styled.input `    
 `;

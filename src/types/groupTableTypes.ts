@@ -11,4 +11,5 @@ export interface PlayerRowProps {
   player: Player;
   numOfPlayers: number;
   rowIndex: number
+  onScoreChange: (id: string, value: string) => void;
 }
