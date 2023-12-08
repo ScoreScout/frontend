@@ -1,5 +1,6 @@
-name: Linting
+name: Linting & testing
 on:
+  push:
   pull_request:
     types: [opened, synchronize, reopened]
 permissions:
@@ -23,3 +24,5 @@ jobs:
         run: npm run lint
       - name: Checking formatting
         run: npm run check-format
+      - name: Running tests
+        run: npm run test

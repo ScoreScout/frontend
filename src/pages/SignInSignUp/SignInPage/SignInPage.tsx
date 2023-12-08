@@ -51,7 +51,7 @@ const SignInPage = (): JSX.Element => {
         }
       })
       .catch((e) => {
-        toast.error("Unknow error occured");
+        toast.error("Unknown error occured");
       });
   };
 
@@ -61,7 +61,13 @@ const SignInPage = (): JSX.Element => {
         <EntryBlock onSubmit={onSubmit}>
           <TextWrapper>Sign in</TextWrapper>
           <InputsContainer>
-            <Input placeholder='E-mail' type='email' name='email' onChange={onChange} />
+            <Input
+              placeholder='E-mail'
+              type='email'
+              name='email'
+              onChange={onChange}
+              data-testid='email'
+            />
             <Input placeholder='Password' type='password' name='password' onChange={onChange} />
           </InputsContainer>
           <ButtonContainer>

@@ -10,11 +10,13 @@
     "target": "es6",
     "jsx": "react",
     "typeRoots": ["node_modules/@types", "src/typings", "src/types"],
-    "types": ["webpack-env", "node"],
+    "types": ["webpack-env", "node", "jest"],
     "resolveJsonModule": true,
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["**/*.ts", "**/*.tsx", "stubs/api/index.js"],
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.test.tsx", "node_modules/@types/jest"]
+  "exclude": ["node_modules", "node_modules/@types/jest"]
 }

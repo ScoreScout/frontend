@@ -21,6 +21,7 @@ import { getUser } from "../../../redux/selectors/userSelection";
 import { setUserCredintials, signUp } from "../../../redux/slices/user/userSlice";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { LoadType } from "../../../types/userTypes";
 
 const SignUpPage = (): JSX.Element => {
   const user = useSelector(getUser);
@@ -72,9 +73,13 @@ const SignUpPage = (): JSX.Element => {
             />
           </InputsContainer>
           <ButtonContainer>
-            <Button primary={true} size={ButtonSize.S} disabled={user.signupState === "pending"}>
+            <Button
+              primary={true}
+              size={ButtonSize.S}
+              disabled={user.signupState === LoadType.pending}
+            >
               <ButtonText>
-                Create account <AddCircleIcon size={24} color='#FFFFFF' />{" "}
+                Create account <AddCircleIcon size='24px' color='#FFFFFF' />{" "}
               </ButtonText>
             </Button>
           </ButtonContainer>
