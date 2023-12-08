@@ -36,7 +36,7 @@ const Table: React.FC<TableProps> = ({
               <TablePlayerName>{player.name}</TablePlayerName>
             </div>
             <TableRating>
-              {ratingToggleOn ? (player.rating !== undefined ? `${player.rating}` : "None") : " "}
+              {ratingToggleOn ? (player.rating !== undefined ? `${player.rating}` : "-") : " "}
             </TableRating>
           </TableRow>
         ))}

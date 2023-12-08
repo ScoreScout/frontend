@@ -31,7 +31,7 @@ const FirstStage = ({
 }: StageProps): React.JSX.Element => {
   const sortedPlayers: Player[] = [...players]
     .sort((a, b) => {
-      return b.rating || 0 - a.rating || 0;
+      return (b.rating ?? 0) - (a.rating ?? 0);
     })
     .map((player, index) => ({ ...player, id: index + 1 }));
 
