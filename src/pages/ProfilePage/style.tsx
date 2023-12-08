@@ -4,6 +4,7 @@ import {
   globalRegularFontStyles,
   globalSemiBoldFontStyles,
 } from "../../theme/FontStyles";
+import { Link } from "react-router-dom";
 
 interface TournamentTabProps {
   $active: boolean;
@@ -153,6 +154,19 @@ const EmptyBox = styled.div`
   background: none;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    background-color: none;
+  }
+`;
+
 export {
   EmptyBox,
   ProfileContainer,
@@ -166,4 +180,5 @@ export {
   TournamentTab,
   CreateTournamentButton,
   CreateIcon,
+  StyledLink,
 };
