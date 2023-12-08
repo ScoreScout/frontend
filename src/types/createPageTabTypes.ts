@@ -4,6 +4,7 @@ export enum CreatePageTabs {
   NUM_STAGES = "numStages",
   FIRST_STAGE = "firstStage",
   SECOND_STAGE = "secondStage",
+  TOURNAMENT_TITLE = "tournamentTitle",
 }
 
 export enum CompetitionOptions {
