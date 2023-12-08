@@ -6,10 +6,21 @@ const selectTournaments = (state: RootState): TournamentsState => {
   return state.tournaments;
 };
 
-export const getActiveTournaments = createSelector([selectTournaments], (tournamentsState) => {
-  return tournamentsState.activeTournaments;
+export const getActiveTournamentsState = createSelector([selectTournaments], (tournamentsState) => {
+  return {
+    tournaments: tournamentsState.activeTournaments,
+    isLoading: tournamentsState.isLoadingActive,
+    error: tournamentsState.errorActive,
+  };
 });
 
-export const getArchivedTournaments = createSelector([selectTournaments], (tournamentsState) => {
-  return tournamentsState.archivedTournaments;
-});
+export const getArchivedTournamentsState = createSelector(
+  [selectTournaments],
+  (tournamentsState) => {
+    return {
+      tournaments: tournamentsState.archivedTournaments,
+      isLoading: tournamentsState.isLoadingArchived,
+      error: tournamentsState.errorArchived,
+    };
+  },
+);

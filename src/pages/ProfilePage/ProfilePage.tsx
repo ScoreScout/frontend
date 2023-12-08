@@ -12,7 +12,10 @@ import {
   CreateTournamentButton,
   CreateIcon,
   EmptyBox,
+  EmptyTournamentsMessage,
 } from "./style";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { TbLogout2 } from "react-icons/tb";
 import { FaUserCircle } from "react-icons/fa";
@@ -27,8 +30,8 @@ import {
   fetchArchivedTournaments,
 } from "../../redux/slices/tournament/tournamentSlice";
 import {
-  getActiveTournaments,
-  getArchivedTournaments,
+  getActiveTournamentsState,
+  getArchivedTournamentsState,
 } from "../../redux/selectors/tournamentSelectors";
 
 const ProfilePage = (): React.JSX.Element => {
@@ -36,11 +39,8 @@ const ProfilePage = (): React.JSX.Element => {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState("active");
   const user = useAppSelector(getUser);
-  const activeTournaments = useAppSelector(getActiveTournaments);
-  const archivedTournaments = useAppSelector(getArchivedTournaments);
-  const [archivedLoaded, setArchivedLoaded] = useState(false);
-  const [activeLoaded, setActiveLoaded] = useState(false);
-
+  const activeTournamentsState = useAppSelector(getActiveTournamentsState);
+  const archivedTournamentsState = useAppSelector(getArchivedTournamentsState);
   const handleLogout = (): void => {
     removeCookie("access", { path: "/" });
     removeCookie("refresh", { path: "/" });
@@ -48,21 +48,16 @@ const ProfilePage = (): React.JSX.Element => {
   };
 
   const handleActiveTabClick = (): void => {
-    // Only fetch active tournaments if they haven't been loaded yet
-    if (!activeLoaded) {
-      void dispatch(fetchActiveTournaments());
-      setActiveLoaded(true);
-    }
     setActiveTab("active");
+    void dispatch(fetchActiveTournaments());
+    if (activeTournamentsState.error !== null) {
+      toast.error(activeTournamentsState.error);
+    }
   };
 
   const handleArchivedTabClick = (): void => {
-    // Only fetch archived tournaments if they haven't been loaded yet
-    if (!archivedLoaded) {
-      void dispatch(fetchArchivedTournaments());
-      setArchivedLoaded(true);
-    }
     setActiveTab("archived");
+    void dispatch(fetchArchivedTournaments());
   };
 
   useEffect(() => {
@@ -81,8 +76,19 @@ const ProfilePage = (): React.JSX.Element => {
 
     // Dispatch Active tournaments by default
     void dispatch(fetchActiveTournaments());
-    setActiveLoaded(true);
   }, [dispatch]);
+
+  useEffect(() => {
+    if (activeTournamentsState.error !== null) {
+      toast.error(activeTournamentsState.error);
+    }
+  }, [activeTournamentsState.error]);
+
+  useEffect(() => {
+    if (archivedTournamentsState.error !== null) {
+      toast.error(archivedTournamentsState.error);
+    }
+  }, [archivedTournamentsState.error]);
 
   return (
     <>
@@ -126,13 +132,32 @@ const ProfilePage = (): React.JSX.Element => {
 
           <MainContent>
             <EmptyBox />
-            {activeTab === "active"
-              ? activeTournaments.map((tournament, index) => (
-                  <TournamentCard key={index} tournament={tournament}></TournamentCard>
+
+            {/* Active tab is Active Tournaments */}
+            {activeTab === "active" &&
+              (activeTournamentsState.isLoading ? (
+                <LoadingSpinner />
+              ) : activeTournamentsState.error === null &&
+                activeTournamentsState.tournaments.length === 0 ? (
+                <EmptyTournamentsMessage>There are no active tournaments</EmptyTournamentsMessage>
+              ) : (
+                activeTournamentsState.tournaments.map((tournament, index) => (
+                  <TournamentCard key={index} tournament={tournament} />
                 ))
-              : archivedTournaments.map((tournament, index) => (
-                  <TournamentCard key={index} tournament={tournament}></TournamentCard>
-                ))}
+              ))}
+
+            {/* Active tab is Archived Tournaments */}
+            {activeTab === "archived" &&
+              (archivedTournamentsState.isLoading ? (
+                <LoadingSpinner />
+              ) : archivedTournamentsState.error === null &&
+                archivedTournamentsState.tournaments.length === 0 ? (
+                <EmptyTournamentsMessage>There are no archived tournaments</EmptyTournamentsMessage>
+              ) : (
+                archivedTournamentsState.tournaments.map((tournament, index) => (
+                  <TournamentCard key={index} tournament={tournament} />
+                ))
+              ))}
           </MainContent>
           <ProfileLogo>
             <FaUserCircle />

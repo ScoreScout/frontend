@@ -1,4 +1,4 @@
-import { type PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { Tournament } from "../../../types/tournamentCardTypes";
 
 export const fetchActiveTournaments = createAsyncThunk(
@@ -7,11 +7,16 @@ export const fetchActiveTournaments = createAsyncThunk(
     try {
       const response = await fetch("/api/tournaments/active");
       const data = await response.json();
-      if (!response.ok)
-        throw new Error("Network response was not ok while fetching active tournaments");
+      if (!response.ok || data.ok !== true || data.data === undefined) {
+        return rejectWithValue(
+          "An error occured while fetching active tournaments. Please try to refresh the page",
+        );
+      }
       return data.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(
+        "An error occured while fetching active tournaments. Please try to refresh the page",
+      );
     }
   },
 );
@@ -21,12 +26,17 @@ export const fetchArchivedTournaments = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch("/api/tournaments/archived");
-      if (!response.ok)
-        throw new Error("Network response was not ok while fetching archived tournaments");
       const data = await response.json();
+      if (!response.ok || (data.ok !== true) === undefined) {
+        return rejectWithValue(
+          "An error occured while fetching archived tournaments. Please try to refresh the page",
+        );
+      }
       return data.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(
+        "An error occured while fetching archived tournaments. Please try to refresh the page",
+      );
     }
   },
 );
@@ -34,34 +44,53 @@ export const fetchArchivedTournaments = createAsyncThunk(
 export interface TournamentsState {
   activeTournaments: Tournament[];
   archivedTournaments: Tournament[];
+  isLoadingActive: boolean;
+  isLoadingArchived: boolean;
+  // TODO: Change any to a known type
+  errorActive: any;
+  errorArchived: any;
 }
 
 const initialState: TournamentsState = {
   activeTournaments: [],
   archivedTournaments: [],
+  isLoadingActive: false,
+  isLoadingArchived: false,
+  errorActive: null,
+  errorArchived: null,
 };
 
 export const TournamentsSlice = createSlice({
   name: "tournaments",
   initialState,
-  reducers: {
-    addActiveTournament: (state, action: PayloadAction<Tournament>) => {
-      state.activeTournaments.push({
-        title: action.payload.title,
-        date: action.payload.date,
-        amountPlayers: action.payload.amountPlayers,
-        amountGamesPlayed: action.payload.amountGamesPlayed,
-        status: action.payload.status,
-      });
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchActiveTournaments.fulfilled, (state, action) => {
         state.activeTournaments = action.payload;
+        state.isLoadingActive = false;
+        state.errorActive = null;
+      })
+      .addCase(fetchActiveTournaments.pending, (state) => {
+        state.isLoadingActive = true;
+        state.errorActive = null;
+      })
+      .addCase(fetchActiveTournaments.rejected, (state, action) => {
+        state.isLoadingActive = false;
+        state.errorActive = action.payload;
       })
       .addCase(fetchArchivedTournaments.fulfilled, (state, action) => {
         state.archivedTournaments = action.payload;
+        state.isLoadingArchived = false;
+        state.errorArchived = null;
+      })
+      .addCase(fetchArchivedTournaments.pending, (state) => {
+        state.isLoadingArchived = true;
+        state.errorArchived = null;
+      })
+      .addCase(fetchArchivedTournaments.rejected, (state, action) => {
+        state.isLoadingArchived = false;
+        state.errorArchived = action.payload;
       });
   },
 });
