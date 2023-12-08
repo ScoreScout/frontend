@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { PlayerRowProps } from "../../types/groupTableTypes";
 import { RowStyle, Cell } from "./style";
 import ScorePopup from "./ScorePopup";
 
-const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange } : PlayerRowProps) => {
+const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : PlayerRowProps) : React.JSX.Element => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedCell, setSelectedCell] = useState(null);
+  const [rowSum, setRowSum] = useState(0);
+  const [places, setPlaces] = useState('');
 
   const openPopup = (cellIndex) => {
     setSelectedCell(cellIndex);
@@ -17,11 +19,23 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange } : PlayerRow
     setSelectedCell(null);
   };
 
+
   const handlePopupSubmit = (result) => {
     if (selectedCell !== null) {
-      onScoreChange(`${rowIndex}-${selectedCell}`, result);
+      const cellId = `${rowIndex}-${selectedCell}`;
+      onScoreChange(cellId, result);
     }
+    closePopup();
   };
+
+  useEffect(() => {
+    const sum = Array.from({ length: numOfPlayers }, (_, index) => {
+      const cellId = `${rowIndex}-${index + 1}`;
+      return Number(scores[cellId]) || 0;
+    }).reduce((acc, score) => acc + score, 0);
+
+    setRowSum(sum);
+  }, [scores, rowIndex, numOfPlayers]);
 
   return (
     <RowStyle numPlayers = {numOfPlayers}>
@@ -31,11 +45,13 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange } : PlayerRow
           key={index} 
           rowIndex={rowIndex} 
           cellIndex={index + 1} 
-          onClick={() => (index + 1 !== rowIndex && index !== numOfPlayers && index !== numOfPlayers + 1) ? openPopup(index + 1) : null}>
-          {index + 1 === rowIndex || index === numOfPlayers || index === numOfPlayers + 1 ? (
-            <span></span>
+          onClick={() => (index + 1 !== rowIndex && index !== numOfPlayers && index !== numOfPlayers + 1) ? 
+          openPopup(index + 1) : null}
+          >
+          {index + 1 === rowIndex || index === numOfPlayers ? (
+            index === numOfPlayers ? <span className="cellValue">{rowSum}</span> : <></>
           ) : (
-            <span></span>
+            <span className="cellValue">{scores[`${rowIndex}-${index + 1}`] ?? ""}</span>
           )}
         </Cell>
       ))}

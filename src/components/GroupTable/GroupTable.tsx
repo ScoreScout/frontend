@@ -3,13 +3,13 @@ import type { GroupTableProps } from "../../types/groupTableTypes";
 import { TableContainer, HeadRow, Cell } from "./style";
 import PlayerRow from "./PlayerRow";
 
-const GroupTable = ({ PlayerNames } : GroupTableProps) => {
+const GroupTable = ({ PlayerNames } : GroupTableProps) : React.JSX.Element => {
 
 const numOfPlayers = PlayerNames.length;
 
 const [scores, setScores] = useState({});
 
-const handleScoreChange = (id, value) => {
+const onScoreChange = (id, value) => {
   setScores((prevScores) => ({
     ...prevScores,
     [id]: value,
@@ -31,7 +31,8 @@ return (
           player={player} 
           numOfPlayers={numOfPlayers} 
           rowIndex={index + 1}
-          onScoreChange = {handleScoreChange}
+          onScoreChange = {onScoreChange}
+          scores = {scores}
         />
       ))}
     </TableContainer>
