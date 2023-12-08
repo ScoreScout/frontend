@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Button from "../../components/Button/Button";
@@ -16,6 +16,14 @@ import SecondStage from "./TabsContents/SecondStage/SecondStage";
 
 import { type Player } from "../../types/bracketTypes";
 import { CreatePageTabs as Tabs, CompetitionOptions } from "../../types/createPageTabTypes";
+import { type Tournament, TournamentStatus } from "../../types/tournamentCardTypes";
+
+import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useSelector } from "react-redux";
+import {
+  addTournament,
+} from "../../redux/slices/tournament/tournamentSlice";
 
 import {
   CreateContainer,
@@ -50,6 +58,9 @@ const CreatePage = (): React.JSX.Element => {
   const handleTournamentOptionClick = (option: CompetitionOptions): void => {
     setTournamentType(option);
   };
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const renderTabContent = (): React.ReactNode => {
     switch (activeTab) {
@@ -117,8 +128,24 @@ const CreatePage = (): React.JSX.Element => {
   };
 
   const submitTournament = (): void => {
-    alert("Tournament submitted!");
-  }
+    const newTournament: Tournament = {
+      title: "Your Tournament Title",
+      date: new Date().toLocaleDateString(),
+      amountPlayers: players.length,
+      amountGamesPlayed: 0,
+      status: TournamentStatus.InProgress,
+    };
+    console.log(newTournament);
+    if (newTournament.title === "") {
+      toast.error("Please write a title for your tournament");
+    } else if (newTournament.amountPlayers === 0) {
+      toast.error("Please add players to your tournament");
+    } else {
+      dispatch(addTournament(newTournament));
+      toast.success("Tournament created successfully!");
+      navigate("/score-scout/profile");
+    }
+  };
 
   return (
     <CreateContainer>
