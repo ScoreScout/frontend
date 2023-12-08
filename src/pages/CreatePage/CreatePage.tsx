@@ -145,7 +145,7 @@ const CreatePage = (): React.JSX.Element => {
 
   const submitTournament = (): void => {
     const newTournament: Tournament = {
-      title: "Your Tournament Title",
+      title: tournamentTitle,
       date: new Date().toLocaleDateString(),
       amountPlayers: players.length,
       amountGamesPlayed: 0,
