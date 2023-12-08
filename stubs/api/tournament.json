@@ -22,7 +22,7 @@
     { "name": "Santana Custer" },
     { "name": "Shemar Sander" }
   ],
-  "first_stage": {
+  "firstStage": {
     "type": "bracket",
     "players": [
       {

@@ -141,10 +141,14 @@ const ProfilePage = (): React.JSX.Element => {
         <EmptyBox />
         {activeTab === "active"
           ? activeTournaments.map((tournament, index) => (
-              <TournamentCard key={index} tournament={tournament}></TournamentCard>
+              <Link key={index} to={`/score-scout/tournaments/1`}>
+                <TournamentCard tournament={tournament}></TournamentCard>
+              </Link>
             ))
           : archivedTournaments.map((tournament, index) => (
-              <TournamentCard key={index} tournament={tournament}></TournamentCard>
+              <Link key={index} to={`/score-scout/tournaments/2`}>
+                <TournamentCard tournament={tournament}></TournamentCard>
+              </Link>
             ))}
       </MainContent>
       <ProfileLogo $isActive={true}>

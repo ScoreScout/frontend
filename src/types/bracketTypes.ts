@@ -3,6 +3,8 @@ import type { TournamentStageType } from "./tournamentTypes";
 export interface BracketProps {
   customBracket?: Bracket;
   playerNames?: string[];
+  viewOnly?: boolean;
+  onUpdate?: (bracket: Bracket) => void;
 }
 export interface WinnerProps {
   stageNumber: number;
@@ -14,7 +16,7 @@ export interface PlayerSpanProps {
 }
 
 export interface Bracket {
-  type: TournamentStageType.Bracket
+  type: TournamentStageType.Bracket;
   players: Player[];
   stages: Stage[];
   matches: Match[];

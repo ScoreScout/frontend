@@ -1,6 +1,6 @@
 import React from "react";
 import type { RootState } from "../../redux";
-import { getMatchById, getPrevMatches } from "../../redux/selectors/bracketSelectors";
+import { getMatchById, getPrevMatches, getViewOnly } from "../../redux/selectors/bracketSelectors";
 import { startMatch, finishMatch } from "../../redux/slices/bracket/bracketSlice";
 import type { BracketMatchProps } from "../../types/bracketTypes";
 import PlayerSpan from "./PlayerSpan";
@@ -16,6 +16,7 @@ const BracketMatch = ({
   stageNumber,
 }: BracketMatchProps): React.JSX.Element => {
   const match = useAppSelector((state: RootState) => getMatchById(state, matchId));
+  const viewOnly = useAppSelector(getViewOnly);
   const dispatch = useAppDispatch();
 
   const { firstPlayer, secondPlayer } = match;
@@ -62,7 +63,9 @@ const BracketMatch = ({
       >
         {firstPlayer !== undefined && secondPlayer !== undefined && !match.isFinished && (
           <StyledMatchTrigger
+          $viewOnly = {viewOnly}
             onClick={() => {
+              if (viewOnly) return;
               if (!match.isStarted) {
                 dispatch(startMatch(matchId));
               } else {

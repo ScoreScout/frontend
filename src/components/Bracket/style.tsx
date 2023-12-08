@@ -67,6 +67,7 @@ export const StyledScoreSpan = styled.span`
 
 export const StyledMatchTrigger = styled.div<{
   $isStarted: boolean;
+  $viewOnly: boolean;
 }>`
   position: absolute;
   width: 1rem;
@@ -79,5 +80,5 @@ export const StyledMatchTrigger = styled.div<{
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   z-index: 1;
-  cursor: pointer;
+  ${(props) => !props.$viewOnly && "cursor: pointer;"}
 `;

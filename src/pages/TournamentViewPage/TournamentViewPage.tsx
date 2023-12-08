@@ -1,6 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useGetTournamentQuery } from "../../redux/apis/tournament/tournamentApi";
+import { Link, useParams } from "react-router-dom";
+import {
+  useGetTournamentQuery,
+  useUpdateTournamentMutation,
+} from "../../redux/apis/tournament/tournamentApi";
 import Loading from "../../components/Loading/Loading";
 import { ProfileLogo } from "../ProfilePage/style";
 import { FaUserCircle } from "react-icons/fa";
@@ -23,9 +26,13 @@ import { TournamentStatus } from "../../types/tournamentCardTypes";
 import Button from "../../components/Button/Button";
 import { ButtonSize } from "../../types/buttonTypes";
 import Bracket from "../../components/Bracket/Bracket";
+import type { Tournament } from "../../types/tournamentTypes";
+import type { Bracket as BracketType } from "../../types/bracketTypes";
 
 const TournamentViewPage = (): React.JSX.Element => {
   const { tournamentId } = useParams();
+
+  const viewOnly: boolean = false;
 
   const {
     data: tournament,
@@ -35,7 +42,21 @@ const TournamentViewPage = (): React.JSX.Element => {
     isError,
     isFetching,
     refetch,
-  } = useGetTournamentQuery({ tournamentId: Number(tournamentId) }, { pollingInterval: 0 });
+  } = useGetTournamentQuery(
+    { tournamentId: Number(tournamentId) },
+    // { pollingInterval: viewOnly ? 5000 : 0 },
+  );
+
+  const [updateTournament, { isLoading: isMutating }] = useUpdateTournamentMutation();
+
+  const handleUpdate = (bracket: BracketType): void => {
+    if (tournament !== undefined) {
+      const data: Tournament = { ...tournament, firstStage: bracket };
+      updateTournament(data).catch((err) => {
+        console.error(err);
+      });
+    }
+  };
 
   if (isFetching || isUninitialized || tournamentId === undefined) {
     return <Loading />;
@@ -49,9 +70,11 @@ const TournamentViewPage = (): React.JSX.Element => {
     return (
       <>
         <StyledHeader>
-          <ProfileLogo $isActive={false}>
-            <FaUserCircle />
-          </ProfileLogo>
+          <Link to={`/score-scout/profile`}>
+            <ProfileLogo $isActive={false}>
+              <FaUserCircle />
+            </ProfileLogo>
+          </Link>
         </StyledHeader>
         <StyledTournamentInfo>
           <StyledTitleDateContainer>
@@ -75,9 +98,11 @@ const TournamentViewPage = (): React.JSX.Element => {
               </StyledTournamentMeta>
             </StyledTournamentMetaContainer>
             <StyledFinishButtonContainer>
-              <Button primary={true} size={ButtonSize.S}>
-                Finish Tournament
-              </Button>
+              {!viewOnly && (
+                <Button primary={true} size={ButtonSize.S}>
+                  Finish Tournament
+                </Button>
+              )}
             </StyledFinishButtonContainer>
           </StyledInfoLowerContainer>
         </StyledTournamentInfo>
@@ -85,8 +110,23 @@ const TournamentViewPage = (): React.JSX.Element => {
           <StyledStageTitle>First Stage</StyledStageTitle>
 
           <StyledBracketContainer>
-            <Bracket playerNames={tournament.players.map((player) => player.name)}></Bracket>
-            {/* <Bracket customBracket={tournament.firstStage}></Bracket> */}
+            {tournament.firstStage.matches.length === 0 ? (
+              <Bracket
+                playerNames={tournament.players.map((player) => player.name)}
+                viewOnly={viewOnly}
+                onUpdate={(bracket: BracketType) => {
+                  handleUpdate(bracket);
+                }}
+              />
+            ) : (
+              <Bracket
+                customBracket={tournament.firstStage}
+                viewOnly={viewOnly}
+                onUpdate={(bracket: BracketType) => {
+                  handleUpdate(bracket);
+                }}
+              />
+            )}
           </StyledBracketContainer>
         </StyledMainContainer>
       </>
