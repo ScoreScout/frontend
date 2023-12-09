@@ -73,7 +73,6 @@ const FirstStage = ({
             <ChooseCompetitionConfigWrapper>
               <ChooseTitle>How many groups do you want?</ChooseTitle>
               <TableChooseNumber type='text' />
-              <GroupTable PlayerNames={sortedPlayers.map((player) => player.name)}/>
             </ChooseCompetitionConfigWrapper>
           ) : optionChosen === CompetitionOptions.BRACKET ? (
             <>

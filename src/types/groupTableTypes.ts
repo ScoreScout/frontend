@@ -3,14 +3,14 @@ export interface GroupTableProps {
 }
 
 export interface score {
-  id?:string
+  id?: string;
 }
 
 export interface PlayerRowProps {
   player: string;
   numOfPlayers: number;
-  rowIndex: number
-  scores: score
+  rowIndex: number;
+  scores: score;
   onScoreChange: (id: string, value: string) => void;
 }
 

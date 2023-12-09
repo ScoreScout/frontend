@@ -3,11 +3,17 @@ import type { PlayerRowProps } from "../../types/groupTableTypes";
 import { RowStyle, Cell } from "./style";
 import ScorePopup from "./ScorePopup";
 
-const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : PlayerRowProps) : React.JSX.Element => {
+const PlayerRow = ({
+  player,
+  numOfPlayers,
+  rowIndex,
+  onScoreChange,
+  scores,
+}: PlayerRowProps): React.JSX.Element => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedCell, setSelectedCell] = useState<number | null>(null);
   const [rowSum, setRowSum] = useState(0);
- 
+
   const openPopup = (cellIndex): void => {
     // console.log(`Clicked on cell: (${rowIndex},${cellIndex})`);
     setSelectedCell(cellIndex);
@@ -19,10 +25,9 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
     setSelectedCell(null);
   };
 
-
   const handlePopupSubmit = (result): void => {
     if (selectedCell !== null) {
-      const cellId : string = `${rowIndex}-${selectedCell}`;
+      const cellId: string = `${rowIndex}-${selectedCell}`;
       onScoreChange(cellId, result);
     }
     closePopup();
@@ -38,30 +43,32 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   }, [scores, rowIndex, numOfPlayers]);
 
   return (
-    <RowStyle numPlayers = {numOfPlayers}>
+    <RowStyle numPlayers={numOfPlayers}>
       <Cell rowIndex={rowIndex} cellIndex={0} numPlayers={numOfPlayers}>{`${player}`}</Cell>
       {[...Array(numOfPlayers + 1)].map((_, index) => (
-        <Cell 
-          key={index} 
-          rowIndex={rowIndex} 
-          cellIndex={index + 1} 
+        <Cell
+          key={index}
+          rowIndex={rowIndex}
+          cellIndex={index + 1}
           numPlayers={numOfPlayers}
           onClick={() => {
             if (index + 1 !== rowIndex && index !== numOfPlayers && index !== numOfPlayers + 1) {
               openPopup(index + 1);
             }
           }}
-          >
+        >
           {index + 1 === rowIndex || index === numOfPlayers ? (
-            index === numOfPlayers? <span className="cellValue">{rowSum}</span> : <></>
+            index === numOfPlayers ? (
+              <span className='cellValue'>{rowSum}</span>
+            ) : (
+              <></>
+            )
           ) : (
-            <span className="cellValue">{scores[`${rowIndex}-${index + 1}`] ?? ""}</span>
+            <span className='cellValue'>{scores[`${rowIndex}-${index + 1}`] ?? ""}</span>
           )}
         </Cell>
       ))}
-      {popupOpen && (
-        <ScorePopup onClose={closePopup} onSubmit={handlePopupSubmit} />
-      )}
+      {popupOpen && <ScorePopup onClose={closePopup} onSubmit={handlePopupSubmit} />}
     </RowStyle>
   );
 };
