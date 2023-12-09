@@ -14,8 +14,8 @@ const ChooseRating = ({
 }): React.JSX.Element => {
   return (
     <ChooseRatingWrapper>
-      <ChooseRatingContainer>
-        <StyledToggle onClick={handleToggle}>
+      <ChooseRatingContainer data-testid='use-rating-system-title'>
+        <StyledToggle onClick={handleToggle} data-testid='rating-system-toggle'>
           {toggleOn ? <FaToggleOn /> : <FaToggleOff />}
         </StyledToggle>
         Use rating system

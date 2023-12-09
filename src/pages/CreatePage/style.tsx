@@ -53,10 +53,6 @@ const SliderTab = styled.button<SliderTabProps>`
 
   color: ${(props) =>
     props.$active ? props.theme.color.mainColor : props.theme.color.notActiveColor};
-
-  /* &:first-child {
-    margin-bottom: 1rem;
-  } */
 `;
 
 const MainContentContainer = styled.div``;
