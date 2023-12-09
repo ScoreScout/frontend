@@ -1,15 +1,15 @@
-// Popup.jsx
 import React, { useState } from 'react';
 import {StyledPopup, StyledScoreInput} from './style';
+import type {ScorePopupProps} from "../../types/groupTableTypes"; 
 
-const ScorePopup = ({ onClose, onSubmit }) : React.JSX.Element => {
+const ScorePopup = ({ onClose, onSubmit } : ScorePopupProps) : React.JSX.Element => {
     const [result, setResult] = useState('');
   
-    const handleSubmit = () => {
+    const handleSubmit = (): void => {
       onSubmit(result);
     };
   
-    const handleClose = () => {
+    const handleClose = (): void => {
       onClose();
     };
 

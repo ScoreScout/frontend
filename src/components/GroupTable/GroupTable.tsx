@@ -9,7 +9,7 @@ const numOfPlayers = PlayerNames.length;
 
 const [scores, setScores] = useState({});
 
-const onScoreChange = (id, value) => {
+const onScoreChange = (id, value): void => {
   setScores((prevScores) => ({
     ...prevScores,
     [id]: value,

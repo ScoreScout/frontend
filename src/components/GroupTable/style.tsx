@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { globalBoldFontStyles, globalSemiBoldFontStyles, globalRegularFontStyles} from "../../theme/FontStyles";
+import { globalBoldFontStyles, globalSemiBoldFontStyles} from "../../theme/FontStyles";
 import type {cellProps, styleProps} from "../../types/groupTableTypes";
 
 export const TableContainer = styled.div<styleProps>`

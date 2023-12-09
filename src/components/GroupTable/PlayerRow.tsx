@@ -7,24 +7,22 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedCell, setSelectedCell] = useState(null);
   const [rowSum, setRowSum] = useState(0);
-  const [places, setPlaces] = useState('');
-  console.log(numOfPlayers);
-  const openPopup = (cellIndex) => {
+ 
+  const openPopup = (cellIndex): void => {
     // console.log(`Clicked on cell: (${rowIndex},${cellIndex})`);
     setSelectedCell(cellIndex);
     setPopupOpen(true);
   };
 
-  const closePopup = () => {
+  const closePopup = (): void => {
     setPopupOpen(false);
     setSelectedCell(null);
   };
 
 
-  const handlePopupSubmit = (result) => {
+  const handlePopupSubmit = (result): void => {
     if (selectedCell !== null) {
-      const cellId = `${rowIndex}-${selectedCell}`;
-      // console.log(`${cellId}`);
+      const cellId : string = `${rowIndex}-${selectedCell}`;
       onScoreChange(cellId, result);
     }
     closePopup();
@@ -33,7 +31,7 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   useEffect(() => {
     const sum = Array.from({ length: numOfPlayers }, (_, index) => {
       const cellId = `${rowIndex}-${index + 1}`;
-      return Number(scores[cellId]) || 0;
+      return isNaN(Number(scores[cellId])) ? 0 : Number(scores[cellId]);
     }).reduce((acc, score) => acc + score, 0);
 
     setRowSum(sum);
@@ -48,8 +46,11 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
           rowIndex={rowIndex} 
           cellIndex={index + 1} 
           numPlayers={numOfPlayers}
-          onClick={() => (index + 1 !== rowIndex && index !== numOfPlayers && index !== numOfPlayers + 1) ? 
-          openPopup(index + 1) : null}
+          onClick={() => {
+            if (index + 1 !== rowIndex && index !== numOfPlayers && index !== numOfPlayers + 1) {
+              openPopup(index + 1);
+            }
+          }}
           >
           {index + 1 === rowIndex || index === numOfPlayers ? (
             index === numOfPlayers? <span className="cellValue">{rowSum}</span> : <></>

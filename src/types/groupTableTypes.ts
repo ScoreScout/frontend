@@ -23,3 +23,8 @@ export interface cellProps {
   cellIndex: number;
   numPlayers: number;
 }
+
+export interface ScorePopupProps {
+  onClose: () => void;
+  onSubmit: (result: string) => void;
+}
