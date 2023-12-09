@@ -77,6 +77,4 @@ test("Third tab", async () => {
   expect(screen.getByTestId("add-players-title")).not.toBeNull();
   expect(screen.getByTestId("add-players-name-input")).not.toBeNull();
   expect(screen.getByTestId("add-players-button")).not.toBeNull();
-
-  user-event.
 });
