@@ -4,6 +4,7 @@ import { type StageProps } from "../../../../types/createPageTabTypes";
 import { ButtonSize } from "../../../../types/buttonTypes";
 import Button from "../../../../components/Button/Button";
 import Bracket from "../../../../components/Bracket/Bracket";
+import GroupTable from "../../../../components/GroupTable/GroupTable";
 
 import {
   FirstStageWrapper,
