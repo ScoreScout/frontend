@@ -90,5 +90,4 @@ test("Fourth tab", async () => {
   await renderWithProviders(<RouterProvider router={router} />);
   fireEvent.click(screen.getByTestId("num-stages-tab"));
   expect(screen.getByTestId("number-of-stages-title")).not.toBeNull();
-
 });
