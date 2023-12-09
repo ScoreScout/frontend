@@ -3,7 +3,7 @@ import CSVReader from "react-csv-reader";
 
 import Button from "../../../../components/Button/Button";
 import { ButtonSize } from "../../../../types/buttonTypes";
-import { type AddPlayersProps } from "../../../../types/playerTypes";
+import { type AddPlayersProps } from "../../../../types/createPageTabTypes";
 
 import { FaCirclePlus, FaUpload } from "react-icons/fa6";
 
@@ -20,6 +20,7 @@ import {
   CsvText,
   AddPlayersForm,
 } from "./style";
+import type { Player } from "../../../../types/bracketTypes";
 
 const AddPlayers: FC<AddPlayersProps> = ({
   ratingToggleOn,
@@ -40,10 +41,16 @@ const AddPlayers: FC<AddPlayersProps> = ({
       return;
     }
 
-    const newPlayer = {
+    const newPlayer: Player = {
+      id: players.length,
       name,
-      rating: ratingToggleOn ? parseInt(rating, 10) : undefined,
     };
+
+    const newRating = parseInt(rating, 10);
+
+    if (!isNaN(newRating) && ratingToggleOn) {
+      newPlayer.rating = newRating;
+    }
 
     setPlayers([...players, newPlayer]);
 
@@ -58,10 +65,21 @@ const AddPlayers: FC<AddPlayersProps> = ({
 
   const handleFileUpload = (data: any, fileInfo: any): void => {
     // Assuming your CSV file has a header row with "name" and "rating" columns
-    const csvPlayers = data.slice(1).map((row: any) => ({
-      name: row[0],
-      rating: ratingToggleOn ? parseInt(row[1], 10) : undefined,
-    }));
+    const csvPlayers = data.slice(1).map((row: string[], index: number) => {
+      const newPlayer: Player = {
+        id: players.length + index,
+        name: row[0],
+      };
+      const rating: string = row[1];
+
+      const newRating = parseInt(rating, 10);
+
+      if (!isNaN(newRating) && ratingToggleOn) {
+        newPlayer.rating = newRating;
+      }
+
+      return newPlayer;
+    });
 
     setPlayers([...players, ...csvPlayers]);
   };
@@ -69,9 +87,10 @@ const AddPlayers: FC<AddPlayersProps> = ({
   return (
     <AddPlayersWrapper>
       <AddPlayersContainer>
-        <AddPLayersTitle>Add Players</AddPLayersTitle>
+        <AddPLayersTitle data-testid='add-players-title'>Add Players</AddPLayersTitle>
         <AddPlayersForm onSubmit={handleSubmit}>
           <AddPlayersInput
+            data-testid='add-players-name-input'
             placeholder="Player's name"
             value={name}
             onChange={(e) => {
@@ -80,6 +99,7 @@ const AddPlayers: FC<AddPlayersProps> = ({
           />
           {ratingToggleOn && (
             <AddPlayersInput
+              data-testid='add-players-rating-input'
               placeholder='Rating (Optional)'
               value={rating}
               onChange={(e) => {
@@ -87,7 +107,7 @@ const AddPlayers: FC<AddPlayersProps> = ({
               }}
             />
           )}
-          <ButtonContainer>
+          <ButtonContainer data-testid='add-players-button'>
             <Button primary={true} size={ButtonSize.S} type='submit'>
               <ButtonText>
                 Add <FaCirclePlus />{" "}

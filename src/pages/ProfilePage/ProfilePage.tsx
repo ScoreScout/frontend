@@ -13,6 +13,7 @@ import {
   CreateIcon,
   EmptyBox,
   EmptyTournamentsMessage,
+  StyledLink,
 } from "./style";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
@@ -33,6 +34,7 @@ import {
   getActiveTournamentsState,
   getArchivedTournamentsState,
 } from "../../redux/selectors/tournamentSelectors";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = (): React.JSX.Element => {
   const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
@@ -41,10 +43,16 @@ const ProfilePage = (): React.JSX.Element => {
   const user = useAppSelector(getUser);
   const activeTournamentsState = useAppSelector(getActiveTournamentsState);
   const archivedTournamentsState = useAppSelector(getArchivedTournamentsState);
+  const navigate = useNavigate();
+
   const handleLogout = (): void => {
     removeCookie("access", { path: "/" });
     removeCookie("refresh", { path: "/" });
     dispatch(logout());
+  };
+
+  const handleCreateTournament = (): void => {
+    navigate("/score-scout/create");
   };
 
   const handleActiveTabClick = (): void => {
@@ -122,7 +130,7 @@ const ProfilePage = (): React.JSX.Element => {
                 Archived Tournaments
               </TournamentTab>
             </TournamentSlider>
-            <CreateTournamentButton>
+            <CreateTournamentButton onClick={handleCreateTournament}>
               Create Tournament
               <CreateIcon>
                 <MdAdd />
@@ -142,7 +150,9 @@ const ProfilePage = (): React.JSX.Element => {
                 <EmptyTournamentsMessage>There are no active tournaments</EmptyTournamentsMessage>
               ) : (
                 activeTournamentsState.tournaments.map((tournament, index) => (
-                  <TournamentCard key={index} tournament={tournament} />
+                  <StyledLink key={index} to={"/score-scout/tournaments/2"}>
+                    <TournamentCard tournament={tournament} />
+                  </StyledLink>
                 ))
               ))}
 
@@ -155,11 +165,13 @@ const ProfilePage = (): React.JSX.Element => {
                 <EmptyTournamentsMessage>There are no archived tournaments</EmptyTournamentsMessage>
               ) : (
                 archivedTournamentsState.tournaments.map((tournament, index) => (
-                  <TournamentCard key={index} tournament={tournament} />
+                  <StyledLink key={index} to={"/score-scout/tournaments/1"}>
+                    <TournamentCard key={index} tournament={tournament} />
+                  </StyledLink>
                 ))
               ))}
           </MainContent>
-          <ProfileLogo>
+          <ProfileLogo $isActive={false}>
             <FaUserCircle />
           </ProfileLogo>
         </ProfileContainer>

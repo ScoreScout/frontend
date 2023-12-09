@@ -41,6 +41,32 @@ export const fetchArchivedTournaments = createAsyncThunk(
   },
 );
 
+export const addTournament = createAsyncThunk(
+  "tournaments/addTournament",
+  async (tournament: Tournament, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const response = await fetch(`/api/tournaments/1`, {
+        // Assuming you want to use the tournament's ID in the URL
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tournament),
+      });
+
+      const data = await response.text();
+
+      if (!response.ok || data !== "Data successfully written to file") {
+        return rejectWithValue("An error occurred while adding a tournament");
+      }
+
+      return fulfillWithValue(tournament);
+    } catch (error) {
+      return rejectWithValue("An error occurred while adding a tournament");
+    }
+  },
+);
+
 export interface TournamentsState {
   activeTournaments: Tournament[];
   archivedTournaments: Tournament[];
@@ -91,6 +117,15 @@ export const TournamentsSlice = createSlice({
       .addCase(fetchArchivedTournaments.rejected, (state, action) => {
         state.isLoadingArchived = false;
         state.errorArchived = action.payload;
+      })
+      .addCase(addTournament.fulfilled, (state, action) => {
+        state.activeTournaments.push(action.payload);
+      })
+      .addCase(addTournament.rejected, (state, action) => {
+        state.errorActive = action.payload;
+      })
+      .addCase(addTournament.pending, (state) => {
+        state.errorActive = null;
       });
   },
 });

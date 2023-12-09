@@ -51,7 +51,7 @@ const SignInPage = (): JSX.Element => {
         }
       })
       .catch((e) => {
-        toast.error("Unknow error occured");
+        toast.error("Unknown error occured");
       });
   };
 

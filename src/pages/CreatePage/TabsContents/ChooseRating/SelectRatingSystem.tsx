@@ -13,7 +13,7 @@ const SelectRatingSystem = (): React.ReactElement => {
   };
 
   return (
-    <StyledRatingSystemSelectorContainer>
+    <StyledRatingSystemSelectorContainer data-testid='rating-system-selector'>
       <Select
         defaultValue={selectedOption}
         onChange={handleChange}
