@@ -34,6 +34,7 @@ import {
   getActiveTournamentsState,
   getArchivedTournamentsState,
 } from "../../redux/selectors/tournamentSelectors";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = (): React.JSX.Element => {
   const [, setCookie, removeCookie] = useCookies(["access", "refresh"]);
@@ -42,10 +43,16 @@ const ProfilePage = (): React.JSX.Element => {
   const user = useAppSelector(getUser);
   const activeTournamentsState = useAppSelector(getActiveTournamentsState);
   const archivedTournamentsState = useAppSelector(getArchivedTournamentsState);
+  const navigate = useNavigate();
+
   const handleLogout = (): void => {
     removeCookie("access", { path: "/" });
     removeCookie("refresh", { path: "/" });
     dispatch(logout());
+  };
+
+  const handleCreateTournament = (): void => {
+    navigate("/score-scout/create");
   };
 
   const handleActiveTabClick = (): void => {
@@ -123,7 +130,7 @@ const ProfilePage = (): React.JSX.Element => {
                 Archived Tournaments
               </TournamentTab>
             </TournamentSlider>
-            <CreateTournamentButton>
+            <CreateTournamentButton onClick={handleCreateTournament}>
               Create Tournament
               <CreateIcon>
                 <MdAdd />
