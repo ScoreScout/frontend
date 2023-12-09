@@ -19,10 +19,6 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import ScoreModal from "./components/Modal/ScoreModal";
 import GroupTable from "./components/GroupTable/GroupTable";
 
-const players = ["Ghadeer Akleh", "Anvar Ishakov"
-, "Hamada Salhab", "Ahmad Alhussin"];
-// , "Test Test", "Test2 Test2"];
-
 const router = createBrowserRouter([
   {
     path: "/score-scout",
@@ -54,10 +50,6 @@ const router = createBrowserRouter([
   {
     path: "/score-scout/create",
     element: <CreatePage />,
-  },
-  {
-    path: "/score-scout/table",
-    element: <GroupTable PlayerNames={players} />
   },
 ]);
 

@@ -48,6 +48,8 @@ export const Cell = styled.div<cellProps>`
     align-items: center;
     justify-content: center;
     background-color: ${(props) => (props.rowIndex === props.cellIndex && props.rowIndex !== 0 ? '#d5d3d3' : '')};
+    background-color: ${(props) => (props.cellIndex === props.numPlayers + 1 ? '#ffe8e8' : '')};
+
 
     border-top-left-radius: ${(props) => 
     (props.rowIndex === 0 && props.cellIndex === 0 ? '13px' : '')};

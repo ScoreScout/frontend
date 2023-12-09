@@ -10,7 +10,7 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   const [places, setPlaces] = useState('');
   console.log(numOfPlayers);
   const openPopup = (cellIndex) => {
-    console.log(`Clicked on cell: (${rowIndex},${cellIndex})`);
+    // console.log(`Clicked on cell: (${rowIndex},${cellIndex})`);
     setSelectedCell(cellIndex);
     setPopupOpen(true);
   };
