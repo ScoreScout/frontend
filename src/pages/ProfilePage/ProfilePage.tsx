@@ -100,84 +100,80 @@ const ProfilePage = (): React.JSX.Element => {
 
   return (
     <>
-      {user.loadState === LoadType.success ? (
-        <ProfileContainer>
-          <Sidebar>
-            <div onClick={handleLogout}>
-              <LogoutButton>
-                <LogoutIcon>
-                  <TbLogout2 />
-                </LogoutIcon>
-                Log out
-              </LogoutButton>
-            </div>
-            <EmailText>{user.email}</EmailText>
-            <TournamentSlider>
-              <TournamentTab
-                $active={activeTab === "active"}
-                onClick={() => {
-                  handleActiveTabClick();
-                }}
-              >
-                Active Tournaments
-              </TournamentTab>
-              <TournamentTab
-                $active={activeTab === "archived"}
-                onClick={() => {
-                  handleArchivedTabClick();
-                }}
-              >
-                Archived Tournaments
-              </TournamentTab>
-            </TournamentSlider>
-            <CreateTournamentButton onClick={handleCreateTournament}>
-              Create Tournament
-              <CreateIcon>
-                <MdAdd />
-              </CreateIcon>
-            </CreateTournamentButton>
-          </Sidebar>
+      <ProfileContainer>
+        <Sidebar>
+          <div onClick={handleLogout}>
+            <LogoutButton>
+              <LogoutIcon>
+                <TbLogout2 />
+              </LogoutIcon>
+              Log out
+            </LogoutButton>
+          </div>
+          <EmailText>{user.email}</EmailText>
+          <TournamentSlider>
+            <TournamentTab
+              $active={activeTab === "active"}
+              onClick={() => {
+                handleActiveTabClick();
+              }}
+            >
+              Active Tournaments
+            </TournamentTab>
+            <TournamentTab
+              $active={activeTab === "archived"}
+              onClick={() => {
+                handleArchivedTabClick();
+              }}
+            >
+              Archived Tournaments
+            </TournamentTab>
+          </TournamentSlider>
+          <CreateTournamentButton onClick={handleCreateTournament}>
+            Create Tournament
+            <CreateIcon>
+              <MdAdd />
+            </CreateIcon>
+          </CreateTournamentButton>
+        </Sidebar>
 
-          <MainContent>
-            <EmptyBox />
+        <MainContent>
+          <EmptyBox />
 
-            {/* Active tab is Active Tournaments */}
-            {activeTab === "active" &&
-              (activeTournamentsState.isLoading ? (
-                <LoadingSpinner />
-              ) : activeTournamentsState.error === null &&
-                activeTournamentsState.tournaments.length === 0 ? (
-                <EmptyTournamentsMessage>There are no active tournaments</EmptyTournamentsMessage>
-              ) : (
-                activeTournamentsState.tournaments.map((tournament, index) => (
-                  <StyledLink key={index} to={"/score-scout/tournaments/2"}>
-                    <TournamentCard tournament={tournament} />
-                  </StyledLink>
-                ))
-              ))}
+          {/* Active tab is Active Tournaments */}
+          {activeTab === "active" &&
+            (activeTournamentsState.isLoading ? (
+              <LoadingSpinner />
+            ) : activeTournamentsState.error === null &&
+              activeTournamentsState.tournaments.length === 0 ? (
+              <EmptyTournamentsMessage>There are no active tournaments</EmptyTournamentsMessage>
+            ) : (
+              activeTournamentsState.tournaments.map((tournament, index) => (
+                <StyledLink key={index} to={"/score-scout/tournaments/2"}>
+                  <TournamentCard tournament={tournament} />
+                </StyledLink>
+              ))
+            ))}
 
-            {/* Active tab is Archived Tournaments */}
-            {activeTab === "archived" &&
-              (archivedTournamentsState.isLoading ? (
-                <LoadingSpinner />
-              ) : archivedTournamentsState.error === null &&
-                archivedTournamentsState.tournaments.length === 0 ? (
-                <EmptyTournamentsMessage>There are no archived tournaments</EmptyTournamentsMessage>
-              ) : (
-                archivedTournamentsState.tournaments.map((tournament, index) => (
-                  <StyledLink key={index} to={"/score-scout/tournaments/1"}>
-                    <TournamentCard key={index} tournament={tournament} />
-                  </StyledLink>
-                ))
-              ))}
-          </MainContent>
-          <ProfileLogo $isActive={false}>
-            <FaUserCircle />
-          </ProfileLogo>
-        </ProfileContainer>
-      ) : (
-        <></>
-      )}
+          {/* Active tab is Archived Tournaments */}
+          {activeTab === "archived" &&
+            (archivedTournamentsState.isLoading ? (
+              <LoadingSpinner />
+            ) : archivedTournamentsState.error === null &&
+              archivedTournamentsState.tournaments.length === 0 ? (
+              <EmptyTournamentsMessage>There are no archived tournaments</EmptyTournamentsMessage>
+            ) : (
+              archivedTournamentsState.tournaments.map((tournament, index) => (
+                <StyledLink key={index} to={"/score-scout/tournaments/1"}>
+                  <TournamentCard key={index} tournament={tournament} />
+                </StyledLink>
+              ))
+            ))}
+        </MainContent>
+        <ProfileLogo $isActive={false}>
+          <FaUserCircle />
+        </ProfileLogo>
+      </ProfileContainer>
     </>
   );
 };

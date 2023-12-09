@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 import type { Tournament } from "../../../types/tournamentTypes";
 
-const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: "http://localhost:8099/api/" }), {
+const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: "/ms/epja-2023-2/score-scout/" }), {
   maxRetries: 1,
 });
 

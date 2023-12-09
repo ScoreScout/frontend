@@ -39,13 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/score-scout/profile",
-    element: <ProtectedRoute />,
-    children: [
-      {
-        index: true,
-        element: <ProfilePage />,
-      },
-    ],
+    element: <ProfilePage />,
   },
   {
     path: "/score-scout/create",
