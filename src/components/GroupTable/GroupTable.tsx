@@ -19,12 +19,12 @@ const onScoreChange = (id, value) => {
 return (
     <TableContainer numPlayers = {numOfPlayers}>
       <HeadRow numPlayers = {numOfPlayers}>
-        <Cell rowIndex={0} cellIndex={0}>First group</Cell>
+        <Cell rowIndex={0} cellIndex={0} numPlayers={numOfPlayers}>First group</Cell>
         {[...Array(numOfPlayers)].map((_, index) => (
-          <Cell key={index} rowIndex={0} cellIndex={index + 1}>{index + 1}</Cell>
+          <Cell key={index} rowIndex={0} cellIndex={index + 1} numPlayers={numOfPlayers}>{index + 1}</Cell>
         ))}
-        <Cell rowIndex={0} cellIndex={numOfPlayers - 2}>Points</Cell>
-        <Cell rowIndex={0} cellIndex={numOfPlayers - 1}>Place</Cell>
+        <Cell rowIndex={0} cellIndex={numOfPlayers + 1} numPlayers={numOfPlayers}>Points</Cell>
+        {/* <Cell rowIndex={0} cellIndex={numOfPlayers + 2} numPlayers={numOfPlayers}>Place</Cell> */}
       </HeadRow>
       {PlayerNames.map((player, index) => (
         <PlayerRow key={index}

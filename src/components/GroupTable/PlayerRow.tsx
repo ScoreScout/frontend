@@ -10,6 +10,7 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   const [places, setPlaces] = useState('');
 
   const openPopup = (cellIndex) => {
+    console.log(`Clicked on cell: (${rowIndex},${cellIndex})`);
     setSelectedCell(cellIndex);
     setPopupOpen(true);
   };
@@ -23,6 +24,7 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   const handlePopupSubmit = (result) => {
     if (selectedCell !== null) {
       const cellId = `${rowIndex}-${selectedCell}`;
+      // console.log(`${cellId}`);
       onScoreChange(cellId, result);
     }
     closePopup();
@@ -39,17 +41,18 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
 
   return (
     <RowStyle numPlayers = {numOfPlayers}>
-      <Cell rowIndex={rowIndex} cellIndex={0}>{`${player.name}`}</Cell>
-      {[...Array(numOfPlayers + 2)].map((_, index) => (
+      <Cell rowIndex={rowIndex} cellIndex={0} numPlayers={numOfPlayers}>{`${player.name}`}</Cell>
+      {[...Array(numOfPlayers + 1)].map((_, index) => (
         <Cell 
           key={index} 
           rowIndex={rowIndex} 
           cellIndex={index + 1} 
+          numPlayers={numOfPlayers}
           onClick={() => (index + 1 !== rowIndex && index !== numOfPlayers && index !== numOfPlayers + 1) ? 
           openPopup(index + 1) : null}
           >
           {index + 1 === rowIndex || index === numOfPlayers ? (
-            index === numOfPlayers ? <span className="cellValue">{rowSum}</span> : <></>
+            index === numOfPlayers? <span className="cellValue">{rowSum}</span> : <></>
           ) : (
             <span className="cellValue">{scores[`${rowIndex}-${index + 1}`] ?? ""}</span>
           )}
