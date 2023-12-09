@@ -19,7 +19,7 @@ const ScorePopup = ({ onClose, onSubmit } : ScorePopupProps) : React.JSX.Element
           <label className='title'>
               Write the score
           </label>
-          <StyledScoreInput className='popupInput' type="number" value={result} onChange={(e) => setResult(e.target.value)} />
+          <StyledScoreInput className='popupInput' type="number" value={result} onChange={(e) => {setResult(e.target.value)}} />
           <div className='btns'>
               <button className='save' onClick={handleSubmit}>save</button>
               <button className="close" onClick={handleClose}>close</button>

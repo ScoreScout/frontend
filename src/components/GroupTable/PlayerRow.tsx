@@ -5,7 +5,7 @@ import ScorePopup from "./ScorePopup";
 
 const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : PlayerRowProps) : React.JSX.Element => {
   const [popupOpen, setPopupOpen] = useState(false);
-  const [selectedCell, setSelectedCell] = useState(null);
+  const [selectedCell, setSelectedCell] = useState<number | null>(null);
   const [rowSum, setRowSum] = useState(0);
  
   const openPopup = (cellIndex): void => {
