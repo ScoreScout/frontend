@@ -6,12 +6,17 @@ import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import HomePage from "../../HomePage/HomePage";
+import SignInPage from "../SignInPage/SignInPage";
 
 test("SignUp page, and all buttons should load", async () => {
   const routes = [
     {
       path: "/score-scout/sign-up",
       element: <SignUpPage />,
+    },
+    {
+      path: "/score-scout/sign-in",
+      element: <SignInPage />,
     },
   ];
   const router = createMemoryRouter(routes, {
@@ -29,6 +34,10 @@ test("Input values can be changed", async () => {
     {
       path: "/score-scout/sign-up",
       element: <SignUpPage />,
+    },
+    {
+      path: "/score-scout/sign-in",
+      element: <SignInPage />,
     },
   ];
   const router = createMemoryRouter(routes, {
@@ -51,11 +60,15 @@ test("Sign up request can be made successfully, and you will get success notific
   const routes = [
     {
       path: "/score-scout",
-      elment: <HomePage />,
+      element: <HomePage />,
     },
     {
       path: "/score-scout/sign-up",
       element: <SignUpPage />,
+    },
+    {
+      path: "/score-scout/sign-in",
+      element: <SignInPage />,
     },
   ];
   const router = createMemoryRouter(routes, {
@@ -82,11 +95,15 @@ test("Should not allow user to login with wrong credintials, and display a given
   const routes = [
     {
       path: "/score-scout",
-      elment: <HomePage />,
+      element: <HomePage />,
     },
     {
       path: "/score-scout/sign-up",
       element: <SignUpPage />,
+    },
+    {
+      path: "/score-scout/sign-in",
+      element: <SignInPage />,
     },
   ];
   const router = createMemoryRouter(routes, {
