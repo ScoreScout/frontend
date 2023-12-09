@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 
-const url = "https://6f2d-188-130-155-160.ngrok-free.app";
+const url = "http://31.31.198.23:8000";
 
 const headers = {
   "Content-Type": "application/json",
