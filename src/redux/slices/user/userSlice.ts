@@ -5,10 +5,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "universal-cookie";
 
-const url = "http://31.31.198.23:8000";
+const url = "https://6f2d-188-130-155-160.ngrok-free.app";
 
 const headers = {
   "Content-Type": "application/json",
+  "ngrok-skip-browser-warning": true,
 };
 const cookies = new Cookies();
 export const initialState: User = {
@@ -28,6 +29,7 @@ export const loadUser = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
         Authorization: `JWT ${state.accessToken}`,
+        "ngrok-skip-browser-warning": true,
       },
     };
     return await axios
