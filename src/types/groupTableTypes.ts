@@ -1,20 +1,25 @@
-export interface Player {
-  name: string;
-  rating?: number;
-}
-
 export interface GroupTableProps {
-  PlayerNames: Player[];
+  PlayerNames: string[];
 }
 
-interface score {
+export interface score {
   id?:string
 }
 
 export interface PlayerRowProps {
-  player: Player;
+  player: string;
   numOfPlayers: number;
   rowIndex: number
   scores: score
   onScoreChange: (id: string, value: string) => void;
+}
+
+export interface styleProps {
+  numPlayers: number;
+}
+
+export interface cellProps {
+  rowIndex: number;
+  cellIndex: number;
+  numPlayers: number;
 }

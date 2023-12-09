@@ -19,14 +19,9 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import ScoreModal from "./components/Modal/ScoreModal";
 import GroupTable from "./components/GroupTable/GroupTable";
 
-const players = [
-  { name: "Ghadeer Akleh"},
-  { name: "Anvar Ishakov" },
-  { name: "Hamada Salhab" },
-  { name: "Ahmad Alhussin" },
-  // { name: "Test Test" },
-  // { name: "Test2 Test2" }
-];
+const players = ["Ghadeer Akleh", "Anvar Ishakov"
+, "Hamada Salhab", "Ahmad Alhussin"];
+// , "Test Test", "Test2 Test2"];
 
 const router = createBrowserRouter([
   {

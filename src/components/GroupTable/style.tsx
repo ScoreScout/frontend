@@ -1,23 +1,14 @@
 import styled from "styled-components";
-import { globalBoldFontStyles } from "../../theme/FontStyles";
-
-interface styleProps {
-    numPlayers: number;
-}
-
-interface cellProps {
-    rowIndex: number;
-    cellIndex: number;
-    numPlayers: number;
-}
+import { globalBoldFontStyles, globalSemiBoldFontStyles, globalRegularFontStyles} from "../../theme/FontStyles";
+import type {cellProps, styleProps} from "../../types/groupTableTypes";
 
 export const TableContainer = styled.div<styleProps>`
     box-sizing: border-box;
     max-width: ${(props) =>
       props.numPlayers > 4
-        ? "85vh"
+        ? "75vh"
         : props.numPlayers > 2
-        ? "70vh"
+        ? "65vh"
         : "55vh"};
     border-radius: 15px;
     border: #d8d7d7 0.5px solid;
@@ -28,8 +19,9 @@ export const HeadRow = styled.div<styleProps>`
     width: 100%;
     height: 2.5rem;
     display: grid;
-    grid-template-columns: 0.40fr repeat(${(props) => props.numPlayers + 1}, 0.15fr);
-    font-weight: 600;
+    grid-template-columns: 0.40fr repeat(${(props) => props.numPlayers}, 0.2fr) 0.25fr;
+    font-family: ${globalSemiBoldFontStyles};
+    
     :first-child{
         color: ${(props) => props.theme.color.mainColor};
     }
@@ -39,7 +31,7 @@ export const RowStyle = styled.div<styleProps>`
     width: 100%;
     height: 3rem;
     display: grid;
-    grid-template-columns: 0.40fr repeat(${(props) => props.numPlayers + 1}, 0.15fr);
+    grid-template-columns: 0.40fr repeat(${(props) => props.numPlayers}, 0.2fr) 0.25fr;
     .cellValue {
         font-family: sans-serif;
         font-size: 0.95rem;
@@ -48,7 +40,7 @@ export const RowStyle = styled.div<styleProps>`
 
 export const Cell = styled.div<cellProps>`
     color: #000000;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: sans-serif;
     padding: 5px;
     border: #d3d3d3 1px solid;

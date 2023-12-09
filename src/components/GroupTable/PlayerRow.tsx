@@ -8,7 +8,7 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
   const [selectedCell, setSelectedCell] = useState(null);
   const [rowSum, setRowSum] = useState(0);
   const [places, setPlaces] = useState('');
-
+  console.log(numOfPlayers);
   const openPopup = (cellIndex) => {
     console.log(`Clicked on cell: (${rowIndex},${cellIndex})`);
     setSelectedCell(cellIndex);
@@ -41,7 +41,7 @@ const PlayerRow = ({ player, numOfPlayers, rowIndex, onScoreChange, scores } : P
 
   return (
     <RowStyle numPlayers = {numOfPlayers}>
-      <Cell rowIndex={rowIndex} cellIndex={0} numPlayers={numOfPlayers}>{`${player.name}`}</Cell>
+      <Cell rowIndex={rowIndex} cellIndex={0} numPlayers={numOfPlayers}>{`${player}`}</Cell>
       {[...Array(numOfPlayers + 1)].map((_, index) => (
         <Cell 
           key={index} 
