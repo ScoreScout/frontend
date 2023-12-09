@@ -5,7 +5,7 @@ export const fetchActiveTournaments = createAsyncThunk(
   "tournaments/fetchActive",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("/api/tournaments/active");
+      const response = await fetch("/ms/epja-2023-2/score-scout/tournaments/active");
       const data = await response.json();
       if (!response.ok || data.ok !== true || data.data === undefined) {
         return rejectWithValue(
@@ -25,7 +25,7 @@ export const fetchArchivedTournaments = createAsyncThunk(
   "tournaments/fetchArchived",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("/api/tournaments/archived");
+      const response = await fetch("/ms/epja-2023-2/score-scout/tournaments/archived");
       const data = await response.json();
       if (!response.ok || (data.ok !== true) === undefined) {
         return rejectWithValue(
@@ -45,7 +45,7 @@ export const addTournament = createAsyncThunk(
   "tournaments/addTournament",
   async (tournament: Tournament, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const response = await fetch(`/api/tournaments/1`, {
+      const response = await fetch(`/ms/epja-2023-2/score-scout/tournaments/1`, {
         // Assuming you want to use the tournament's ID in the URL
         method: "POST",
         headers: {
