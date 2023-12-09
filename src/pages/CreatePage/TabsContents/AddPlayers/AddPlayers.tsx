@@ -87,9 +87,10 @@ const AddPlayers: FC<AddPlayersProps> = ({
   return (
     <AddPlayersWrapper>
       <AddPlayersContainer>
-        <AddPLayersTitle>Add Players</AddPLayersTitle>
+        <AddPLayersTitle data-testid='add-players-title'>Add Players</AddPLayersTitle>
         <AddPlayersForm onSubmit={handleSubmit}>
           <AddPlayersInput
+            data-testid='add-players-name-input'
             placeholder="Player's name"
             value={name}
             onChange={(e) => {
@@ -98,6 +99,7 @@ const AddPlayers: FC<AddPlayersProps> = ({
           />
           {ratingToggleOn && (
             <AddPlayersInput
+              data-testid='add-players-rating-input'
               placeholder='Rating (Optional)'
               value={rating}
               onChange={(e) => {
@@ -105,7 +107,7 @@ const AddPlayers: FC<AddPlayersProps> = ({
               }}
             />
           )}
-          <ButtonContainer>
+          <ButtonContainer data-testid='add-players-button'>
             <Button primary={true} size={ButtonSize.S} type='submit'>
               <ButtonText>
                 Add <FaCirclePlus />{" "}

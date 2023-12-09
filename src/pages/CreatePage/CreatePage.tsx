@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Button from "../../components/Button/Button";
@@ -60,7 +60,6 @@ const CreatePage = (): React.JSX.Element => {
   };
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const renderTabContent = (): React.ReactNode => {
     switch (activeTab) {
@@ -157,7 +156,6 @@ const CreatePage = (): React.JSX.Element => {
       try {
         await dispatch(addTournament(newTournament));
         toast.success("Tournament created successfully!");
-        navigate("/score-scout/profile");
       } catch (error) {
         toast.error("Error creating tournament");
       }
@@ -175,6 +173,7 @@ const CreatePage = (): React.JSX.Element => {
               onClick={() => {
                 setActiveTab(Tabs.TOURNAMENT_TITLE);
               }}
+              data-testid='tournament-title-tab'
             >
               Tournament title
             </SliderTab>
@@ -183,6 +182,7 @@ const CreatePage = (): React.JSX.Element => {
               onClick={() => {
                 setActiveTab(Tabs.CHOOSE_RATING);
               }}
+              data-testid='choose-rating-tab'
             >
               Choose rating
             </SliderTab>
@@ -191,6 +191,7 @@ const CreatePage = (): React.JSX.Element => {
               onClick={() => {
                 setActiveTab(Tabs.ADD_PLAYERS);
               }}
+              data-testid='add-players-tab'
             >
               Add players
             </SliderTab>
@@ -199,6 +200,7 @@ const CreatePage = (): React.JSX.Element => {
               onClick={() => {
                 setActiveTab(Tabs.NUM_STAGES);
               }}
+              data-testid='num-stages-tab'
             >
               Number of stages
             </SliderTab>
@@ -207,6 +209,7 @@ const CreatePage = (): React.JSX.Element => {
               onClick={() => {
                 setActiveTab(Tabs.FIRST_STAGE);
               }}
+              data-testid='first-stage-tab'
             >
               First stage
             </SliderTab>
@@ -215,6 +218,7 @@ const CreatePage = (): React.JSX.Element => {
               onClick={() => {
                 setActiveTab(Tabs.SECOND_STAGE);
               }}
+              data-testid='second-stage-tab'
             >
               Second stage
             </SliderTab>
@@ -233,7 +237,12 @@ const CreatePage = (): React.JSX.Element => {
 
         <ButtonsContainer>
           {activeTab !== Tabs.TOURNAMENT_TITLE ? (
-            <Button primary={false} size={ButtonSize.S} onClick={handleBack}>
+            <Button
+              primary={false}
+              size={ButtonSize.S}
+              onClick={handleBack}
+              data-testid='back-button'
+            >
               <ButtonText>
                 <ArrowLeftIcon size={"24"} color='#D22D19' />
                 Back
@@ -243,7 +252,12 @@ const CreatePage = (): React.JSX.Element => {
             <div></div>
           )}
           {activeTab !== Tabs.SECOND_STAGE ? (
-            <Button primary={true} size={ButtonSize.S} onClick={handleNext}>
+            <Button
+              primary={true}
+              size={ButtonSize.S}
+              onClick={handleNext}
+              data-testid='next-button'
+            >
               <ButtonText>
                 Next <ArrowRightIcon size={"24"} color='#FFFFFF' />
               </ButtonText>
@@ -261,6 +275,7 @@ const CreatePage = (): React.JSX.Element => {
                     toast.error("Error creating tournament");
                   });
               }}
+              data-testid='create-button'
             >
               <ButtonText>
                 Create <CupIcon size={"24"} color='#FFFFFF' />
