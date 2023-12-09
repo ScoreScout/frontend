@@ -4,6 +4,7 @@ import { type StageProps } from "../../../../types/createPageTabTypes";
 import { ButtonSize } from "../../../../types/buttonTypes";
 import Button from "../../../../components/Button/Button";
 import Bracket from "../../../../components/Bracket/Bracket";
+import GroupTable from "../../../../components/GroupTable/GroupTable";
 
 import {
   FirstStageWrapper,
@@ -72,6 +73,7 @@ const FirstStage = ({
             <ChooseCompetitionConfigWrapper>
               <ChooseTitle>How many groups do you want?</ChooseTitle>
               <TableChooseNumber type='text' />
+              <GroupTable PlayerNames={sortedPlayers.map((player) => player.name)}/>
             </ChooseCompetitionConfigWrapper>
           ) : optionChosen === CompetitionOptions.BRACKET ? (
             <>
