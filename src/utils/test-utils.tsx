@@ -8,6 +8,7 @@ import userReducer from "../redux/slices/user/userSlice";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../theme/Theme";
 import { ToastContainer, toast } from "react-toastify";
+import tournamentApi from "../redux/apis/tournament/tournamentApi";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
   preloadedState?: Partial<RootState>;
@@ -18,7 +19,11 @@ export function renderWithProviders(
   ui: React.ReactElement,
   {
     preloadedState = {},
-    store = configureStore({ reducer: { user: userReducer }, preloadedState }),
+    store = configureStore({
+      reducer: { user: userReducer, [tournamentApi.reducerPath]: tournamentApi.reducer },
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(tournamentApi.middleware),
+      preloadedState,
+    }),
     ...renderOptions
   }: ExtendedRenderOptions = {},
 ): any {
