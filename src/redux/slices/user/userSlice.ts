@@ -9,7 +9,6 @@ const url = "https://6f2d-188-130-155-160.ngrok-free.app";
 
 const headers = {
   "Content-Type": "application/json",
-  "ngrok-skip-browser-warning": true,
 };
 const cookies = new Cookies();
 export const initialState: User = {
