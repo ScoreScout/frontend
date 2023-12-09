@@ -1,12 +1,9 @@
 import { createApi, fetchBaseQuery, retry } from "@reduxjs/toolkit/query/react";
 import type { Tournament } from "../../../types/tournamentTypes";
 
-const staggeredBaseQuery = retry(
-  fetchBaseQuery({ baseUrl: "http://localhost:8099/api/" }),
-  {
-    maxRetries: 1,
-  },
-);
+const staggeredBaseQuery = retry(fetchBaseQuery({ baseUrl: "http://localhost:8099/api/" }), {
+  maxRetries: 1,
+});
 
 const tournamentApi = createApi({
   reducerPath: "tournament",
