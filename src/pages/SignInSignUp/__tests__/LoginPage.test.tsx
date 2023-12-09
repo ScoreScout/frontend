@@ -48,7 +48,7 @@ test("Login request can be made successfully, and you will get success notificat
   const routes = [
     {
       path: "/score-scout",
-      elment: <HomePage />,
+      element: <HomePage />,
     },
     {
       path: "/score-scout/sign-in",
@@ -75,7 +75,7 @@ test("Should not allow user to login with wrong credintials, and display a given
   const routes = [
     {
       path: "/score-scout",
-      elment: <HomePage />,
+      element: <HomePage />,
     },
     {
       path: "/score-scout/sign-in",
