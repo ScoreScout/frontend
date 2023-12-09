@@ -17,7 +17,9 @@ const NumStages: React.FC<NumStagesProps> = ({
 }: NumStagesProps): React.ReactElement => {
   return (
     <NumStagesWrapper>
-      <NumStagesTitle>Choose number of stages in your tournament</NumStagesTitle>
+      <NumStagesTitle data-testid='number-of-stages-title'>
+        Choose number of stages in your tournament
+      </NumStagesTitle>
       <StageBoxesContainer>
         <StageBox
           onClick={() => {

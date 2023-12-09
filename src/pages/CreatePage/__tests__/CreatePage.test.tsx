@@ -4,8 +4,6 @@ import { renderWithProviders } from "../../../utils/test-utils";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
-import MockAdapter from "axios-mock-adapter";
-import axios from "axios";
 
 test("Create page, and all buttons should load", async () => {
   const routes = [
@@ -77,4 +75,20 @@ test("Third tab", async () => {
   expect(screen.getByTestId("add-players-title")).not.toBeNull();
   expect(screen.getByTestId("add-players-name-input")).not.toBeNull();
   expect(screen.getByTestId("add-players-button")).not.toBeNull();
+});
+
+test("Fourth tab", async () => {
+  const routes = [
+    {
+      path: "/score-scout/create",
+      element: <CreatePage />,
+    },
+  ];
+  const router = createMemoryRouter(routes, {
+    initialEntries: ["/score-scout/create"],
+  });
+  await renderWithProviders(<RouterProvider router={router} />);
+  fireEvent.click(screen.getByTestId("num-stages-tab"));
+  expect(screen.getByTestId("number-of-stages-title")).not.toBeNull();
+
 });
